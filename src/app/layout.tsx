@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { Provider } from "@/components/ui/provider";
+
 import "./globals.css";
 
 //! Update metadata to match your project
@@ -9,8 +11,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html suppressHydrationWarning>
+      <body>
+        <Provider>{children}</Provider>
+      </body>
     </html>
   );
 }
