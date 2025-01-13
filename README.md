@@ -32,7 +32,7 @@ The LCSLO team consists of {#} Cal Poly students. Over the course of about 9 mon
 - [Tammy Si](https://www.linkedin.com/in/tammy-si-104303244/) - Software Developer
 - [Saurish Suman](https://www.linkedin.com/in/saurish-suman/) - Software Developer
 - [Ethan Yang]() - Software Developer
-- [Jason Yu](https://www.linkedin.com/jasonyu101/) - Software Developer
+- [Jason Yu](https://www.linkedin.com/in/jasonyu101/) - Software Developer
 ## Getting Started And Contributing
 
 Visit [getting-started.md](docs/getting-started.md) on info for how to set up this repo.
