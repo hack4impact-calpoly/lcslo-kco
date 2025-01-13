@@ -26,7 +26,10 @@ yarn-error.log*
 
 # local env files
 .env*.local
+<<<<<<< HEAD
 .env
+=======
+>>>>>>> c78f2570bd3da18b4743198b2ce42e0646361275
 
 # vercel
 .vercel
@@ -35,7 +38,10 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 =======
 >>>>>>> c78f257 (Initialize main)
+=======
+>>>>>>> c78f2570bd3da18b4743198b2ce42e0646361275
