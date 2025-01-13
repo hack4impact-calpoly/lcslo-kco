@@ -19,12 +19,20 @@ The LCSLO needs a new solution to provide educational audio tours at their Nipom
 
 The LCSLO team consists of {#} Cal Poly students. Over the course of about 9 months, we worked as a team to deploy this web application. The team members are listed below:
 
-- [First Last](https://www.linkedin.com/) - Project Manager
-- [First Last](https://www.linkedin.com/) - Designer
-- [First Last](https://www.linkedin.com/) - Tech Lead
-- [First Last](https://www.linkedin.com/) - Tech Lead
-- [First Last](https://www.linkedin.com/) - Software Developer
-
+- [Rohit Kota](https://www.linkedin.com/in/rohit-kota4/) - Project Manager
+- [Maxine Ancheta](https://www.linkedin.com/in/maxineancheta/) - Designer
+- [Caitlyn Chailitilerd](http://www.linkedin.com/in/caitlynchailitilerd) - Designer
+- [Apoorva Gowda]() - Designer
+- [Grace Boye-Williams](https://www.linkedin.com/in/graceboyewilliams/) - Tech Lead
+- [Emily Yarvis](https://www.linkedin.com/in/emily-yarvis/) - Tech Lead
+- [Amogh Arora](https://www.linkedin.com/in/amogharora76/) - Software Developer
+- [Nick Carboni](https://www.linkedin.com/in/nick-carboni/) - Software Developer
+- [Taiki Jeffers](https://www.linkedin.com/in/taiki-jeffers/) - Software Developer
+- [Derrick Phan](https://www.linkedin.com/in/derrick-phan/) - Software Developer
+- [Tammy Si](https://www.linkedin.com/in/tammy-si-104303244/) - Software Developer
+- [Saurish Suman](https://www.linkedin.com/saurish-suman/) - Software Developer
+- [Ethan Yang]() - Software Developer
+- [Jason Yu](https://www.linkedin.com/jasonyu101/) - Software Developer
 ## Getting Started And Contributing
 
 Visit [getting-started.md](docs/getting-started.md) on info for how to set up this repo.
