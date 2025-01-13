@@ -27,7 +27,7 @@ The LCSLO team consists of {#} Cal Poly students. Over the course of about 9 mon
 - [Emily Yarvis](https://www.linkedin.com/in/emily-yarvis/) - Tech Lead
 - [Amogh Arora](https://www.linkedin.com/in/amogharora76/) - Software Developer
 - [Nick Carboni](https://www.linkedin.com/in/nick-carboni/) - Software Developer
-- [Taiki Jeffers](https://www.linkedin.com/in/taiki-jeffers/) - Software Developer
+- [Taiki Jeffers](https://www.linkedin.com/in/taiki-jeffers-63b219234) - Software Developer
 - [Derrick Phan](https://www.linkedin.com/in/derrick-phan/) - Software Developer
 - [Tammy Si](https://www.linkedin.com/in/tammy-si-104303244/) - Software Developer
 - [Saurish Suman](https://www.linkedin.com/saurish-suman/) - Software Developer
