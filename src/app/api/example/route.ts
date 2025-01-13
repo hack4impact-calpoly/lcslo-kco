@@ -1,4 +1,4 @@
-import connectDB from "@/database/db";
+import connectDB from "@/backend/database/db";
 import { NextResponse } from "next/server";
 
 /**
