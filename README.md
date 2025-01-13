@@ -27,12 +27,12 @@ The LCSLO team consists of {#} Cal Poly students. Over the course of about 9 mon
 - [Emily Yarvis](https://www.linkedin.com/in/emily-yarvis/) - Tech Lead
 - [Amogh Arora](https://www.linkedin.com/in/amogharora76/) - Software Developer
 - [Nick Carboni](https://www.linkedin.com/in/nick-carboni/) - Software Developer
-- [Taiki Jeffers](https://www.linkedin.com/in/taiki-jeffers/) - Software Developer
+- [Taiki Jeffers](https://www.linkedin.com/in/taiki-jeffers-63b219234) - Software Developer
 - [Derrick Phan](https://www.linkedin.com/in/derrick-phan/) - Software Developer
 - [Tammy Si](https://www.linkedin.com/in/tammy-si-104303244/) - Software Developer
-- [Saurish Suman](https://www.linkedin.com/saurish-suman/) - Software Developer
+- [Saurish Suman](https://www.linkedin.com/in/saurish-suman/) - Software Developer
 - [Ethan Yang]() - Software Developer
-- [Jason Yu](https://www.linkedin.com/jasonyu101/) - Software Developer
+- [Jason Yu](https://www.linkedin.com/in/jasonyu101/) - Software Developer
 ## Getting Started And Contributing
 
 Visit [getting-started.md](docs/getting-started.md) on info for how to set up this repo.
