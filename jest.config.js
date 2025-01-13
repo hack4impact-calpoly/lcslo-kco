@@ -1,5 +1,6 @@
 module.exports = {
-  preset: "ts-jest", // Use ts-jest for TypeScript support
+  preset: "ts-jest",
+  preset: "@shelf/jest-mongodb", // Use ts-jest for TypeScript support
   testEnvironment: "jest-environment-jsdom", //use jsdom as the environment)
   moduleNameMapper: {
     "\\.css$": "identity-obj-proxy", // If you're using CSS modules
