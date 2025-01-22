@@ -2,7 +2,7 @@ import mongoose, { Schema } from "mongoose";
 
 // typescript type (can also be an interface)
 export type Poi = {
-  id: string;
+  _id: string;
   name: string;
   description: string;
   audioField: string;
@@ -11,7 +11,6 @@ export type Poi = {
 
 // mongoose schema
 const POISchema = new Schema<Poi>({
-  id: { type: String, required: true },
   name: { type: String, required: true },
   description: { type: String, required: true },
   audioField: { type: String, required: true },

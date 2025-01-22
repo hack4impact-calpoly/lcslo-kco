@@ -1,11 +1,8 @@
 import connectDB from "@/database/db";
 import { NextResponse } from "next/server";
-import POIModel, { Poi } from "@/database/models/POISchema";
+import POIModel from "@/database/models/POISchema";
 
-/**
- * Example GET API route
- * @returns {message: string}
- */
+// endpoint to get all the POIs
 export async function GET() {
   try {
     await connectDB();
