@@ -1,25 +1,28 @@
 import { put } from "@vercel/blob";
 import { revalidatePath } from "next/cache";
 
-export async function Form() {
-  async function uploadFile(formData: FormData) {
+export default function Form() {
+  async function uploadFile(formData: FormData): Promise<void> {
     "use server";
 
     const file = formData.get("file") as File;
 
-    const blob = await put(file.name, file, {
+    if (!file) {
+      throw new Error("No file selected");
+    }
+
+    await put(file.name, file, {
       access: "public",
     });
 
-    revalidatePath("/");
-    return blob;
+    revalidatePath("/"); // Optional: Revalidate the page or path if needed
   }
 
   return (
     <form action={uploadFile}>
       <label htmlFor="file">Upload File (Image or Audio)</label>
       <input type="file" id="file" name="file" accept="audio/*,image/*" required />
-      <button>Upload</button>
+      <button type="submit">Upload</button>
     </form>
   );
 }
