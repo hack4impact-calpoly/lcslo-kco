@@ -1,28 +1,53 @@
 import { put } from "@vercel/blob";
-import { revalidatePath } from "next/cache";
+import { useState } from "react";
 
-export default function Form() {
-  async function uploadFile(formData: FormData): Promise<void> {
+export function Form() {
+  const [uploadedUrl, setUploadedUrl] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  async function uploadFile(formData: FormData) {
     "use server";
 
-    const file = formData.get("file") as File;
+    try {
+      setError(null); // Clear any previous errors
 
-    if (!file) {
-      throw new Error("No file selected");
+      const file = formData.get("file") as File;
+      if (!file) throw new Error("No file selected");
+
+      const blob = await put(file.name, file, {
+        access: "public",
+      });
+
+      // Set the uploaded URL for feedback
+      setUploadedUrl(blob.url);
+    } catch (err) {
+      setError((err as Error).message || "An error occurred during upload");
     }
-
-    await put(file.name, file, {
-      access: "public",
-    });
-
-    revalidatePath("/"); // Optional: Revalidate the page or path if needed
   }
 
   return (
-    <form action={uploadFile}>
-      <label htmlFor="file">Upload File (Image or Audio)</label>
-      <input type="file" id="file" name="file" accept="audio/*,image/*" required />
-      <button type="submit">Upload</button>
-    </form>
+    <div>
+      <form action={uploadFile}>
+        <label htmlFor="file">Upload File (Image or Audio)</label>
+        <input type="file" id="file" name="file" accept="audio/*,image/*" required />
+        <button>Upload</button>
+      </form>
+
+      {/* Display feedback */}
+      {uploadedUrl && (
+        <div style={{ marginTop: "1rem" }}>
+          <p>File uploaded successfully!</p>
+          <a href={uploadedUrl} target="_blank" rel="noopener noreferrer">
+            View Uploaded File
+          </a>
+        </div>
+      )}
+
+      {error && (
+        <div style={{ marginTop: "1rem", color: "red" }}>
+          <p>Error: {error}</p>
+        </div>
+      )}
+    </div>
   );
 }
