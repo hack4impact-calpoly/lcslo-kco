@@ -13,6 +13,7 @@ export async function POST(request: Request): Promise<NextResponse> {
     return NextResponse.json({ error: "Request body is required" }, { status: 400 });
   }
 
+  // Upload the file to Vercel Blob with public access
   const blob = await put(filename, request.body, {
     access: "public",
   });
