@@ -1,25 +1,47 @@
-import Image from "next/image";
-import Key_Stats from "./Key_Stats";
+import React from "react";
+import KeyStats from "./Key_Stats";
 
-export default function Selected_POI_Page() {
+interface OverlayImageProps {
+  src: string;
+  header: string;
+}
+
+interface POIProps {
+  mainImage: string;
+  name: string;
+  content: string;
+}
+const OverlayImage: React.FC<OverlayImageProps> = ({ src, header }) => {
   return (
-    <div className="m-4 border-2 flex flex-col items-center" style={{ backgroundColor: "#eeebe6" }}>
-      <h1 className="text-center whitespace-nowrap w-full mt-5 mb-5 text-white text-2xl font-bold tracking-wide">
-        Point of Interest Name
+    <div className="flex flex-col z-20">
+      <h1 className="absolute top-0 left-1/2 transform -translate-x-1/2 translate-y-[110%] text-white text-3xl font whitespace-nowrap">
+        {header}
       </h1>
-      <div>
-        <Image
-          src={require("./lcslo_placeholder.jpg")}
-          alt="Image of selected POI"
-          className="border-white border-8 rounded-xl"
-        />
-      </div>
-      <Key_Stats></Key_Stats>
-      <p className="m-4 text-black">
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloremque reprehenderit aliquam fuga repudiandae
-        expedita provident ad, deserunt dolorum architecto voluptatum minus consequuntur amet animi, at nemo aspernatur
-        labore corrupti. Laborum?
-      </p>
+      <img
+        src={src}
+        alt="Overlay"
+        className="absolute top-0 left-1/2 transform translate-y-[70%] -translate-x-1/2 w-1/2 rounded-xl border-white border-4"
+      />
     </div>
   );
-}
+};
+
+const Selected_POI_Page: React.FC<POIProps> = ({ mainImage, name, content }) => {
+  return (
+    <div className="w-full h-screen flex flex-col relative bg-black">
+      {/* first div with main image and overlay image*/}
+      <div className="flex items-center justify-center h-[20%]">
+        <img src={mainImage} alt="Main" className="w-full h-full object-cover blur-[1.65px] filter brightness-[70%]" />
+        <OverlayImage src={mainImage} header={name} />
+      </div>
+
+      {/* second div (left blank for subcomponent) */}
+      <div className="flex-1 rounded-tl-3xl rounded-tr-3xl -mt-8 z-10 bg-[#F0EBE7] overflow-visible">
+        <KeyStats></KeyStats>
+        <p className="text-[#1C1C1C] ml-5 mr-5">{content}</p>
+      </div>
+    </div>
+  );
+};
+
+export default Selected_POI_Page;
