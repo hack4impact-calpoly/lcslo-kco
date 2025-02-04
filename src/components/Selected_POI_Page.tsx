@@ -10,6 +10,8 @@ interface POIProps {
   mainImage: string;
   name: string;
   content: string;
+  toursCompleted: number;
+  totalTours: number;
 }
 const OverlayImage: React.FC<OverlayImageProps> = ({ src, header }) => {
   return (
@@ -26,7 +28,7 @@ const OverlayImage: React.FC<OverlayImageProps> = ({ src, header }) => {
   );
 };
 
-const Selected_POI_Page: React.FC<POIProps> = ({ mainImage, name, content }) => {
+const Selected_POI_Page: React.FC<POIProps> = ({ mainImage, name, toursCompleted, totalTours, content }) => {
   return (
     <div className="w-full h-screen flex flex-col relative bg-black">
       {/* first div with main image and overlay image*/}
@@ -37,7 +39,7 @@ const Selected_POI_Page: React.FC<POIProps> = ({ mainImage, name, content }) => 
 
       {/* second div (left blank for subcomponent) */}
       <div className="flex-1 rounded-tl-3xl rounded-tr-3xl -mt-8 z-10 bg-[#F0EBE7] overflow-visible">
-        <KeyStats></KeyStats>
+        <KeyStats toursCompletedCnt={toursCompleted} totalTourCnt={totalTours} />
         <p className="text-[#1C1C1C] ml-5 mr-5">{content}</p>
       </div>
     </div>

@@ -1,15 +1,17 @@
 import React from "react";
 import { FaPlay } from "react-icons/fa";
 
-export default function KeyStats() {
-  const toursCompletedCnt = 2; //To store no of tours completed so far (temp)
-  const totalTourCnt = 15; //Count of all tours available (temp)
+interface KeyStatsProps {
+  toursCompletedCnt: number;
+  totalTourCnt: number;
+}
 
+const KeyStats: React.FC<KeyStatsProps> = ({ toursCompletedCnt, totalTourCnt }) => {
   return (
     <div className="grid grid-cols-3 gap-6 p-6">
       {/* Play Audio Section */}
       <div className="flex flex-col items-center justify-center space-y-4 bg-[eeebe6] p-6 border-r-4 border-gray-300">
-        <FaPlay className="h-12 w-12 text-[#c29669]" />
+        <FaPlay className="h-12 w-12 text-[#D29561]" />
         <span className="text-xl font-medium text-center">Play Audio</span>
       </div>
 
@@ -29,13 +31,13 @@ export default function KeyStats() {
       <div className="flex flex-col items-center justify-center space-y-4 bg-[eeebe6] p-6 border-l-4 border-gray-300">
         <div className="relative flex items-center justify-center w-24 h-24">
           <svg className="absolute transform rotate-90" width="75" height="75" viewBox="0 0 100 100">
-            <circle cx="50" cy="50" r="45" stroke="#c29669" strokeWidth="8" fill="none" />
+            <circle cx="50" cy="50" r="45" stroke="#D29561" strokeWidth="10" fill="none" />
             <circle
               cx="50"
               cy="50"
               r="45"
-              stroke="#d2b68e"
-              strokeWidth="8"
+              stroke="#F7CBA6"
+              strokeWidth="10"
               fill="none"
               strokeDasharray={2 * Math.PI * 45}
               strokeDashoffset={(toursCompletedCnt / totalTourCnt) * 2 * Math.PI * 45}
@@ -51,4 +53,6 @@ export default function KeyStats() {
       </div>
     </div>
   );
-}
+};
+
+export default KeyStats;
