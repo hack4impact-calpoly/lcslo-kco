@@ -1,21 +1,35 @@
+import Link from "next/link";
 import React from "react";
 import { FaPlay } from "react-icons/fa";
 
-export default function KeyStats() {
-  const toursCompletedCnt = 2; //To store no of tours completed so far (temp)
-  const totalTourCnt = 15; //Count of all tours available (temp)
+interface KS_Porps {
+  audio_link: string;
+  duration_sec: number;
+  tour_progress: number;
+  total_tours: number;
+}
+
+const KeyStats: React.FC<KS_Porps> = ({ audio_link, duration_sec, tour_progress, total_tours }) => {
+  const toursCompletedCnt = tour_progress; //To store no of tours completed so far
+  const totalTourCnt = total_tours; //Count of all tours available
+  const minutes = Math.floor(duration_sec / 60); //get mins of audio duration
+  const seconds = duration_sec % 60; //get seconds of audio duration
 
   return (
     <div className="grid grid-cols-3 gap-6 p-6">
       {/* Play Audio Section */}
       <div className="flex flex-col items-center justify-center space-y-4 bg-[eeebe6] p-6 border-r-4 border-gray-300">
-        <FaPlay className="h-12 w-12 text-[#c29669]" />
-        <span className="text-xl font-medium text-center">Play Audio</span>
+        <Link href={audio_link}>
+          <FaPlay className="h-12 w-12 text-[#c29669]" />
+          <span className="text-xl font-medium text-center">Play Audio</span>
+        </Link>
       </div>
 
       {/* Audio Duration Section */}
       <div className="flex flex-col items-center justify-center space-y-4 bg-[eeebe6] rounded-lg p-6 ">
-        <span className="text-3xl font-bold text-black">2:30</span>
+        <span className="text-3xl font-bold text-black">
+          {minutes}:{seconds}
+        </span>
         <span className="text-xl font-medium text-center">Audio Duration</span>
       </div>
 
@@ -51,4 +65,6 @@ export default function KeyStats() {
       </div>
     </div>
   );
-}
+};
+
+export default KeyStats;
