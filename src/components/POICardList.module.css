@@ -1,0 +1,17 @@
+/* Checkbox.module.css */
+.checkbox .chakra-checkbox__control {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border-color: gray;
+  background-color: white;
+}
+
+.checkbox .chakra-checkbox__control[data-checked] {
+  background-color: green;
+  border-color: green;
+}
+
+.checkbox .chakra-checkbox__control[data-checked] svg {
+  color: white;
+}
