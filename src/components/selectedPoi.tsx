@@ -3,6 +3,7 @@ import KeyStats from "./keyStats";
 import styles from "@/styles/selectedPoi.module.css";
 import { Button } from "@chakra-ui/react";
 import AudioPlayer from "./AudioPlayer";
+import { TranscriptView } from "./transcript";
 
 //Subcomponent to display image (unblurred) and header of the POI name
 interface OverlayImageProps {
@@ -67,11 +68,11 @@ const Selected_POI_Page: React.FC<POIProps> = ({
         </div>
       </div>
 
-      {/* Audio Player remains in place, but is only visible when isAudioVisible is true */}
+      {isAudioVisible && <TranscriptView audioUri={audio_link} imageUrl={mainImage}></TranscriptView>}
+
       {isAudioVisible && <AudioPlayer audioURL={audio_link} name="POI Audio" />}
     </div>
   );
 };
 
 export default Selected_POI_Page;
-//"https://d1omyfn3jea7ni.cloudfront.net/Daniel_Spanish_Final.wav"

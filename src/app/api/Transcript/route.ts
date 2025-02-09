@@ -32,6 +32,7 @@ export async function GET(req: NextRequest) {
     );
 
     if (error) {
+      console.error("Deepgram error details:", error);
       return NextResponse.json({ error: "Deepgram API Error", details: error }, { status: 500 });
     }
 

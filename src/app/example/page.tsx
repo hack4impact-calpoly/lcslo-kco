@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
-//import { TranscriptView } from "@/components/transcript";
+
+import { TranscriptView } from "@/components/transcript";
 
 export default function Page() {
   const [transcript, setTranscript] = useState("Loading transcript...");
@@ -27,7 +28,8 @@ export default function Page() {
   return (
     <div>
       <Navbar />
-      {/*<TranscriptView />*/}
+
+      <TranscriptView audioUri={""} />
     </div>
   );
 }

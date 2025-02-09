@@ -14,6 +14,7 @@ const PlayAudio: React.FC<PA_Props> = ({ toggleAudioPlayer }) => {
       <Button onClick={toggleAudioPlayer} className={styles.audioButton}>
         <FaPlay className={styles.audioIcon} />
       </Button>
+
       <span className={styles.paText}>Play Audio</span>
     </div>
   );
