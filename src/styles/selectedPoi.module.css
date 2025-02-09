@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  background-color: black;
+  background-color: #f0ebe7;
 }
 
 /* First div with main image */
@@ -85,6 +85,7 @@
   max-height: 50vh; /* Limit height so it doesn't push up other elements */
   font-family: sans-serif;
   font-style: normal;
+
   font-size: 17px;
 }
 

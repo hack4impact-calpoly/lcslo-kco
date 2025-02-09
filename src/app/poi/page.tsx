@@ -22,7 +22,7 @@ function POIDetailContent() {
         mainImage={imageUrl || ""}
         name={name || "Unknown POI"}
         content={description || "Description"}
-        audio_link="link"
+        audio_link={imageUrl || "link"}
         duration={duration || "0:00"}
         tour_progress={progress}
         total_tours={totalPois}

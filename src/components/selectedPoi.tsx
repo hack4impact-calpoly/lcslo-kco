@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import KeyStats from "./keyStats";
 import styles from "@/styles/selectedPoi.module.css";
+import { Button } from "@chakra-ui/react";
+import AudioPlayer from "./AudioPlayer";
 
 //Subcomponent to display image (unblurred) and header of the POI name
 interface OverlayImageProps {
@@ -26,6 +28,7 @@ interface POIProps {
   tour_progress: number;
   total_tours: number;
 }
+
 const Selected_POI_Page: React.FC<POIProps> = ({
   mainImage,
   name,
@@ -35,15 +38,18 @@ const Selected_POI_Page: React.FC<POIProps> = ({
   tour_progress,
   total_tours,
 }) => {
+  const [isAudioVisible, setIsAudioVisible] = useState(false);
+
+  const toggleAudioPlayer = () => {
+    setIsAudioVisible((prev) => !prev);
+  };
+
   return (
-    //overall container
     <div className={styles.pageContainer}>
-      {/* first div with blurred image*/}
       <div className={styles.mainImageContainer}>
         <img src={mainImage} alt="Main" className={styles.mainImage} />
       </div>
 
-      {/* second div with overlage and key stats sub components*/}
       <div className={styles.contentContainer}>
         <OverlayImage src={mainImage} header={name} />
         <div className={styles.statsWrapper}>
@@ -52,15 +58,20 @@ const Selected_POI_Page: React.FC<POIProps> = ({
             duration={duration}
             tour_progress={tour_progress}
             total_tours={total_tours}
+            toggleAudioPlayer={toggleAudioPlayer}
           />
         </div>
         <div>
           <p className={styles.textContent}>
-            {" "}
             <span className={styles.description}>Description:</span> {content}
           </p>
         </div>
       </div>
+
+      {/* Audio Player remains in place, but is only visible when isAudioVisible is true */}
+      {isAudioVisible && (
+        <AudioPlayer audioURL={"https://d1omyfn3jea7ni.cloudfront.net/Daniel_Spanish_Final.wav"} name="POI Audio" />
+      )}
     </div>
   );
 };
