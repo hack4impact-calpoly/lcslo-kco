@@ -19,7 +19,7 @@ interface POIProps {
 const OverlayImage: React.FC<OverlayImageProps> = ({ src, header }) => {
   return (
     <div className="flex flex-col z-30">
-      <h1 className="absolute top-0 left-1/2 transform -translate-x-1/2 translate-y-[50%] text-white text-3xl font whitespace-nowrap">
+      <h1 className="absolute top-0 left-1/2 transform -translate-x-1/2 translate-y-[160%] text-white text-3xl font whitespace-nowrap">
         {header}
       </h1>
       <img
