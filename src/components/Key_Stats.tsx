@@ -20,7 +20,7 @@ const KeyStats: React.FC<KS_Porps> = ({ audio_link, duration_sec, tour_progress,
       <div className="flex flex-col items-center justify-center space-y-4 bg-[eeebe6] p-6 border-r-4 border-gray-300">
         <Link href={audio_link}>
           <FaPlay className="h-12 w-12 text-[#D29561]" />
-          <span className="text-xl font-medium text-center">Play Audio</span>
+          <span className="text-xl font-medium text-center text-black">Play Audio</span>
         </Link>
       </div>
 
@@ -29,7 +29,7 @@ const KeyStats: React.FC<KS_Porps> = ({ audio_link, duration_sec, tour_progress,
         <span className="text-3xl font-bold text-black">
           {minutes}:{seconds}
         </span>
-        <span className="text-xl font-medium text-center">Audio Duration</span>
+        <span className="text-xl font-medium text-center text-black">Audio Duration</span>
       </div>
 
       {/* Tour Progress Section */
@@ -60,7 +60,7 @@ const KeyStats: React.FC<KS_Porps> = ({ audio_link, duration_sec, tour_progress,
             {toursCompletedCnt}/{totalTourCnt}
           </div>
         </div>
-        <span className="text-xl font-medium text-center">Tour Progress</span>
+        <span className="text-xl font-medium text-center text-black">Tour Progress</span>
       </div>
     </div>
   );
