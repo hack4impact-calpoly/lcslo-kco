@@ -15,7 +15,6 @@ export async function GET() {
     return NextResponse.json({ error: "Error: Unable to fetch audio files." }, { status: 500 });
   }
 }
-
 export async function POST(request: Request) {
   try {
     await connectDB();
