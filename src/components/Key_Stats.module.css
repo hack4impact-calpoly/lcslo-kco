@@ -1,0 +1,60 @@
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 0rem;
+  width: 100%;
+  margin: 10px;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  background-color: #eeebe6;
+  padding: 1.5rem;
+}
+
+.playSection {
+  border-right: 4px solid #d1d5db;
+}
+
+.progressSection {
+  border-left: 4px solid #d1d5db;
+}
+
+.audioIcon {
+  height: 3rem;
+  width: 3rem;
+  color: #d29561;
+}
+
+.text {
+  font-size: 1.25rem;
+  font-weight: 500;
+  text-align: center;
+  color: black;
+}
+
+.audioDuration {
+  font-size: 1.875rem;
+  font-weight: bold;
+  color: black;
+}
+
+.progressContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 6rem;
+  height: 6rem;
+}
+
+.progressText {
+  position: absolute;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: black;
+}
