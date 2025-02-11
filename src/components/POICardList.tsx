@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Progress } from "./ui/progress";
 import { Checkbox } from "./ui/checkbox";
 import styles from "./POICardList.module.css";
+import { FaCheck } from "react-icons/fa";
 
 export default function POICardList() {
   const [cardsDone, setCardsDone] = useState(0);
@@ -123,6 +124,30 @@ export default function POICardList() {
     },
   ]);
 
+  const toggleComplete = (id) => {
+    const clickedIndex = data.findIndex((item) => item._id === id);
+
+    const isCurrentlyComplete = data[clickedIndex].isComplete;
+    const updatedData = data.map((item, index) => {
+      if (isCurrentlyComplete) {
+        // If the checkbox is checked, toggle the clicked one and everything after it off
+        if (index >= clickedIndex) {
+          return { ...item, isComplete: false };
+        }
+      } else {
+        // If the checkbox is not checked, toggle the clicked one and everything before it on
+        if (index <= clickedIndex) {
+          return { ...item, isComplete: true };
+        }
+      }
+      return item; // Leave all other items as they are
+    });
+    setData(updatedData);
+
+    const updatedCardsDone = updatedData.filter((item) => item.isComplete).length;
+    setCardsDone(updatedCardsDone);
+  };
+
   // Defining a custom variant
   return (
     <div>
@@ -130,19 +155,41 @@ export default function POICardList() {
         <h1>All Audios</h1>
         <h2>Kathleens Overlook Canyon</h2>
       </div>
-      <div>
-        <div>
+      <div className="cardList">
+        <div className={styles.topProgress}>
           <h1>Tour Progress: {cardsDone + " / " + data.length}</h1>
           <Progress value={(cardsDone / data.length) * 100} />
         </div>
 
         <div>
-          {data.map((POI) => (
-            <div key={POI._id}>
-              <Checkbox className={styles.checkbox}></Checkbox>
-              <h2>{POI.name}</h2>
-              <p>{POI.description}</p>
-              <p>Status: {POI.isComplete ? "Completed" : "Not Completed"}</p>
+          {data.map((POI, index) => (
+            <div key={POI._id} className={styles.poicard}>
+              <div className={styles.progressBar}>
+                {Array(4) // Adjust the number of dots
+                  .fill(null)
+                  .map((_, dotIndex) => (
+                    <div
+                      key={dotIndex}
+                      className={`${styles.dot} ${
+                        POI.isComplete ? styles.dotCompleted : styles.dotNotCompleted
+                      } ${index === 0 ? styles.hiddenDot : ""}`}
+                    ></div>
+                  ))}
+
+                <button
+                  onClick={() => toggleComplete(POI._id)}
+                  className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors ${
+                    POI.isComplete ? styles.POIchecked : styles.POIdefault
+                  }`}
+                >
+                  {POI.isComplete && <FaCheck color="white" />}
+                </button>
+              </div>
+              <div className={styles.cardtbd}>
+                <h2>{POI.name}</h2>
+                <p>{POI.description}</p>
+                <p>Status: {POI.isComplete ? "Completed" : "Not Completed"}</p>
+              </div>
             </div>
           ))}
         </div>

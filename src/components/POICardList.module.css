@@ -1,17 +1,66 @@
-/* Checkbox.module.css */
-.checkbox .chakra-checkbox__control {
-  width: 24px;
-  height: 24px;
+.poicard {
+  display: flex;
+  justify-content: space-between;
+}
+
+.checkbox-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dot {
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
-  border-color: gray;
-  background-color: white;
+  background-color: #876950;
 }
 
-.checkbox .chakra-checkbox__control[data-checked] {
-  background-color: green;
-  border-color: green;
+.dotCompleted {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: #d29561;
 }
 
-.checkbox .chakra-checkbox__control[data-checked] svg {
-  color: white;
+.hiddenDot {
+  opacity: 0;
+}
+
+.progressBar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  transform: translateY(-30%);
+  margin: 0 1em;
+}
+
+.POIchecked {
+  background-color: #d29561; /* Set background color for checked state */
+  border-color: #d29561; /* Optionally set border color to match */
+}
+
+.POIdefault {
+  border-color: #876950; /* Set border color for default state */
+  background-color: transparent; /* Ensure background is transparent when not checked */
+}
+
+.cardtbd {
+  background: #f8f6f3;
+  border-radius: 16px; /* Rounded corners */
+  overflow: hidden; /* Ensures image and content stay inside the card */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  width: 100%;
+  max-width: 400px;
+  font-family: Arial, sans-serif;
+  margin: 1em 1.5em 0 0;
+}
+
+.topProgress {
+  padding-left: 3.4em;
+}
+
+.tourProgress {
+  background-color: "#876950";
 }
