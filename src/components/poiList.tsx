@@ -1,5 +1,7 @@
-/* eslint-disable @next/next/no-img-element */
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
+import POIModel from "@/database/models/POISchema";
+import mongoose from "mongoose";
 
 interface POICardProps {
   title: string;
@@ -12,6 +14,7 @@ function POICard({ title, duration, imageUrl }: POICardProps) {
     <div className="relative bg-black rounded-2xl p-1 w-[324.07px] h-[178.44px]">
       {/* Image Section */}
       <div className="rounded-t-2xl overflow-hidden w-full h-[112.81px]">
+        {/*eslint-disable-next-line @next/next/no-img-element*/}
         <img src={imageUrl} alt={title} className="object-cover w-full h-full" />
       </div>
 
@@ -25,17 +28,33 @@ function POICard({ title, duration, imageUrl }: POICardProps) {
 }
 
 function POIListView() {
-  // Placeholder data
-  const poi = {
-    title: "Point of interest's name",
-    duration: "2:15 min",
-    imageUrl:
-      "https://images.unsplash.com/uploads/141148589884100082977/a816dbd7?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  };
+  const [poiList, setPoiList] = useState<POICardProps[]>([]);
+
+  useEffect(() => {
+    async function fetchPOIs() {
+      try {
+        const res = await fetch("/api/poi"); // API route
+        const data = await res.json();
+        setPoiList(
+          data.map((poi: any) => ({
+            title: poi.name,
+            duration: poi.audioFile?.duration || "N/A",
+            imageUrl: poi.image || "https://via.placeholder.com/300",
+          })),
+        );
+      } catch (error) {
+        console.error("Failed to fetch POIs:", error);
+      }
+    }
+
+    fetchPOIs();
+  }, []);
 
   return (
-    <div className="POICard">
-      <POICard title={poi.title} duration={poi.duration} imageUrl={poi.imageUrl} />
+    <div className="grid grid-cols-3 gap-4">
+      {poiList.map((poi, index) => (
+        <POICard key={index} title={poi.title} duration={poi.duration} imageUrl={poi.imageUrl} />
+      ))}
     </div>
   );
 }

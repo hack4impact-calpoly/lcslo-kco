@@ -2,10 +2,10 @@ import mongoose, { Schema } from "mongoose";
 
 // typescript type (can also be an interface)
 export type Poi = {
-  _id: string;
   name: string;
   description: string;
-  audioField: string;
+  image: string;
+  audioField: mongoose.Types.ObjectId;
   isComplete: boolean;
 };
 
@@ -13,7 +13,8 @@ export type Poi = {
 const POISchema = new Schema<Poi>({
   name: { type: String, required: true },
   description: { type: String, required: true },
-  audioField: { type: String, required: true },
+  image: { type: String, required: true },
+  audioField: { type: mongoose.Schema.Types.ObjectId, ref: "Audiofile", required: true },
   isComplete: { type: Boolean, required: true },
 });
 
