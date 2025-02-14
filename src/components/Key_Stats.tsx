@@ -15,8 +15,8 @@ const PlayAudio: React.FC<PA_Props> = ({ audio_link }) => {
     <div className={styles.section}>
       <Link href={audio_link}>
         <FaPlay className={styles.audioIcon} />
-        <span className={styles.subText}>Play Audio</span>
       </Link>
+      <span className={styles.paText}>Play Audio</span>
     </div>
   );
 };
@@ -39,7 +39,7 @@ const AudioDuration: React.FC<AD_Props> = ({ duration_sec }) => {
       <span className={styles.audioDuration}>
         {minutes}:{seconds}
       </span>
-      <span className={styles.subText}>Audio Duration</span>
+      <span className={styles.adText}>Audio Duration</span>
     </div>
   );
 };
@@ -57,26 +57,22 @@ const TourProgress: React.FC<TP_Props> = ({ tour_progress, total_tours }) => {
   return (
     <div className={styles.section}>
       <div className={styles.progressContainer}>
-        <svg className="absolute transform rotate-90" width="75" height="75" viewBox="0 0 100 100">
-          <circle cx="50" cy="50" r="45" stroke="#D29561" strokeWidth="10" fill="none" />
+        <svg className={styles.progressSvg} width="75" height="75" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="45" className={styles.progressBgCircle} />
           <circle
             cx="50"
             cy="50"
             r="45"
-            stroke="#F7CBA6"
-            strokeWidth="10"
-            fill="none"
+            className={styles.progressFillCircle}
             strokeDasharray={2 * Math.PI * 45}
             strokeDashoffset={(tour_progress / total_tours) * 2 * Math.PI * 45}
-            strokeLinecap="round"
-            transform="rotate(-90 50 50)"
           />
         </svg>
         <div className={styles.progressText}>
           {tour_progress}/{total_tours}
         </div>
       </div>
-      <span className={styles.subText}>Tour Progress</span>
+      <span className={styles.tpText}>Tour Progress</span>
     </div>
   );
 };
@@ -97,14 +93,18 @@ interface KS_Props {
 const KeyStats: React.FC<KS_Props> = ({ audio_link, duration_sec, tour_progress, total_tours }) => {
   return (
     <div className={styles.container}>
-      {/* Play Audio Section */}
-      <PlayAudio audio_link={audio_link}></PlayAudio>
-
-      {/* Audio Duration Section */}
-      <AudioDuration duration_sec={duration_sec}></AudioDuration>
-
-      {/* Tour Progress Section */}
-      <TourProgress total_tours={total_tours} tour_progress={tour_progress}></TourProgress>
+      <div className={styles.sideContainer}>
+        {/* Play Audio Section */}
+        <PlayAudio audio_link={audio_link}></PlayAudio>
+      </div>
+      <div className={styles.centerContainer}>
+        {/* Audio Duration Section */}
+        <AudioDuration duration_sec={duration_sec}></AudioDuration>
+      </div>
+      <div className={styles.sideContainer}>
+        {/* Tour Progress Section */}
+        <TourProgress total_tours={total_tours} tour_progress={tour_progress}></TourProgress>
+      </div>
     </div>
   );
 };

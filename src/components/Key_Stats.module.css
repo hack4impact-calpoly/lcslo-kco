@@ -1,8 +1,6 @@
 .container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  padding: 0rem;
-  width: 100%;
+  display: flex;
+  width: 100vw;
 }
 
 .section {
@@ -10,19 +8,35 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
   background-color: #eeebe6;
   padding: 1.5rem;
 }
 
 .audioIcon {
-  height: 3rem;
-  width: 3rem;
+  height: 75px;
+  width: 75px;
   color: #d29561;
   align-items: start;
+  padding-top: 20px;
 }
 
-.subText {
+.paText {
+  font-size: 1.25rem;
+  font-weight: 500;
+  text-align: center;
+  color: black;
+  padding-top: 20px;
+}
+
+.adText {
+  font-size: 1.25rem;
+  font-weight: 500;
+  text-align: center;
+  color: black;
+  padding-top: 25px;
+}
+
+.tpText {
   font-size: 1.25rem;
   font-weight: 500;
   text-align: center;
@@ -33,6 +47,28 @@
   font-size: 1.875rem;
   font-weight: bold;
   color: black;
+  padding-top: 25px;
+}
+
+.progressText {
+  position: absolute;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: black;
+}
+
+.sideContainer {
+  width: 33.33vw;
+  height: 40vw;
+}
+
+.centerContainer {
+  width: 33.33vw;
+  height: 40vw;
+  border-left: 5px solid #e5e5e5; /* Left border */
+  border-right: 5px solid #e5e5e5; /* Right border */
+  border-top: none;
+  border-bottom: none;
 }
 
 .progressContainer {
@@ -49,4 +85,24 @@
   font-size: 1.25rem;
   font-weight: bold;
   color: black;
+}
+
+.progressSvg {
+  position: absolute;
+  transform: rotate(90deg);
+}
+
+.progressBgCircle {
+  stroke: #d29561;
+  stroke-width: 10;
+  fill: none;
+}
+
+.progressFillCircle {
+  stroke: #f7cba6;
+  stroke-width: 10;
+  fill: none;
+  stroke-linecap: round;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
 }
