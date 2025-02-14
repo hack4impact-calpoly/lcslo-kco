@@ -2,22 +2,11 @@ import React from "react";
 import KeyStats from "./Key_Stats";
 import styles from "./Selected_POI_Page.module.css";
 
+//Subcomponent to display image (unblurred) and header of the POI name
 interface OverlayImageProps {
   src: string;
   header: string;
 }
-
-interface POIProps {
-  mainImage: string;
-  name: string;
-  content: string;
-  audio_link: string;
-  duration_sec: number;
-  tour_progress: number;
-  total_tours: number;
-}
-
-//Subcomponent to display image (unblurred) and header of the POI name
 const OverlayImage: React.FC<OverlayImageProps> = ({ src, header }) => {
   return (
     <div className={styles.overlayContainer}>
@@ -28,6 +17,15 @@ const OverlayImage: React.FC<OverlayImageProps> = ({ src, header }) => {
 };
 
 //Main component containing Key_Stats subcomponent, and content
+interface POIProps {
+  mainImage: string;
+  name: string;
+  content: string;
+  audio_link: string;
+  duration_sec: number;
+  tour_progress: number;
+  total_tours: number;
+}
 const Selected_POI_Page: React.FC<POIProps> = ({
   mainImage,
   name,
