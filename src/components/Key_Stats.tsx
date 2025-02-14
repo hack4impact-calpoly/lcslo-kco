@@ -12,10 +12,10 @@ interface PA_Props {
 }
 const PlayAudio: React.FC<PA_Props> = ({ audio_link }) => {
   return (
-    <div className={styles.playSection}>
+    <div className={styles.section}>
       <Link href={audio_link}>
         <FaPlay className={styles.audioIcon} />
-        <span className={styles.playText}>Play Audio</span>
+        <span className={styles.subText}>Play Audio</span>
       </Link>
     </div>
   );
@@ -39,7 +39,7 @@ const AudioDuration: React.FC<AD_Props> = ({ duration_sec }) => {
       <span className={styles.audioDuration}>
         {minutes}:{seconds}
       </span>
-      <span className={styles.audioText}>Audio Duration</span>
+      <span className={styles.subText}>Audio Duration</span>
     </div>
   );
 };
@@ -55,7 +55,7 @@ interface TP_Props {
 }
 const TourProgress: React.FC<TP_Props> = ({ tour_progress, total_tours }) => {
   return (
-    <div className={styles.progressSection}>
+    <div className={styles.section}>
       <div className={styles.progressContainer}>
         <svg className="absolute transform rotate-90" width="75" height="75" viewBox="0 0 100 100">
           <circle cx="50" cy="50" r="45" stroke="#D29561" strokeWidth="10" fill="none" />
@@ -76,7 +76,7 @@ const TourProgress: React.FC<TP_Props> = ({ tour_progress, total_tours }) => {
           {tour_progress}/{total_tours}
         </div>
       </div>
-      <span className={styles.tourText}>Tour Progress</span>
+      <span className={styles.subText}>Tour Progress</span>
     </div>
   );
 };
