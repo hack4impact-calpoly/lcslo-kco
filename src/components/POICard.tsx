@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import styles from "./POICard.module.css";
 import React from "react";
 
 interface POICardProps {
@@ -9,7 +10,7 @@ interface POICardProps {
 
 function POICard({ title, duration, imageUrl }: POICardProps) {
   return (
-    <div className="relative bg-white rounded-2xl p-1 w-[324.07px] h-[178.44px]">
+    <div className={styles.base}>
       {/* Image Section */}
       <div className="rounded-t-2xl overflow-hidden w-full h-[112.81px]">
         <img src={imageUrl} alt={title} className="object-cover w-full h-full" />

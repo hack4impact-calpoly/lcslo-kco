@@ -158,8 +158,10 @@ export default function POICardList() {
       </div>
       <div className={styles.base}>
         <div className={styles.topProgress}>
-          <h1>Tour Progress: {cardsDone + " / " + data.length}</h1>
-          <Progress value={(cardsDone / data.length) * 100} />
+          <div className="text-black">
+            Visited Spots: <span className="text-orange-500"> {cardsDone + " / " + data.length}</span>
+          </div>
+          <Progress value={(cardsDone / data.length) * 100} colorPalette="orange" />
         </div>
 
         <div>

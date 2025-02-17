@@ -1,5 +1,7 @@
 .base {
+  flex: auto;
   background-color: #f7f3ef;
+  padding-top: 20px;
 }
 
 .header {
@@ -41,6 +43,7 @@
 .poicard {
   display: flex;
   justify-content: space-between;
+  padding: 20px;
 }
 
 .checkbox-container {
@@ -98,7 +101,35 @@
 }
 
 .topProgress {
-  padding-left: 3.4em;
+  display: flex;
+  width: 324.07px;
+  padding: 0px 2px;
+  flex-direction: column;
+  gap: 10px;
+  margin-left: auto;
+  padding-bottom: 20px;
+}
+
+.textProgress {
+  width: 300.764px;
+  height: 21.904px;
+  position: absolute;
+  right: -2.764px;
+  color: #333;
+  font-family: "Stevie Sans";
+  font-size: 14.656px;
+  font-style: normal;
+  font-weight: 550;
+  line-height: 110%; /* 16.122px */
+}
+.textInnerProgress {
+  color: #d29561;
+  text-align: center;
+  font-family: "Stevie Sans";
+  font-size: 14.656px;
+  font-style: normal;
+  font-weight: 550;
+  line-height: normal;
 }
 
 .tourProgress {
