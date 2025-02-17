@@ -4,6 +4,7 @@ import { Progress } from "./ui/progress";
 import { Checkbox } from "./ui/checkbox";
 import styles from "./POICardList.module.css";
 import { FaCheck } from "react-icons/fa";
+import POICard from "./POICard";
 
 export default function POICardList() {
   const [cardsDone, setCardsDone] = useState(0);
@@ -124,7 +125,7 @@ export default function POICardList() {
     },
   ]);
 
-  const toggleComplete = (id) => {
+  const toggleComplete = (id: string) => {
     const clickedIndex = data.findIndex((item) => item._id === id);
 
     const isCurrentlyComplete = data[clickedIndex].isComplete;
@@ -150,12 +151,12 @@ export default function POICardList() {
 
   // Defining a custom variant
   return (
-    <div>
-      <div>
-        <h1>All Audios</h1>
-        <h2>Kathleens Overlook Canyon</h2>
+    <div className={"flex-auto"}>
+      <div className={styles.header}>
+        <h1 className={styles.headerTitle}>All Audios</h1>
+        <h2 className={styles.headerSubtitle}>Kathleens Overlook Canyon</h2>
       </div>
-      <div className="cardList">
+      <div className={styles.base}>
         <div className={styles.topProgress}>
           <h1>Tour Progress: {cardsDone + " / " + data.length}</h1>
           <Progress value={(cardsDone / data.length) * 100} />
@@ -185,11 +186,11 @@ export default function POICardList() {
                   {POI.isComplete && <FaCheck color="white" />}
                 </button>
               </div>
-              <div className={styles.cardtbd}>
-                <h2>{POI.name}</h2>
-                <p>{POI.description}</p>
-                <p>Status: {POI.isComplete ? "Completed" : "Not Completed"}</p>
-              </div>
+              <POICard
+                title={POI.name}
+                duration="19:00"
+                imageUrl="https://images.unsplash.com/uploads/141148589884100082977/a816dbd7?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              ></POICard>
             </div>
           ))}
         </div>
