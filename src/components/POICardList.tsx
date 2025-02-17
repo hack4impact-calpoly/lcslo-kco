@@ -19,7 +19,7 @@ export default function POICardList() {
       duration: "1:00",
       imageUrl:
         "https://images.unsplash.com/uploads/141148589884100082977/a816dbd7?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      isComplete: true,
+      isComplete: false,
     },
     {
       _id: "2",
@@ -40,7 +40,7 @@ export default function POICardList() {
       duration: "1:00",
       imageUrl:
         "https://images.unsplash.com/uploads/141148589884100082977/a816dbd7?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      isComplete: true,
+      isComplete: false,
     },
     {
       _id: "4",
@@ -61,7 +61,7 @@ export default function POICardList() {
       duration: "1:00",
       imageUrl:
         "https://images.unsplash.com/uploads/141148589884100082977/a816dbd7?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      isComplete: true,
+      isComplete: false,
     },
     {
       _id: "6",
@@ -72,7 +72,7 @@ export default function POICardList() {
       duration: "1:00",
       imageUrl:
         "https://images.unsplash.com/uploads/141148589884100082977/a816dbd7?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      isComplete: true,
+      isComplete: false,
     },
     {
       _id: "7",
@@ -94,7 +94,7 @@ export default function POICardList() {
       duration: "1:00",
       imageUrl:
         "https://images.unsplash.com/uploads/141148589884100082977/a816dbd7?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      isComplete: true,
+      isComplete: false,
     },
     {
       _id: "9",
@@ -115,7 +115,7 @@ export default function POICardList() {
       duration: "1:00",
       imageUrl:
         "https://images.unsplash.com/uploads/141148589884100082977/a816dbd7?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      isComplete: true,
+      isComplete: false,
     },
     {
       _id: "11",
@@ -137,7 +137,7 @@ export default function POICardList() {
       duration: "1:00",
       imageUrl:
         "https://images.unsplash.com/uploads/141148589884100082977/a816dbd7?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      isComplete: true,
+      isComplete: false,
     },
     {
       _id: "13",
@@ -157,7 +157,7 @@ export default function POICardList() {
       duration: "1:00",
       imageUrl:
         "https://images.unsplash.com/uploads/141148589884100082977/a816dbd7?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      isComplete: true,
+      isComplete: false,
     },
     {
       _id: "15",
@@ -205,7 +205,7 @@ export default function POICardList() {
       <div className={styles.base}>
         <div className={styles.topProgress}>
           <div className="text-black">
-            Visited Spots: <span className="text-orange-400"> {cardsDone + " / " + data.length}</span>
+            Visited Spots: <span className="text-orange-400"> {cardsDone + "/" + data.length}</span>
           </div>
           <Progress value={(cardsDone / data.length) * 100} colorPalette="orange" />
         </div>

@@ -21,7 +21,7 @@
   align-self: stretch;
   color: #333;
   text-align: center;
-  font-family: "Stevie Sans";
+  font-family: sans-serif;
   font-size: 22.145px;
   font-style: normal;
   font-weight: 600;
@@ -33,7 +33,7 @@
   align-self: stretch;
   color: #757575;
   text-align: center;
-  font-family: "Stevie Sans";
+  font-family: sans-serif;
   font-size: 16.105px;
   font-style: normal;
   font-weight: 550;
@@ -89,17 +89,6 @@
   background-color: transparent; /* Ensure background is transparent when not checked */
 }
 
-.cardtbd {
-  background: #f8f6f3;
-  border-radius: 16px; /* Rounded corners */
-  overflow: hidden; /* Ensures image and content stay inside the card */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
-  width: 100%;
-  max-width: 400px;
-  font-family: Arial, sans-serif;
-  margin: 1em 1.5em 0 0;
-}
-
 .topProgress {
   display: flex;
   width: 370.07px;
@@ -116,7 +105,7 @@
   position: absolute;
   right: -2.764px;
   color: #333;
-  font-family: "Stevie Sans";
+  font-family: sans-serif;
   font-size: 14.656px;
   font-style: normal;
   font-weight: 550;
@@ -125,7 +114,7 @@
 .textInnerProgress {
   color: #d29561;
   text-align: center;
-  font-family: "Stevie Sans";
+  font-family: sans-serif;
   font-size: 14.656px;
   font-style: normal;
   font-weight: 550;
