@@ -53,7 +53,12 @@ const Selected_POI_Page: React.FC<POIProps> = ({
             tour_progress={tour_progress}
             total_tours={total_tours}
           />
-          <p className={styles.textContent}>{content}</p>
+        </div>
+        <div>
+          <p className={styles.textContent}>
+            {" "}
+            <span className={styles.description}>Description:</span> {content}
+          </p>
         </div>
       </div>
     </div>

@@ -5,7 +5,6 @@ export default function Home() {
   return (
     <main>
       <Navbar />
-
       <POICardList></POICardList>
     </main>
   );
