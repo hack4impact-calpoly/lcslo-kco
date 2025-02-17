@@ -102,8 +102,8 @@
 
 .topProgress {
   display: flex;
-  width: 324.07px;
-  padding: 0px 2px;
+  width: 370.07px;
+  padding: 0px 20px;
   flex-direction: column;
   gap: 10px;
   margin-left: auto;
