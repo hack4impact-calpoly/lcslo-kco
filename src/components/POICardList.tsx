@@ -236,7 +236,10 @@ export default function POICardList() {
                       ></div>
                     ))}
                   <button
-                    onClick={() => toggleComplete(POI._id)}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      toggleComplete(POI._id);
+                    }}
                     className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors ${
                       POI.isComplete ? styles.POIchecked : styles.POIdefault
                     }`}
