@@ -1,5 +1,5 @@
 import Navbar from "@/components/Navbar";
-import POICardList from "@/components/POICardList";
+import POICardList from "@/components/poiList";
 
 export default function Home() {
   return (

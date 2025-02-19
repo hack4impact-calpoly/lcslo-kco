@@ -1,6 +1,6 @@
 import React from "react";
-import KeyStats from "./Key_Stats";
-import styles from "./Selected_POI_Page.module.css";
+import KeyStats from "./keyStats";
+import styles from "@/styles/selectedPoi.module.css";
 
 //Subcomponent to display image (unblurred) and header of the POI name
 interface OverlayImageProps {

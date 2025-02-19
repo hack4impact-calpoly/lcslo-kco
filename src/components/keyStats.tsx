@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import { FaPlay } from "react-icons/fa";
-import styles from "./Key_Stats.module.css";
+import styles from "@/styles/keyStats.module.css";
 
 /*
 PlayAudio Component (1 of 3)

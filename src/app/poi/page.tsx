@@ -1,9 +1,9 @@
 "use client";
 
 import { Suspense } from "react"; // Import Suspense from React
-import POICard from "@/components/POICard";
+import POICard from "@/components/poiCard";
 import { useParams, useSearchParams } from "next/navigation";
-import Selected_POI_Page from "@/components/Selected_POI_Page";
+import Selected_POI_Page from "@/components/selectedPoi";
 
 function POIDetailContent() {
   const params = useParams();

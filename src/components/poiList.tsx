@@ -2,9 +2,9 @@
 import { useState } from "react";
 import { Progress } from "./ui/progress";
 import { Checkbox } from "./ui/checkbox";
-import styles from "./POICardList.module.css";
+import styles from "@/styles/poiList.module.css";
 import { FaCheck } from "react-icons/fa";
-import POICard from "./POICard";
+import POICard from "./poiCard";
 import Link from "next/link";
 
 export default function POICardList() {
