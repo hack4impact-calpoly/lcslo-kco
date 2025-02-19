@@ -22,7 +22,7 @@ interface POIProps {
   name: string;
   content: string;
   audio_link: string;
-  duration_sec: number;
+  duration: string;
   tour_progress: number;
   total_tours: number;
 }
@@ -31,7 +31,7 @@ const Selected_POI_Page: React.FC<POIProps> = ({
   name,
   content,
   audio_link,
-  duration_sec,
+  duration,
   tour_progress,
   total_tours,
 }) => {
@@ -49,7 +49,7 @@ const Selected_POI_Page: React.FC<POIProps> = ({
         <div className={styles.statsWrapper}>
           <KeyStats
             audio_link={audio_link}
-            duration_sec={duration_sec}
+            duration={duration}
             tour_progress={tour_progress}
             total_tours={total_tours}
           />

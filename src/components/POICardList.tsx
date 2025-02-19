@@ -220,6 +220,7 @@ export default function POICardList() {
                   name: POI.name,
                   duration: POI.duration,
                   url: POI.imageUrl,
+                  description: POI.description,
                 },
               }}
             >

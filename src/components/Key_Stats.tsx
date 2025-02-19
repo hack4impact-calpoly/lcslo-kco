@@ -27,18 +27,14 @@ AudioDuration Component (2 of 3)
   - passed in as seconds, converted into a minute:second format
 */
 interface AD_Props {
-  duration_sec: number;
+  duration: string;
 }
-const AudioDuration: React.FC<AD_Props> = ({ duration_sec }) => {
+const AudioDuration: React.FC<AD_Props> = ({ duration }) => {
   //convert total seconds into minutes and seconds
-  const minutes = Math.floor(duration_sec / 60);
-  const seconds = duration_sec % 60;
 
   return (
     <div className={styles.section}>
-      <span className={styles.audioDuration}>
-        {minutes}:{seconds}
-      </span>
+      <span className={styles.audioDuration}>{duration}</span>
       <span className={styles.adText}>Audio Duration</span>
     </div>
   );
@@ -85,12 +81,12 @@ Main KeyStats Component (contains the previous three and is exported)
 */
 interface KS_Props {
   audio_link: string;
-  duration_sec: number;
+  duration: string;
   tour_progress: number;
   total_tours: number;
 }
 
-const KeyStats: React.FC<KS_Props> = ({ audio_link, duration_sec, tour_progress, total_tours }) => {
+const KeyStats: React.FC<KS_Props> = ({ audio_link, duration, tour_progress, total_tours }) => {
   return (
     <div className={styles.container}>
       <div className={styles.sideContainer}>
@@ -99,7 +95,7 @@ const KeyStats: React.FC<KS_Props> = ({ audio_link, duration_sec, tour_progress,
       </div>
       <div className={styles.centerContainer}>
         {/* Audio Duration Section */}
-        <AudioDuration duration_sec={duration_sec}></AudioDuration>
+        <AudioDuration duration={duration}></AudioDuration>
       </div>
       <div className={styles.sideContainer}>
         {/* Tour Progress Section */}
