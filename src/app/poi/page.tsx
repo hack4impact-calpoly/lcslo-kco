@@ -14,6 +14,8 @@ function POIDetailContent() {
   const duration = searchParams.get("duration");
   const imageUrl = searchParams.get("url");
   const description = searchParams.get("description");
+  const progress = parseInt(searchParams.get("progress") || "0", 10);
+  const totalPois = parseInt(searchParams.get("totalCards") || "0", 10);
 
   return (
     <div>
@@ -23,8 +25,8 @@ function POIDetailContent() {
         content={description || "Description"}
         audio_link="link"
         duration={duration || "0:00"}
-        tour_progress={2}
-        total_tours={15}
+        tour_progress={progress}
+        total_tours={totalPois}
       />
     </div>
   );

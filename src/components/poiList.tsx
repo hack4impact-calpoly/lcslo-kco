@@ -172,27 +172,12 @@ export default function POICardList() {
   ]);
 
   const toggleComplete = (id: string) => {
-    const clickedIndex = data.findIndex((item) => item._id === id);
+    const updatedData = data.map((item) => (item._id === id ? { ...item, isComplete: !item.isComplete } : item));
 
-    const isCurrentlyComplete = data[clickedIndex].isComplete;
-    const updatedData = data.map((item, index) => {
-      if (isCurrentlyComplete) {
-        // If the checkbox is checked, toggle the clicked one and everything after it off
-        if (index >= clickedIndex) {
-          return { ...item, isComplete: false };
-        }
-      } else {
-        // If the checkbox is not checked, toggle the clicked one and everything before it on
-        if (index <= clickedIndex) {
-          return { ...item, isComplete: true };
-        }
-      }
-      return item; // Leave all other items as they are
-    });
     setData(updatedData);
 
-    const updatedCardsDone = updatedData.filter((item) => item.isComplete).length;
-    setCardsDone(updatedCardsDone);
+    // Recalculate the number of completed cards
+    setCardsDone(updatedData.filter((item) => item.isComplete).length);
   };
 
   // Defining a custom variant
@@ -221,6 +206,8 @@ export default function POICardList() {
                   duration: POI.duration,
                   url: POI.imageUrl,
                   description: POI.description,
+                  progress: cardsDone,
+                  totalCards: data.length,
                 },
               }}
             >
