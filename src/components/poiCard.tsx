@@ -3,6 +3,7 @@ import React from "react";
 
 import styles from "@/styles/poiCard.module.css";
 
+
 interface POICardProps {
   title: string;
   duration: string;
@@ -21,7 +22,10 @@ export function POICard({ title, duration, imageUrl }: POICardProps) {
       <div className={styles.content}>
         <h3 className={styles.title}>{title}</h3>
         <p className={styles.duration}>{duration}</p>
+
       </div>
     </div>
   );
 }
+
+
