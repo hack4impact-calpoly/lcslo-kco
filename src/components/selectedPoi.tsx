@@ -1,6 +1,6 @@
 import React from "react";
-import KeyStats from "./Key_Stats";
-import styles from "./Selected_POI_Page.module.css";
+import KeyStats from "./keyStats";
+import styles from "@/styles/selectedPoi.module.css";
 
 //Subcomponent to display image (unblurred) and header of the POI name
 interface OverlayImageProps {
@@ -22,7 +22,7 @@ interface POIProps {
   name: string;
   content: string;
   audio_link: string;
-  duration_sec: number;
+  duration: string;
   tour_progress: number;
   total_tours: number;
 }
@@ -31,7 +31,7 @@ const Selected_POI_Page: React.FC<POIProps> = ({
   name,
   content,
   audio_link,
-  duration_sec,
+  duration,
   tour_progress,
   total_tours,
 }) => {
@@ -49,11 +49,16 @@ const Selected_POI_Page: React.FC<POIProps> = ({
         <div className={styles.statsWrapper}>
           <KeyStats
             audio_link={audio_link}
-            duration_sec={duration_sec}
+            duration={duration}
             tour_progress={tour_progress}
             total_tours={total_tours}
           />
-          <p className={styles.textContent}>{content}</p>
+        </div>
+        <div>
+          <p className={styles.textContent}>
+            {" "}
+            <span className={styles.description}>Description:</span> {content}
+          </p>
         </div>
       </div>
     </div>

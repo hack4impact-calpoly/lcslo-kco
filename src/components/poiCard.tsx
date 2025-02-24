@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import styles from "./POICard.module.css";
+import styles from "@/styles/poiCard.module.css";
 import React from "react";
 
 interface POICardProps {
