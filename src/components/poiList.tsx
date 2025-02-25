@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Progress } from "./ui/progress";
 import styles from "@/styles/poiList.module.css";
 import { FaCheck } from "react-icons/fa";
-import POICard from "@/components/poiCard";
+import { POICard } from "@/components/poiCard";
 import Link from "next/link";
 
 interface POI {
