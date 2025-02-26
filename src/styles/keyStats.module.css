@@ -102,7 +102,7 @@
   stroke: #f7cba6;
   stroke-width: 10;
   fill: none;
-  stroke-linecap: round;
+  stroke-linecap: square;
   transform: rotate(-90deg);
   transform-origin: 50% 50%;
 }
