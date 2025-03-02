@@ -12,5 +12,15 @@ module.exports = {
     "@babel/preset-typescript", // For TypeScript support (removes type checking)
   ],
 
-  plugins: [],
+  plugins: [
+    [
+      "module-resolver",
+      {
+        root: ["./src"], // Root directory to start resolving
+        alias: {
+          "@": "./src", // Match the alias to your TypeScript configuration
+        },
+      },
+    ],
+  ],
 };
