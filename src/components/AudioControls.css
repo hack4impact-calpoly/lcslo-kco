@@ -3,34 +3,37 @@
   flex-direction: column; 
   justify-content: space-between;
   background-color: #876950;
-  padding: 8px;  /* Padding to fit within the fixed size */
-  border-radius: 8px 8px 0 0; /* Top corners rounded, bottom corners square */
-  width: 160.886px;   /* Fixed width */
-  height: 47.441px;   /* Fixed height */
-  flex-shrink: 0;      /* Prevent shrinking */
+  padding-bottom: 9.9px;
+  padding-left: 8.25px;
+  padding-right: 8.25px;
+  padding-top: 7px; 
+  border-radius: 4.125px 4.125px 0px 0px;
+  width: 160.886px;   
+  height: 47.441px;  
+  flex-shrink: 0;     
 }
 
 .progress-bar-container {
   display: flex;
   align-items: center;
-  justify-content: flex-start;  /* Align progress bar to the left */
-  width: 100%;  /* Make progress bar take up full width */
-  gap: 4px;  /* Reduced gap for space efficiency */
+  justify-content: flex-start;  
+  width: 100%; 
+  gap: 4px;
 }
 
 .progress-bar {
   flex: 1;
   appearance: none;
   height: 1.238px;
-  background-color: #d9d9d9;
+  background-color: #C1BEBE;
   border-radius: 2px;
   outline: none;
 }
 
 .progress-bar::-webkit-slider-thumb {
   appearance: none;
-  width: 4.95px;  /* Smaller thumb */
-  height: 4.95px; /* Smaller thumb */
+  width: 4.95px;
+  height: 4.95px; 
   background-color: white;
   border-radius: 50%;
   cursor: pointer;
@@ -38,12 +41,15 @@
 
 .time-display {
   color: white;
-  font-size: 5.775px;
+  font-size: 5.7px;
   text-align: right;
+  font-weight: 500;
   flex-shrink: 0;
-  width: 40px; /* Limit width to fit in the component */
-  margin-left: auto; /* Align to the right */
-  white-space: nowrap;  /* Prevent time display from breaking into multiple lines */
+  width: 40px; 
+  margin-left: auto; 
+  white-space: nowrap;  
+  margin-top: 0.75px;
+  letter-spacing: -0.5px;
 }
 
 .controls-container {
@@ -55,36 +61,38 @@
 }
 
 .volume-control {
-  display: flex;
-  align-items: center; /* Align the volume icon and slider vertically */
-  gap: 4px;
+  transform: translateX(-27px); 
 }
 
 .control-buttons {
   display: flex;
   align-items: center;
-  gap: 8px;
   justify-content: center;
+  margin-top: -2px; 
+  transform: translateX(-5px); 
 }
 
 .play-button {
-  border-radius: 14.026px;
+  border-radius: 50%;
   background: #FFF;
+  width: 20.214px;
+  height: 20.214px;
+  display: flex;
+  align-items: center;
 }
 
 .button {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 4px;  /* Smaller padding for buttons */
   border-radius: 50%;
   cursor: pointer;
-  width: 24px;  /* Smaller button width */
-  height: 24px; /* Smaller button height */
-  background-color: transparent; /* Ensure button has transparent background */
+  width: 24px; 
+  height: 24px; 
+  background-color: transparent; 
 }
 
 .icon {
-  font-size: 1.1rem;  /* Smaller icon size */
+  font-size: 1.1rem; 
   color: white;
 }
