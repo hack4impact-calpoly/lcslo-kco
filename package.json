@@ -9,7 +9,7 @@
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "format": "prettier --write .",
-    "test": "jest",
+    "test": "jest --coverage",
     "prepare": "husky"
   },
   "dependencies": {

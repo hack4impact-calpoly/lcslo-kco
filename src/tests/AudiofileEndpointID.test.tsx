@@ -156,4 +156,34 @@ describe("API Route Tests for /api/audiofile/[_id]", () => {
     const data = await response.json();
     expect(data.error).toBe("Invalid audiofile ID.");
   });
+
+  it("should log an error when fetching the audiofile fails with a generic error", async () => {
+    // Spying on the console.error to track if it's called
+    const consoleErrorSpy = jest.spyOn(console, "error").mockImplementation(() => {});
+
+    // Mocking the Audiofile.findById().exec() to throw a generic error
+    const mockFindById = jest.spyOn(Audiofile, "findById").mockReturnValue({
+      exec: jest.fn().mockRejectedValue(new Error("Generic database error")),
+    });
+
+    const request = new Request("http://localhost/api/audiofile/1", {
+      method: "GET",
+    });
+
+    const params = { _id: "1" };
+
+    const response = await GET(request, { params });
+
+    // Check if console.error was called with the expected error message
+    expect(consoleErrorSpy).toHaveBeenCalledWith("Error fetching audiofile:", expect.any(Error));
+
+    // Check the response status is 500 (internal server error)
+    expect(response.status).toBe(500);
+    const data = await response.json();
+    expect(data.error).toBe("Error: Unable to fetch the audiofile.");
+
+    // Clean up the mocks
+    consoleErrorSpy.mockRestore();
+    mockFindById.mockRestore();
+  });
 });
