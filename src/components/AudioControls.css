@@ -1,0 +1,59 @@
+.audio-controls {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background-color: #6b4f3f;
+    padding: 16px;
+    border-radius: 8px;
+  }
+  
+  .volume-control {
+    display: flex;
+    align-items: center;
+  }
+  
+  .control-buttons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    justify-content: center;
+  }
+  
+  .button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    background-color: #d3d3d3;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .button:hover {
+    background-color: #b0b0b0; /* Darker gray on hover */
+  }
+  
+  .language-toggle {
+    border-radius: 8px; 
+    padding: 8px 16px;
+    background-color: #d3d3d3;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .language-toggle:hover {
+    background-color: #b0b0b0;
+  }
+  
+  .icon {
+    font-size: 1.5rem; 
+    color: black;
+  }
+  
+  .time-display {
+    color: white;
+    font-size: 1rem;
+  }
+  
