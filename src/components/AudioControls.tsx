@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Howl } from "howler";
 import "./AudioControls.css";
 
@@ -62,6 +62,7 @@ const AudioControls: React.FC = () => {
 
   return (
     <div className="audio-controls">
+      {/* Progress Bar and Time Display */}
       <div className="progress-bar-container">
         <input
           type="range"
@@ -72,22 +73,44 @@ const AudioControls: React.FC = () => {
           className="progress-bar"
         />
       </div>
-      <div className="volume-control">
-        <span className="icon">🔊</span>
-      </div>
-      <div className="control-buttons">
-        <button onClick={handleRewind} className="button rewind">
-          <span className="icon">❮❮</span>
-        </button>
-        <button onClick={togglePlayPause} className="button play-pause">
-          {isPlaying ? <span className="icon">❚❚</span> : <span className="icon">►</span>}
-        </button>
-        <button onClick={handleFastForward} className="button fast-forward">
-          <span className="icon">❯❯</span>
-        </button>
-      </div>
       <div className="time-display">
         {formatTime(currentTime)} / {formatTime(duration)}
+      </div>
+
+      {/* Control Buttons */}
+      <div className="control-buttons">
+        <button onClick={handleRewind} className="button rewind">
+          <span className="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="10" viewBox="0 0 12 10" fill="none">
+              <rect width="1.51674" height="9.10043" transform="matrix(-1 0 0 1 2.32031 0.821747)" fill="#D9D9D9" />
+              <path d="M2.82587 5.37196L9.65119 9.31257L9.65119 1.43136L2.82587 5.37196Z" fill="#D9D9D9" />
+            </svg>
+          </span>
+        </button>
+        <div className="play-button">
+          <button onClick={togglePlayPause} className="button play-pause">
+            <span className="play">
+              {isPlaying ? (
+                <svg xmlns="http://www.w3.org/2000/svg" width="9" height="10" viewBox="0 0 9 10" fill="none">
+                  <path d="M8.17725 5.13431L0.751738 9.42143L0.751739 0.847194L8.17725 5.13431Z" fill="#F6F6F6" />
+                </svg>
+              ) : (
+                <svg xmlns="http://www.w3.org/2000/svg" width="7" height="10" viewBox="0 0 7 10" fill="none">
+                  <rect x="0.211426" y="0.834656" width="2.01691" height="8.87439" fill="#876950" />
+                  <rect x="4.24524" y="0.834656" width="2.01691" height="8.87439" fill="#876950" />
+                </svg>
+              )}
+            </span>
+          </button>
+        </div>
+        <button onClick={handleFastForward} className="button fast-forward">
+          <span className="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="10" viewBox="0 0 12 10" fill="none">
+              <rect x="10.1531" y="0.821747" width="1.51674" height="9.10043" fill="#D9D9D9" />
+              <path d="M9.64758 5.37196L2.82226 9.31257L2.82226 1.43136L9.64758 5.37196Z" fill="#D9D9D9" />
+            </svg>
+          </span>
+        </button>
       </div>
     </div>
   );

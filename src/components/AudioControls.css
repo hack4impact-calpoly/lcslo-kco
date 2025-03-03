@@ -1,59 +1,90 @@
 .audio-controls {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    background-color: #6b4f3f;
-    padding: 16px;
-    border-radius: 8px;
-  }
-  
-  .volume-control {
-    display: flex;
-    align-items: center;
-  }
-  
-  .control-buttons {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex: 1;
-    justify-content: center;
-  }
-  
-  .button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 8px;
-    background-color: #d3d3d3;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: background-color 0.2s;
-  }
-  
-  .button:hover {
-    background-color: #b0b0b0; /* Darker gray on hover */
-  }
-  
-  .language-toggle {
-    border-radius: 8px; 
-    padding: 8px 16px;
-    background-color: #d3d3d3;
-    cursor: pointer;
-    transition: background-color 0.2s;
-  }
-  
-  .language-toggle:hover {
-    background-color: #b0b0b0;
-  }
-  
-  .icon {
-    font-size: 1.5rem; 
-    color: black;
-  }
-  
-  .time-display {
-    color: white;
-    font-size: 1rem;
-  }
-  
+  display: flex;
+  flex-direction: column; 
+  justify-content: space-between;
+  background-color: #876950;
+  padding: 8px;  /* Padding to fit within the fixed size */
+  border-radius: 8px 8px 0 0; /* Top corners rounded, bottom corners square */
+  width: 160.886px;   /* Fixed width */
+  height: 47.441px;   /* Fixed height */
+  flex-shrink: 0;      /* Prevent shrinking */
+}
+
+.progress-bar-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;  /* Align progress bar to the left */
+  width: 100%;  /* Make progress bar take up full width */
+  gap: 4px;  /* Reduced gap for space efficiency */
+}
+
+.progress-bar {
+  flex: 1;
+  appearance: none;
+  height: 1.238px;
+  background-color: #d9d9d9;
+  border-radius: 2px;
+  outline: none;
+}
+
+.progress-bar::-webkit-slider-thumb {
+  appearance: none;
+  width: 4.95px;  /* Smaller thumb */
+  height: 4.95px; /* Smaller thumb */
+  background-color: white;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.time-display {
+  color: white;
+  font-size: 5.775px;
+  text-align: right;
+  flex-shrink: 0;
+  width: 40px; /* Limit width to fit in the component */
+  margin-left: auto; /* Align to the right */
+  white-space: nowrap;  /* Prevent time display from breaking into multiple lines */
+}
+
+.controls-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+  width: 100%;
+}
+
+.volume-control {
+  display: flex;
+  align-items: center; /* Align the volume icon and slider vertically */
+  gap: 4px;
+}
+
+.control-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+}
+
+.play-button {
+  border-radius: 14.026px;
+  background: #FFF;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;  /* Smaller padding for buttons */
+  border-radius: 50%;
+  cursor: pointer;
+  width: 24px;  /* Smaller button width */
+  height: 24px; /* Smaller button height */
+  background-color: transparent; /* Ensure button has transparent background */
+}
+
+.icon {
+  font-size: 1.1rem;  /* Smaller icon size */
+  color: white;
+}
