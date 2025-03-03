@@ -2,9 +2,8 @@ import { GET, PUT } from "@/app/api/audiofile/[_id]/route";
 import connectDB from "@/database/db";
 import mongoose from "mongoose";
 import Audiofile from "@/database/models/audiofileSchema";
-import request from "supertest";
 
-// Mocking the resquest apparently
+// Mocking the Request class for tests
 if (typeof Request === "undefined") {
   global.Request = class Request {
     private url: string;
@@ -32,130 +31,129 @@ jest.mock("next/server", () => ({
   },
 }));
 
-beforeAll(async () => {
-  await connectDB(); // Connect to the DB before all tests
-});
-afterAll(async () => {
-  await Audiofile.deleteMany({ name: "Test Audio" });
-  await mongoose.disconnect(); // Disconnect after all tests are completed
-});
+describe("API Route Tests for /api/audiofile/[_id]", () => {
+  const audiofileId = new mongoose.Types.ObjectId(); // Use a mock ObjectId
+  const audiofileData = {
+    _id: audiofileId,
+    name: "Test Audio ID",
+    url: "https://example.com/audioId.mp3",
+    duration: "180",
+    description: "Sample audio",
+  };
 
-describe("Audiofile API Tests", () => {
-  let testAudiofileId: string;
+  beforeEach(async () => {
+    // Insert the audiofile data before each test
+    await Audiofile.create(audiofileData);
+  });
 
-  // Insert a sample audio file for testing
+  afterEach(async () => {
+    // Cleanup after each test
+    await Audiofile.deleteMany({ _id: audiofileId });
+  });
+
   beforeAll(async () => {
-    // Connect to the database before tests
-    await connectDB();
-
-    // Insert a sample audio file for testing
-    const newAudiofile = new Audiofile({
-      name: "Test Audio",
-      url: "https://example.com/audio.mp3",
-      duration: "1:30",
-      description: "Test audio description",
-    });
-    const savedAudiofile = await newAudiofile.save();
-    testAudiofileId = savedAudiofile._id.toString();
+    await connectDB(); // Connect to DB before all tests
   });
 
   afterAll(async () => {
-    // Clean up by deleting test data and disconnecting from DB
-    await mongoose.disconnect();
+    await mongoose.disconnect(); // Disconnect after all tests are done
   });
 
-  // Test for GET request (fetch audio file by ID)
-  it("should return 200 and the audio file for valid _id", async () => {
-    const response = await request("http://localhost") // Directly hit the Next.js app
-      .get(`/api/audiofile/${testAudiofileId}`) // Simulate GET request to your Next.js API
-      .expect(200); // Expecting status 200
+  // Test GET method
+  it("should return 200 and the audiofile when GET /api/audiofile/[_id] is called", async () => {
+    // Simulate a GET request with the mock ObjectId
+    const request = { params: { _id: audiofileId.toString() } };
+    const response = await GET(null, request);
 
-    const data = response.body;
-    expect(data.name).toBe("Test Audio");
+    expect(response.status).toBe(200);
+    const data = await response.json();
+    expect(data._id.toString()).toBe(audiofileId.toString());
+    expect(data.name).toBe(audiofileData.name);
+    expect(data.url).toBe(audiofileData.url);
+    expect(data.duration).toBe(audiofileData.duration);
+    expect(data.description).toBe(audiofileData.description);
+  });
+  // Test GET method: non-existent ID
+  it("should return 404 when GET /api/audiofile/[id] is called with a non-existent ID", async () => {
+    const nonExistentId = new mongoose.Types.ObjectId();
+    const request = { params: { _id: nonExistentId.toString() } };
+    const response = await GET(null, request);
+
+    expect(response.status).toBe(404);
+    const data = await response.json();
+    expect(data.error).toBe("Audiofile not found.");
   });
 
-  //   it("should return 400 for invalid _id", async () => {
-  //     const invalidId = "invalidObjectId";
-  //     const request = new Request(`http://localhost/api/audiofile/${invalidId}`);
-  //     const response = await GET(request, { params: { _id: invalidId } });
+  // Test GET method: invalid ObjectId
+  it("should return 400 when GET /api/audiofile/[id] is called with an invalid ObjectId", async () => {
+    const invalidId = "invalid-id";
+    const request = { params: { _id: invalidId } };
+    const response = await GET(null, request);
 
-  //     expect(response.status).toBe(400);
-  //     const data = await response.json();
-  //     expect(data.error).toBe("Invalid audiofile ID.");
-  //   });
+    expect(response.status).toBe(400);
+    const data = await response.json();
+    expect(data.error).toBe("Invalid audiofile ID.");
+  });
 
-  //   it("should return 404 if audio file not found", async () => {
-  //     const nonExistentId = mongoose.Types.ObjectId();
-  //     const request = new Request(`http://localhost/api/audiofile/${nonExistentId}`);
-  //     const response = await GET(request, { params: { _id: nonExistentId.toString() } });
+  // Test PUT method: valid update
+  it("should return 200 and the updated audiofile when PUT /api/audiofile/[id] is called with valid data", async () => {
+    const updatedData = {
+      name: "Updated Audio",
+      duration: "200",
+      description: "Updated description",
+    };
 
-  //     expect(response.status).toBe(404);
-  //     const data = await response.json();
-  //     expect(data.error).toBe("Audiofile not found.");
-  //   });
+    // Simulate a PUT request with the updated data
+    const request = {
+      params: { _id: audiofileId.toString() },
+      json: jest.fn().mockResolvedValue(updatedData),
+    };
+    const response = await PUT(request, { params: { _id: audiofileId.toString() } });
 
-  //   // Test for PUT request (update audio file by ID)
-  //   it("should return 200 and updated audio file", async () => {
-  //     const updatedData = {
-  //       name: "Updated Test Audio",
-  //       duration: 200,
-  //       description: "Updated description",
-  //     };
+    expect(response.status).toBe(200);
+    const data = await response.json();
+    expect(data.name).toBe(updatedData.name);
+    expect(data.duration).toBe(updatedData.duration);
+    expect(data.description).toBe(updatedData.description);
+  });
 
-  //     const request = new Request(`http://localhost/api/audiofile/${testAudiofileId}`, {
-  //       method: "PUT",
-  //       body: JSON.stringify(updatedData),
-  //       headers: { "Content-Type": "application/json" },
-  //     });
+  // Test PUT method: non-existent ID
+  it("should return 404 when PUT /api/audiofile/[id] is called with a non-existent ID", async () => {
+    const nonExistentId = new mongoose.Types.ObjectId();
+    const updatedData = {
+      name: "Updated Audio",
+      duration: "200",
+      description: "Updated description",
+    };
 
-  //     const response = await PUT(request, { params: { _id: testAudiofileId } });
+    const request = {
+      params: { _id: nonExistentId.toString() },
+      json: jest.fn().mockResolvedValue(updatedData),
+    };
+    const response = await PUT(request, { params: { _id: nonExistentId.toString() } });
 
-  //     expect(response.status).toBe(200);
-  //     const data = await response.json();
-  //     expect(data.name).toBe(updatedData.name);
-  //     expect(data.duration).toBe(updatedData.duration);
-  //     expect(data.description).toBe(updatedData.description);
-  //   });
+    expect(response.status).toBe(404);
+    const data = await response.json();
+    expect(data.error).toBe("Audiofile not found.");
+  });
 
-  //   it("should return 404 for non-existing audio file on PUT", async () => {
-  //     const nonExistentId = mongoose.Types.ObjectId();
-  //     const updatedData = {
-  //       name: "Updated Test Audio",
-  //       duration: 200,
-  //       description: "Updated description",
-  //     };
+  // Test PUT method: invalid ObjectId
+  it("should return 400 when PUT /api/audiofile/[id] is called with an invalid ObjectId", async () => {
+    const invalidId = "invalid-id";
+    const updatedData = {
+      name: "Updated Audio",
+      duration: "200",
+      description: "Updated description",
+    };
 
-  //     const request = new Request(`http://localhost/api/audiofile/${nonExistentId}`, {
-  //       method: "PUT",
-  //       body: JSON.stringify(updatedData),
-  //       headers: { "Content-Type": "application/json" },
-  //     });
+    const request = {
+      params: { _id: invalidId },
+      json: jest.fn().mockResolvedValue(updatedData),
+    };
+    const response = await PUT(request, { params: { _id: invalidId } });
 
-  //     const response = await PUT(request, { params: { _id: nonExistentId.toString() } });
-
-  //     expect(response.status).toBe(404);
-  //     const data = await response.json();
-  //     expect(data.error).toBe("Audiofile not found.");
-  //   });
-
-  //   it("should return 400 for invalid _id in PUT", async () => {
-  //     const invalidId = "invalidObjectId";
-  //     const updatedData = {
-  //       name: "Updated Test Audio",
-  //       duration: 200,
-  //       description: "Updated description",
-  //     };
-
-  //     const request = new Request(`http://localhost/api/audiofile/${invalidId}`, {
-  //       method: "PUT",
-  //       body: JSON.stringify(updatedData),
-  //       headers: { "Content-Type": "application/json" },
-  //     });
-
-  //     const response = await PUT(request, { params: { _id: invalidId } });
-
-  //     expect(response.status).toBe(400);
-  //     const data = await response.json();
-  //     expect(data.error).toBe("Invalid audiofile ID.");
-  //   });
+    expect(response.status).toBe(400);
+    const data = await response.json();
+    expect(data.error).toBe("Invalid audiofile ID.");
+  });
 });

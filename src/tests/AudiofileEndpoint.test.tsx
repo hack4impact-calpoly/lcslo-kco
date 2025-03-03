@@ -32,10 +32,9 @@ jest.mock("next/server", () => ({
 
 beforeAll(async () => {
   await connectDB(); // Connect to the DB before all tests
-  await audioFile.deleteMany({ name: "Test Audio" }); // Remove duplicates before tests
 });
+
 afterAll(async () => {
-  await audioFile.deleteMany({ name: "Test Audio" });
   await mongoose.disconnect(); // Disconnect after all tests are completed
 });
 
