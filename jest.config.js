@@ -10,5 +10,8 @@ module.exports = {
     //"^.+\\.tsx?$": "ts-jest", // Transpile .ts and .tsx files
     "^.+\\.(js|jsx|ts|tsx)$": "babel-jest", // Use babel-jest to transpile JS/JSX/TS/TSX files
   },
-  setupFilesAfterEnv: ["@testing-library/jest-dom"],
+  setupFilesAfterEnv: [
+    "@testing-library/jest-dom",
+    "./jest.setup.js", // Add the path to the setup file
+  ],
 };
