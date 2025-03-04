@@ -34,19 +34,33 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioURL, name }) => {
     };
   }, [audioURL]);
 
-  // To handle playing the audio
-  const handlePlay = () => {
+  // Toggle play and pause functionality
+  const togglePlayPause = () => {
     if (soundRef.current) {
-      soundRef.current.play();
-      setIsPlaying(true);
+      if (isPlaying) {
+        soundRef.current.pause();
+        setIsPlaying(false);
+      } else {
+        soundRef.current.play();
+        setIsPlaying(true);
+      }
     }
   };
 
-  // To handle pausing the audio.
-  const handlePause = () => {
+  // Skip forward by 5 seconds
+  const skipForward = () => {
     if (soundRef.current) {
-      soundRef.current.pause();
-      setIsPlaying(false);
+      const currentTime = soundRef.current.seek() as number;
+      const duration = soundRef.current.duration();
+      soundRef.current.seek(Math.min(currentTime + 5, duration));
+    }
+  };
+
+  // Skip backward by 5 seconds
+  const skipBackward = () => {
+    if (soundRef.current) {
+      const currentTime = soundRef.current.seek() as number;
+      soundRef.current.seek(Math.max(currentTime - 5, 0));
     }
   };
 
@@ -70,12 +84,9 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioURL, name }) => {
     <div className="audio-player">
       <h3>{name}</h3>
       <div>
-        <button onClick={handlePlay} disabled={isPlaying}>
-          Play
-        </button>
-        <button onClick={handlePause} disabled={!isPlaying}>
-          Pause
-        </button>
+        <button onClick={skipBackward}>-5 sec</button>
+        <button onClick={togglePlayPause}>{isPlaying ? "Pause" : "Play"}</button>
+        <button onClick={skipForward}>+5 sec</button>
       </div>
       <div>
         <progress value={progress} max="100" style={{ width: "100%" }} />
