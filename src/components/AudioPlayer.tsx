@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
+
 import { Howl } from "howler";
 
 interface AudioPlayerProps {
@@ -52,7 +53,11 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioURL, name }) => {
     if (soundRef.current) {
       const currentTime = soundRef.current.seek() as number;
       const duration = soundRef.current.duration();
-      soundRef.current.seek(Math.min(currentTime + 5, duration));
+      const newTime = Math.min(currentTime + 5, duration);
+      soundRef.current.seek(newTime);
+      if (duration > 0) {
+        setProgress((newTime / duration) * 100);
+      }
     }
   };
 
@@ -60,7 +65,12 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioURL, name }) => {
   const skipBackward = () => {
     if (soundRef.current) {
       const currentTime = soundRef.current.seek() as number;
-      soundRef.current.seek(Math.max(currentTime - 5, 0));
+      const newTime = Math.max(currentTime - 5, 0);
+      soundRef.current.seek(newTime);
+      const duration = soundRef.current.duration();
+      if (duration > 0) {
+        setProgress((newTime / duration) * 100);
+      }
     }
   };
 
