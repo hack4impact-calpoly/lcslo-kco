@@ -5,6 +5,7 @@ import styles from "@/styles/poiList.module.css";
 import { FaCheck } from "react-icons/fa";
 import { POICard } from "@/components/poiCard";
 import Link from "next/link";
+import React from "react";
 
 interface POI {
   _id: string;
