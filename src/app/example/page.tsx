@@ -1,4 +1,4 @@
-import POICardList from "@/components/POICardList";
+import POICardList from "@/components/poiList";
 export default function Page() {
   return (
     <div>
