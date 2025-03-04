@@ -1,0 +1,98 @@
+.audio-controls {
+  display: flex;
+  flex-direction: column; 
+  justify-content: space-between;
+  background-color: #876950;
+  padding-bottom: 9.9px;
+  padding-left: 8.25px;
+  padding-right: 8.25px;
+  padding-top: 7px; 
+  border-radius: 4.125px 4.125px 0px 0px;
+  width: 160.886px;   
+  height: 47.441px;  
+  flex-shrink: 0;     
+}
+
+.progress-bar-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;  
+  width: 100%; 
+  gap: 4px;
+}
+
+.progress-bar {
+  flex: 1;
+  appearance: none;
+  height: 1.238px;
+  background-color: #C1BEBE;
+  border-radius: 2px;
+  outline: none;
+}
+
+.progress-bar::-webkit-slider-thumb {
+  appearance: none;
+  width: 4.95px;
+  height: 4.95px; 
+  background-color: white;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.time-display {
+  color: white;
+  font-size: 5.7px;
+  text-align: right;
+  font-weight: 500;
+  flex-shrink: 0;
+  width: 40px; 
+  margin-left: auto; 
+  white-space: nowrap;  
+  margin-top: 0.75px;
+  letter-spacing: -0.5px;
+}
+
+.controls-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+  width: 100%;
+}
+
+.volume-control {
+  transform: translateX(-27px); 
+}
+
+.control-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -2px; 
+  transform: translateX(-5px); 
+}
+
+.play-button {
+  border-radius: 50%;
+  background: #FFF;
+  width: 20.214px;
+  height: 20.214px;
+  display: flex;
+  align-items: center;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  width: 24px; 
+  height: 24px; 
+  background-color: transparent; 
+}
+
+.icon {
+  font-size: 1.1rem; 
+  color: white;
+}
