@@ -1,3 +1,4 @@
+import AudioControls from "@/components/AudioControls";
 import Navbar from "@/components/Navbar";
 import POICardList from "@/components/poiList";
 
