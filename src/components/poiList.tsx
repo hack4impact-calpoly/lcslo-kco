@@ -16,19 +16,45 @@ interface POI {
   isComplete: boolean;
 }
 
+interface Audio {
+  _id: string;
+  name: string;
+  url: string;
+  duration: string;
+  description: string;
+  __v: number;
+}
+
 export default function POICardList() {
   const [cardsDone, setCardsDone] = useState(0);
   const [data, setData] = useState<POI[]>([]);
 
   useEffect(() => {
-    //fetch POIs, parse and extract
     async function fetchData() {
-      fetch("/api/poi")
-        .then((response) => response.json())
-        .then((data) => {
-          setData(data.POIs);
-        })
-        .catch((error) => console.error("Error fetching POI data:", error));
+      try {
+        //fetch POI data
+        const poiResponse = await fetch("/api/poi");
+        const poiData = await poiResponse.json();
+
+        //fetch audio data so we also have audio duration info
+        const audioResponse = await fetch("/api/audiofile");
+        const audioData = await audioResponse.json();
+
+        // Create a lookup map using the name field
+        const audioMap = Object.fromEntries(audioData.map((audio: Audio) => [audio.name, audio.duration]));
+
+        // Merge POIs with corresponding audio durations based on name
+        const mergedData = poiData.POIs.map((poi: POI) => ({
+          ...poi,
+          duration: audioMap[poi.name] || "0:00", // fallback of 0:00
+        }));
+
+        // Store in sessionStorage and update state
+        sessionStorage.setItem("poiData", JSON.stringify(mergedData));
+        setData(mergedData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
     }
 
     //use sessionStorage if possible, otherwise make GET
@@ -41,9 +67,6 @@ export default function POICardList() {
   }, []);
 
   useEffect(() => {
-    console.log("done: " + cardsDone);
-    console.log("total: " + data.length);
-
     if (data.length > 0) {
       sessionStorage.setItem("poiData", JSON.stringify(data));
       setCardsDone(data.filter((item) => item.isComplete).length);
