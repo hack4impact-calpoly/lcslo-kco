@@ -45,6 +45,11 @@ describe("API Route Tests", () => {
     expect(response.status).toBe(200);
     const data = await response.json();
     expect(Array.isArray(data)).toBe(true);
+    expect(data.length).toBeGreaterThan(0); // Ensure we have at least one audio file
+    expect(data[0]).toHaveProperty("name");
+    expect(data[0]).toHaveProperty("url");
+    expect(data[0]).toHaveProperty("duration");
+    expect(data[0]).toHaveProperty("description");
   });
 
   beforeEach(async () => {
