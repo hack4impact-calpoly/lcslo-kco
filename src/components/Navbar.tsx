@@ -1,3 +1,9 @@
+import Head from "@/components/headerBar";
+
 export default function Navbar() {
-  return <div>Navbar</div>;
+  return (
+    <div>
+      <Head />
+    </div>
+  );
 }

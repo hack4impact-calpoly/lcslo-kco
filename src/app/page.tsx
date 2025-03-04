@@ -1,10 +1,12 @@
+import AudioControls from "@/components/AudioControls";
 import Navbar from "@/components/Navbar";
+import POICardList from "@/components/poiList";
 
 export default function Home() {
   return (
     <main>
       <Navbar />
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>{" "}
+      <POICardList></POICardList>
     </main>
   );
 }
