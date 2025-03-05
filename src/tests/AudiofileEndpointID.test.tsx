@@ -2,6 +2,8 @@ import { GET, PUT } from "@/app/api/audiofile/[_id]/route";
 import connectDB from "@/database/db";
 import mongoose from "mongoose";
 import Audiofile from "@/database/models/audiofileSchema";
+import { NextRequest } from "next/server";
+import React from "react";
 
 // Mocking the Request class for tests
 if (typeof Request === "undefined") {
@@ -62,8 +64,8 @@ describe("API Route Tests for /api/audiofile/[_id]", () => {
   // Test GET method
   it("should return 200 and the audiofile when GET /api/audiofile/[_id] is called", async () => {
     // Simulate a GET request with the mock ObjectId
-    const request = { params: { _id: audiofileId.toString() } };
-    const response = await GET(null, request);
+    const request = new NextRequest(`http://localhost/api/audiofile/${audiofileId.toString()}`);
+    const response = await GET(request, { params: { _id: audiofileId.toString() } });
 
     expect(response.status).toBe(200);
     const data = await response.json();
@@ -76,8 +78,9 @@ describe("API Route Tests for /api/audiofile/[_id]", () => {
   // Test GET method: non-existent ID
   it("should return 404 when GET /api/audiofile/[id] is called with a non-existent ID", async () => {
     const nonExistentId = new mongoose.Types.ObjectId();
-    const request = { params: { _id: nonExistentId.toString() } };
-    const response = await GET(null, request);
+
+    const request = new NextRequest(`http://localhost/api/audiofile/${nonExistentId.toString()}`);
+    const response = await GET(request, { params: { _id: audiofileId.toString() } });
 
     expect(response.status).toBe(404);
     const data = await response.json();
@@ -87,8 +90,9 @@ describe("API Route Tests for /api/audiofile/[_id]", () => {
   // Test GET method: invalid ObjectId
   it("should return 400 when GET /api/audiofile/[id] is called with an invalid ObjectId", async () => {
     const invalidId = "invalid-id";
-    const request = { params: { _id: invalidId } };
-    const response = await GET(null, request);
+
+    const request = new NextRequest(`http://localhost/api/audiofile/${invalidId.toString()}`);
+    const response = await GET(request, { params: { _id: invalidId.toString() } });
 
     expect(response.status).toBe(400);
     const data = await response.json();
@@ -104,10 +108,10 @@ describe("API Route Tests for /api/audiofile/[_id]", () => {
     };
 
     // Simulate a PUT request with the updated data
-    const request = {
-      params: { _id: audiofileId.toString() },
-      json: jest.fn().mockResolvedValue(updatedData),
-    };
+    const request = new NextRequest(`http://localhost/api/audiofile/${audiofileId.toString()}`, {
+      method: "PUT",
+      body: JSON.stringify(updatedData),
+    });
     const response = await PUT(request, { params: { _id: audiofileId.toString() } });
 
     expect(response.status).toBe(200);
@@ -126,10 +130,10 @@ describe("API Route Tests for /api/audiofile/[_id]", () => {
       description: "Updated description",
     };
 
-    const request = {
-      params: { _id: nonExistentId.toString() },
-      json: jest.fn().mockResolvedValue(updatedData),
-    };
+    const request = new NextRequest(`http://localhost/api/audiofile/${nonExistentId.toString()}`, {
+      method: "PUT",
+      body: JSON.stringify(updatedData),
+    });
     const response = await PUT(request, { params: { _id: nonExistentId.toString() } });
 
     expect(response.status).toBe(404);
@@ -146,11 +150,11 @@ describe("API Route Tests for /api/audiofile/[_id]", () => {
       description: "Updated description",
     };
 
-    const request = {
-      params: { _id: invalidId },
-      json: jest.fn().mockResolvedValue(updatedData),
-    };
-    const response = await PUT(request, { params: { _id: invalidId } });
+    const request = new NextRequest(`http://localhost/api/audiofile/${invalidId.toString()}`, {
+      method: "PUT",
+      body: JSON.stringify(updatedData),
+    });
+    const response = await PUT(request, { params: { _id: invalidId.toString() } });
 
     expect(response.status).toBe(400);
     const data = await response.json();
@@ -163,10 +167,12 @@ describe("API Route Tests for /api/audiofile/[_id]", () => {
 
     // Mocking the Audiofile.findById().exec() to throw a generic error
     const mockFindById = jest.spyOn(Audiofile, "findById").mockReturnValue({
-      exec: jest.fn().mockRejectedValue(new Error("Generic database error")),
-    });
+      exec: async () => {
+        throw new Error("Generic database error");
+      },
+    } as any);
 
-    const request = new Request("http://localhost/api/audiofile/1", {
+    const request = new NextRequest(`http://localhost/api/audiofile/1`, {
       method: "GET",
     });
 

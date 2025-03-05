@@ -2,6 +2,8 @@ import { GET } from "@/app/api/poi/[_id]/route";
 import connectDB from "@/database/db";
 import mongoose from "mongoose";
 import POIModel from "@/database/models/POISchema";
+import React from "react";
+import { NextRequest } from "next/server";
 
 // Mocking the Request class for tests
 if (typeof Request === "undefined") {
@@ -62,8 +64,8 @@ describe("API Route Tests for /api/poi/[_id]", () => {
   // Test GET method
   it("should return 200 and the POI when GET /api/poi/[_id] is called", async () => {
     // Simulate a GET request with the mock ObjectId
-    const request = { params: { _id: poiId.toString() } };
-    const response = await GET(null, request);
+    const request = new NextRequest(`http://localhost/api/poi/${poiId.toString()}`);
+    const response = await GET(request, { params: { _id: poiId.toString() } });
 
     expect(response.status).toBe(200);
     const data = await response.json();
@@ -77,8 +79,8 @@ describe("API Route Tests for /api/poi/[_id]", () => {
   // Test GET method: non-existent ID
   it("should return 404 when GET /api/poi/[id] is called with a non-existent ID", async () => {
     const nonExistentId = new mongoose.Types.ObjectId();
-    const request = { params: { _id: nonExistentId.toString() } };
-    const response = await GET(null, request);
+    const request = new NextRequest(`http://localhost/api/poi/${nonExistentId.toString()}`);
+    const response = await GET(request, { params: { _id: nonExistentId.toString() } });
 
     expect(response.status).toBe(404);
     const data = await response.json();
@@ -88,9 +90,8 @@ describe("API Route Tests for /api/poi/[_id]", () => {
   // Test GET method: invalid ObjectId
   it("should return 404 when GET /api/poi/[id] is called with an invalid ObjectId", async () => {
     const invalidId = "invalid-id";
-    const request = { params: { _id: invalidId } };
-    const response = await GET(null, request);
-
+    const request = new NextRequest(`http://localhost/api/poi/${invalidId.toString()}`);
+    const response = await GET(request, { params: { _id: invalidId.toString() } });
     expect(response.status).toBe(404);
     const data = await response.json();
     expect(data).toContain("POI not found");

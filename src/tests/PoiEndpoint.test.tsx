@@ -2,6 +2,7 @@ import { GET } from "@/app/api/poi/route"; // Your GET and POST handlers
 import connectDB from "@/database/db";
 import mongoose from "mongoose";
 import POIModel from "@/database/models/POISchema";
+import React from "react";
 
 // Mocking the Request class in case it's undefined
 if (typeof Request === "undefined") {
@@ -30,6 +31,13 @@ jest.mock("next/server", () => ({
     })),
   },
 }));
+// Type definition for POI objects
+interface POI {
+  name: string;
+  description: string;
+  audioField: string;
+  isComplete: boolean;
+}
 
 beforeAll(async () => {
   await connectDB(); // Connect to the DB before all tests
@@ -55,7 +63,8 @@ describe("API Route Tests for /api/poi", () => {
     const response = await GET();
     expect(response.status).toBe(200);
 
-    const data = await response.json();
+    const data = (await response.json()) as { POIs: POI[] };
+
     expect(Array.isArray(data.POIs)).toBe(true);
     expect(data.POIs.length).toBeGreaterThan(0); // Ensure we have at least one POI
 

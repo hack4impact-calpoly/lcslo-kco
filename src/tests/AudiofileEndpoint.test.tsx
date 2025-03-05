@@ -2,6 +2,9 @@ import { GET, POST } from "@/app/api/audiofile/route";
 import connectDB from "@/database/db";
 import mongoose from "mongoose";
 import audioFile from "@/database/models/audiofileSchema";
+import React from "react";
+import Audiofile from "@/database/models/audiofileSchema";
+import { Query } from "mongoose";
 // Mocking the resquest apparently
 if (typeof Request === "undefined") {
   global.Request = class Request {
@@ -107,9 +110,9 @@ describe("API Route Tests", () => {
     const consoleErrorSpy = jest.spyOn(console, "error").mockImplementation(() => {});
 
     // Mocking Audiofile.find() to return a mocked query object with an exec method
-    const mockFind = jest.spyOn(audioFile, "find").mockReturnValue({
+    const mockFind = jest.spyOn(Audiofile, "find").mockReturnValue({
       exec: jest.fn().mockRejectedValue(new Error("Database connection failed")),
-    });
+    } as unknown as Query<any, any>);
 
     const response = await GET();
 

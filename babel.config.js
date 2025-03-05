@@ -8,17 +8,22 @@ module.exports = {
         },
       },
     ],
-    "@babel/preset-react", // Adds support for JSX,
-    "@babel/preset-typescript", // For TypeScript support (removes type checking)
+    [
+      "@babel/preset-react",
+      {
+        runtime: "automatic", // Enables new JSX transform
+      },
+    ],
+    "@babel/preset-typescript",
   ],
 
   plugins: [
     [
       "module-resolver",
       {
-        root: ["./src"], // Root directory to start resolving
+        root: ["./src"],
         alias: {
-          "@": "./src", // Match the alias to your TypeScript configuration
+          "@": "./src",
         },
       },
     ],
