@@ -43,7 +43,6 @@ const Selected_POI_Page: React.FC<POIProps> = ({
   const toggleAudioPlayer = () => {
     setIsAudioVisible((prev) => !prev);
   };
-
   return (
     <div className={styles.pageContainer}>
       <div className={styles.mainImageContainer}>
@@ -63,17 +62,16 @@ const Selected_POI_Page: React.FC<POIProps> = ({
         </div>
         <div>
           <p className={styles.textContent}>
-            <span className={styles.description}>Description:</span> {content}
+            <span className={styles.description}>Description: </span> {content}
           </p>
         </div>
       </div>
 
       {/* Audio Player remains in place, but is only visible when isAudioVisible is true */}
-      {isAudioVisible && (
-        <AudioPlayer audioURL={"https://d1omyfn3jea7ni.cloudfront.net/Daniel_Spanish_Final.wav"} name="POI Audio" />
-      )}
+      {isAudioVisible && <AudioPlayer audioURL={audio_link} name="POI Audio" />}
     </div>
   );
 };
 
 export default Selected_POI_Page;
+//"https://d1omyfn3jea7ni.cloudfront.net/Daniel_Spanish_Final.wav"

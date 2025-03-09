@@ -43,11 +43,12 @@ export default function POICardList() {
 
         // Create a lookup map using the name field
         const audioMap = Object.fromEntries(audioData.map((audio: Audio) => [audio.name, audio.duration]));
-
+        const urlMap = Object.fromEntries(audioData.map((audio: Audio) => [audio.name, audio.url]));
         // Merge POIs with corresponding audio durations based on name
         const mergedData = poiData.POIs.map((poi: POI) => ({
           ...poi,
-          duration: audioMap[poi.name] || "0:00", // fallback of 0:00
+          duration: audioMap[poi.name] || "0:00",
+          audioField: urlMap[poi.name],
         }));
 
         // Store in sessionStorage and update state
@@ -111,6 +112,7 @@ export default function POICardList() {
                   description: POI.description,
                   progress: cardsDone,
                   totalCards: data.length,
+                  audioField: POI.audioField,
                 },
               }}
             >
