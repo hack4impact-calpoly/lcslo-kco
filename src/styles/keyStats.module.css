@@ -2,7 +2,6 @@
   display: flex;
   width: 100vw;
 }
-
 .section {
   display: flex;
   flex-direction: column;
@@ -10,14 +9,15 @@
   justify-content: center;
   background-color: #eeebe6;
   padding: 1.5rem;
+  height: 100%; /* Ensure equal height */
 }
 
 .audioIcon {
-  height: 75px;
-  width: 75px;
+  height: 50px; /* Adjusted size */
+  width: 50px;
   color: #d29561;
-  align-items: start;
-  padding-top: 20px;
+  margin-bottom: 10px; /* Reduce space */
+  margin-top: 25px;
 }
 
 .paText {
@@ -25,7 +25,23 @@
   font-weight: 500;
   text-align: center;
   color: black;
-  padding-top: 20px;
+  padding-top: 25px;
+}
+
+.sideContainer,
+.centerContainer {
+  flex: 1; /* Ensure equal widths */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sideContainer,
+.centerContainer {
+  flex: 1; /* Ensure equal widths */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .adText {

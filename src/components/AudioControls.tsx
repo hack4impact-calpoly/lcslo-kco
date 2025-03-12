@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { Howl } from "howler";
 import "./AudioControls.css";
+import "@/components/AudioPlayer";
 
 const AudioControls: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -96,7 +97,7 @@ const AudioControls: React.FC = () => {
             />
           </svg>
         </span>
-        <button onClick={handleRewind} className="button rewind">
+        <button onClick={handleRewind} className="button-rewind">
           <span className="icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="12" height="10" viewBox="0 0 12 10" fill="none">
               <rect width="1.51674" height="9.10043" transform="matrix(-1 0 0 1 2.32031 0.821747)" fill="#D9D9D9" />
@@ -105,7 +106,7 @@ const AudioControls: React.FC = () => {
           </span>
         </button>
         <div className="play-button">
-          <button onClick={togglePlayPause} className="button play-pause">
+          <button onClick={togglePlayPause} className="button-play-pause">
             <span className="play">
               {isPlaying ? (
                 <svg xmlns="http://www.w3.org/2000/svg" width="9" height="10" viewBox="0 0 9 10" fill="none">
@@ -120,7 +121,7 @@ const AudioControls: React.FC = () => {
             </span>
           </button>
         </div>
-        <button onClick={handleFastForward} className="button fast-forward">
+        <button onClick={handleFastForward} className="button-fast-forward">
           <span className="icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="12" height="10" viewBox="0 0 12 10" fill="none">
               <rect x="10.1531" y="0.821747" width="1.51674" height="9.10043" fill="#D9D9D9" />

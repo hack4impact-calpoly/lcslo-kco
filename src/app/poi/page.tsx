@@ -15,14 +15,14 @@ function POIDetailContent() {
   const description = searchParams.get("description");
   const progress = parseInt(searchParams.get("progress") || "0", 10);
   const totalPois = parseInt(searchParams.get("totalCards") || "0", 10);
-
+  const audioUrl = searchParams.get("audioField");
   return (
     <div>
       <Selected_POI_Page
         mainImage={imageUrl || ""}
         name={name || "Unknown POI"}
         content={description || "Description"}
-        audio_link="link"
+        audio_link={audioUrl || "link"}
         duration={duration || "0:00"}
         tour_progress={progress}
         total_tours={totalPois}
