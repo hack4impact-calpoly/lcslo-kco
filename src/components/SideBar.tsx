@@ -12,11 +12,13 @@ const SideBar: React.FC = () => {
         ☰
       </button>
       <div className={`sidebar ${isOpen ? "open" : ""}`}>
-        <button className="close-btn" onClick={() => setIsOpen(false)}>
-          ✖
-        </button>
-        <div className="sidebar-content">
+        <div className="sidebar-image">
           <img src="/sidebar.jpg" className="logo" />
+          <button className="close-btn" onClick={() => setIsOpen(false)}>
+            ✖
+          </button>
+        </div>
+        <div className="sidebar-links">
           <ul>
             <li>
               <a href="#">View All Audios</a>
