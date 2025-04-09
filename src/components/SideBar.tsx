@@ -21,13 +21,15 @@ const SideBar: React.FC = () => {
         <div className="sidebar-links">
           <ul>
             <li>
-              <a href="#">View All Audios</a>
+              <button onClick={() => setIsOpen(false)}>
+                <a href="#">View All Audios</a>
+              </button>
             </li>
             <li>
-              <a href="#">About LCSCLO</a>
+              <a href="https://lcslo.org/">About LCSCLO</a>
             </li>
             <li>
-              <a href="#">Need Help?</a>
+              <a href="https://lcslo.org/contact-us/">Need Help?</a>
             </li>
           </ul>
         </div>
