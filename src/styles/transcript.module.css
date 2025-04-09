@@ -1,0 +1,93 @@
+.base {
+  display: flex;
+  flex-direction: column;
+  height: 340px; /* Fixed height for proper scrolling */
+  padding: 16px;
+  gap: 10px;
+  border-radius: 15.12px 15.12px 0px 0px;
+  background: var(--White, #fff);
+  overflow: hidden; /* Prevents overflow */
+}
+
+.transcriptHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+}
+
+.transcriptContent {
+  flex: 1; /* Takes up remaining space */
+  width: 100%;
+  overflow-y: auto; /* Enables scrolling */
+  padding-right: 8px; /* Prevents text from touching the scrollbar */
+}
+
+.transcriptText {
+  color: var(--Black, #000);
+  font-family: sans-serif;
+  font-size: 24.994px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 180%;
+  width: 100%;
+}
+
+.audioControlsWrapper {
+  padding-top: 10px;
+  border-top: 1px solid #ddd; /* Optional: Separator */
+  background: white; /* Ensure it doesn't blend with text */
+}
+
+.transcriptHeaderLabel {
+  color: var(--Black, #000);
+  font-family: sans-serif;
+  font-size: 15.621px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.baseFull {
+  display: flex;
+  height: 735px;
+  padding: 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-radius: 15.115px 15.115px 0px 0px;
+  background: var(--Dark-Brown, #37322b);
+  box-shadow: 0px -4.031px 15.821px 0px rgba(0, 0, 0, 0.1);
+}
+
+.transcriptHeaderFull {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+}
+.transcriptHeaderLabelFull {
+  color: var(--Warm-Gray, #f7f3ef);
+  font-family: sans-serif;
+  font-size: 15.621px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.transcriptContentFull {
+  flex: 1; /* Fill remaining vertical space */
+  width: 100%;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+.transcriptTextFull {
+  color: var(--Warm-Gray, #f7f3ef);
+  font-family: sans-serif;
+  font-size: 24.994px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 180%;
+  width: 100%;
+}

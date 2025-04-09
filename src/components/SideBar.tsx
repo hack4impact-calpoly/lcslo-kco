@@ -1,0 +1,39 @@
+"use client";
+
+import React, { useState } from "react";
+import "./SideBar.css";
+
+const SideBar: React.FC = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <>
+      <button className="sidebar-toggle" onClick={() => setIsOpen(!isOpen)}>
+        ☰
+      </button>
+      <div className={`sidebar ${isOpen ? "open" : ""}`}>
+        <div className="sidebar-image">
+          <img src="/sidebar.jpg" className="logo" />
+          <button className="close-btn" onClick={() => setIsOpen(false)}>
+            ✖
+          </button>
+        </div>
+        <div className="sidebar-links">
+          <ul>
+            <li>
+              <a href="#">View All Audios</a>
+            </li>
+            <li>
+              <a href="#">About LCSCLO</a>
+            </li>
+            <li>
+              <a href="#">Need Help?</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default SideBar;
