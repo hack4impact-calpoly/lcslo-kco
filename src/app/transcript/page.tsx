@@ -1,6 +1,7 @@
 "use client";
 
-import { useParams, useSearchParams } from "next/navigation";
+import { Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 
 import Navbar from "@/components/Navbar";
 import { FullTranscriptView } from "@/components/transcript";
@@ -13,14 +14,10 @@ function TranscriptFullViewDetails() {
   const transcript = searchParams.get("transcript");
   const imageUrl = searchParams.get("imageUrl");
 
-  return (
-    <div>
-      <FullTranscriptView transcript={transcript || ""} imageUrl={imageUrl || ""} />
-    </div>
-  );
+  return <FullTranscriptView transcript={transcript || ""} imageUrl={imageUrl || ""} />;
 }
 
-export default function Page() {
+function TranscriptFullViewPageContent() {
   const searchParams = useSearchParams();
   const audioUri = searchParams.get("audioUri");
   const imageUrl = searchParams.get("imageUrl");
@@ -31,7 +28,15 @@ export default function Page() {
       style={{ backgroundImage: `url("${imageUrl}")` }}
     >
       <TranscriptFullViewDetails />
-      <AudioPlayer audioURL={audioUri || ""} name={""}></AudioPlayer>
+      <AudioPlayer audioURL={audioUri || ""} name={""} />
     </div>
+  );
+}
+
+export default function Page() {
+  return (
+    <Suspense fallback={<div>Loading transcript...</div>}>
+      <TranscriptFullViewPageContent />
+    </Suspense>
   );
 }

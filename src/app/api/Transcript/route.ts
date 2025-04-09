@@ -7,6 +7,7 @@ curl --request POST --header 'Authorization: ed24039e8d93e825cceff18e9869dc8a231
 */
 
 export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@deepgram/sdk";

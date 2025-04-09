@@ -28,8 +28,6 @@ export default function Page() {
   return (
     <div>
       <Navbar />
-
-      <TranscriptView audioUri={""} />
     </div>
   );
 }
