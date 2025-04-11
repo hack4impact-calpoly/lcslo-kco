@@ -4,7 +4,10 @@ import SideBar from "./SideBar";
 export default function Head() {
   return (
     <div className={styles.head}>
-      <SideBar></SideBar>
+      <div>
+        <SideBar></SideBar>
+      </div>
+
       <img src="Logo_Banner.png" className={styles.banner_img} />
     </div>
   );

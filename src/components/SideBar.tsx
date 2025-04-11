@@ -13,7 +13,7 @@ const SideBar: React.FC = () => {
       </button>
       <div className={`sidebar ${isOpen ? "open" : ""}`}>
         <div className="sidebar-image">
-          <img src="/sidebar.jpg" className="logo" />
+          <img src="/sidebarImage.png" className="logo" />
           <button className="close-btn" onClick={() => setIsOpen(false)}>
             ✖
           </button>

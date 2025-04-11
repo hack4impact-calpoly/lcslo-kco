@@ -20,9 +20,6 @@
 }
 
 .sidebar-toggle {
-  position: fixed;
-  top: 20px;
-  left: 20px;
   background: transparent;
   color: #333333;
   border: none;
@@ -56,7 +53,7 @@
   border: none;
   font-size: 20px;
   cursor: pointer;
-  color: #6b6b6b;
+  color: #ffffff;
   z-index: 2;
 }
 
