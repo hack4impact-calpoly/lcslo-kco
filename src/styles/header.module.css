@@ -1,9 +1,10 @@
 .head {
   background-color: #d29561;
   display: flex;
-  justify-content: center;
   align-items: center;
   height: 8vh;
+  position: relative;
+  padding-left: 1rem;
 }
 
 .full_bars {
@@ -25,4 +26,7 @@
 .banner_img {
   height: 75%;
   width: auto;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }

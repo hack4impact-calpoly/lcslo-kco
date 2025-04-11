@@ -1,5 +1,6 @@
 .sidebar {
   position: fixed;
+  z-index: 10000; /* really high */
   top: 0;
   left: -300px;
   width: 300px;
@@ -19,11 +20,8 @@
 }
 
 .sidebar-toggle {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  background: #333;
-  color: white;
+  background: transparent;
+  color: #333333;
   border: none;
   padding: 10px 15px;
   cursor: pointer;
@@ -55,7 +53,7 @@
   border: none;
   font-size: 20px;
   cursor: pointer;
-  color: #6b6b6b;
+  color: #ffffff;
   z-index: 2;
 }
 
