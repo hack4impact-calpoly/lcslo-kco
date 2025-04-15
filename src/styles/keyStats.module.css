@@ -1,8 +1,6 @@
 .container {
   display: flex;
   width: 100vw;
-  max-height: fit-content;
-  min-height: fit-content;
 }
 
 .section {
@@ -34,6 +32,8 @@
   align-items: flex-end;
   /* justify-content: center; */
   color: black;
+  max-height: 60px;
+  min-height: 50px;
 }
 
 /* .paText {
@@ -72,6 +72,8 @@
 .progressContainer,
 .audioDuration {
   margin-bottom: 0.5rem; /* Push down space for text */
+  max-height: 100px;
+  min-height: 92px;
 }
 
 .audioDuration {
