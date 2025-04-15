@@ -26,7 +26,6 @@
 .tpText {
   font-size: 1.25rem;
   font-weight: 500;
-  min-height: 24px; /* same height for all to align */
   text-align: center;
   display: flex;
   align-items: flex-end;
@@ -34,8 +33,16 @@
   color: black;
   max-height: 60px;
   min-height: 50px;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
-
+.vertCenter {
+  position: relative;
+}
 /* .paText {
   font-size: 1.25rem;
   font-weight: 500;
