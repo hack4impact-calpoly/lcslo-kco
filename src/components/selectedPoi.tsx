@@ -28,6 +28,18 @@ interface POIProps {
   duration: string;
   tour_progress: number;
   total_tours: number;
+  id: string;
+}
+
+//For sessionStorage; to update isComplete
+interface POI {
+  _id: string;
+  name: string;
+  description: string;
+  audioField: string;
+  duration: string;
+  image: string;
+  isComplete: boolean;
 }
 
 const Selected_POI_Page: React.FC<POIProps> = ({
@@ -38,12 +50,41 @@ const Selected_POI_Page: React.FC<POIProps> = ({
   duration,
   tour_progress,
   total_tours,
+  id,
 }) => {
   const [isAudioVisible, setIsAudioVisible] = useState(false);
 
   const toggleAudioPlayer = () => {
     setIsAudioVisible((prev) => !prev);
   };
+
+  const [newTourProgress, updateTourProgress] = useState(tour_progress);
+
+  //When a card is selected, it should be marked as done in sessionStorage
+  try {
+    //Get locally stored data
+    const storedData = sessionStorage.getItem("poiData");
+
+    if (storedData) {
+      const data: POI[] = JSON.parse(storedData);
+
+      //Update tour progression and local data, if required
+      const updatedData = data.map((item) => {
+        if (item._id === id && !item.isComplete) {
+          updateTourProgress(tour_progress + 1);
+          return { ...item, isComplete: true };
+        } else {
+          return item;
+        }
+      });
+
+      //Save updated local data
+      sessionStorage.setItem("poiData", JSON.stringify(updatedData));
+    }
+  } catch (error) {
+    console.log("Error Updating Progress:", error);
+  }
+
   return (
     <div className={styles.pageContainer}>
       <div className={styles.mainImageContainer}>
@@ -56,7 +97,7 @@ const Selected_POI_Page: React.FC<POIProps> = ({
           <KeyStats
             audio_link={audio_link}
             duration={duration}
-            tour_progress={tour_progress}
+            tour_progress={newTourProgress}
             total_tours={total_tours}
             toggleAudioPlayer={toggleAudioPlayer}
           />

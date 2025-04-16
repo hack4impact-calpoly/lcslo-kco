@@ -113,6 +113,7 @@ export default function POICardList() {
                   progress: cardsDone,
                   totalCards: data.length,
                   audioField: POI.audioField,
+                  pid: POI._id,
                 },
               }}
             >
