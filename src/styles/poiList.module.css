@@ -73,9 +73,10 @@
 .progressBar {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
+
   align-items: center;
-  transform: translateY(-30%);
+  /*transform: translateY(-30%); */
   margin: 0 1em;
 }
 
@@ -123,4 +124,25 @@
 
 .tourProgress {
   background-color: "#876950";
+}
+
+.dotExtra {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: #876950;
+}
+
+.dotCompleted {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: #d29561;
+}
+
+.dotExtraContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.35em;
+  margin-left: calc(29.5px + 1em);
 }
