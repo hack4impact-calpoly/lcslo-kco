@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import KeyStats from "./keyStats";
+import AudioControls from "./AudioControls";
+import { Howl } from "howler";
 import styles from "@/styles/selectedPoi.module.css";
 
 //Subcomponent to display image (unblurred) and header of the POI name
@@ -35,6 +37,30 @@ const Selected_POI_Page: React.FC<POIProps> = ({
   tour_progress,
   total_tours,
 }) => {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const soundRef = useRef<Howl | null>(null);
+
+  useEffect(() => {
+    soundRef.current = new Howl({
+      src: [audio_link],
+      html5: true,
+      onend: () => setIsPlaying(false),
+    });
+    return () => {
+      soundRef.current?.unload();
+    };
+  }, [audio_link]);
+
+  const togglePlayPause = () => {
+    if (!visible) setVisible(true);
+    const sound = soundRef.current;
+    if (!sound) return;
+    if (isPlaying) sound.pause();
+    else sound.play();
+    setIsPlaying(!isPlaying);
+  };
+
   return (
     //overall container
     <div className={styles.pageContainer}>
@@ -49,11 +75,19 @@ const Selected_POI_Page: React.FC<POIProps> = ({
         <div className={styles.statsWrapper}>
           <KeyStats
             audio_link={audio_link}
+            isPlaying={isPlaying}
+            togglePlayPause={togglePlayPause}
             duration={duration}
             tour_progress={tour_progress}
             total_tours={total_tours}
           />
         </div>
+        <div className={styles.audioButtonWrapper}>
+          <button onClick={togglePlayPause} className={styles.audioButton}>
+            {isPlaying ? "Pause Audio" : "Play Audio"}
+          </button>
+        </div>
+        {visible && <AudioControls isPlaying={isPlaying} togglePlayPause={togglePlayPause} soundRef={soundRef} />}
         <div>
           <p className={styles.textContent}>
             {" "}

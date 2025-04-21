@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import { FaPlay } from "react-icons/fa";
+import { FaPlay, FaPause } from "react-icons/fa";
 import styles from "@/styles/keyStats.module.css";
 
 /*
@@ -81,12 +81,21 @@ Main KeyStats Component (contains the previous three and is exported)
 */
 interface KS_Props {
   audio_link: string;
+  isPlaying: boolean;
+  togglePlayPause: () => void;
   duration: string;
   tour_progress: number;
   total_tours: number;
 }
 
-const KeyStats: React.FC<KS_Props> = ({ audio_link, duration, tour_progress, total_tours }) => {
+const KeyStats: React.FC<KS_Props> = ({
+  audio_link,
+  isPlaying,
+  togglePlayPause,
+  duration,
+  tour_progress,
+  total_tours,
+}) => {
   return (
     <div className={styles.container}>
       <div className={styles.sideContainer}>
@@ -94,8 +103,7 @@ const KeyStats: React.FC<KS_Props> = ({ audio_link, duration, tour_progress, tot
         <PlayAudio audio_link={audio_link}></PlayAudio>
       </div>
       <div className={styles.centerContainer}>
-        {/* Audio Duration Section */}
-        <AudioDuration duration={duration}></AudioDuration>
+        <AudioDuration duration={duration} />
       </div>
       <div className={styles.sideContainer}>
         {/* Tour Progress Section */}
