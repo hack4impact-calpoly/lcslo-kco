@@ -1,53 +1,51 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Howl } from "howler";
 import "./AudioControls.css";
 import "@/components/AudioPlayer";
 
-const AudioControls: React.FC = () => {
-  const [isPlaying, setIsPlaying] = useState(false);
+interface AudioControlsProps {
+  isPlaying: boolean;
+  togglePlayPause: () => void;
+  soundRef: React.MutableRefObject<Howl | null>;
+}
+
+const AudioControls: React.FC<AudioControlsProps> = ({ isPlaying, togglePlayPause, soundRef }) => {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
 
-  const sound = new Howl({
-    src: ["/path/to/your/audio.mp3"], // Replace with the actual audio file path
-    html5: true,
-    onplay: () => {
-      setDuration(sound.duration());
-      const interval = setInterval(() => {
-        setCurrentTime(sound.seek() as number);
-      }, 1000);
+  useEffect(() => {
+    const sound = soundRef.current;
+    if (!sound) return;
+    setDuration(sound.duration());
 
-      return () => clearInterval(interval);
-    },
-    onend: () => {
-      setIsPlaying(false);
-    },
-  });
+    const interval = window.setInterval(() => {
+      setCurrentTime(sound.seek() as number);
+    }, 1000);
 
-  const togglePlayPause = () => {
-    if (isPlaying) {
-      sound.pause();
-    } else {
-      sound.play();
-    }
-    setIsPlaying(!isPlaying);
-  };
+    return () => clearInterval(interval);
+  }, [soundRef, isPlaying]);
 
   const handleFastForward = () => {
+    const sound = soundRef.current;
+    if (!sound) return;
     const newTime = Math.min((sound.seek() as number) + 10, duration);
     sound.seek(newTime);
     setCurrentTime(newTime);
   };
 
   const handleRewind = () => {
+    const sound = soundRef.current;
+    if (!sound) return;
     const newTime = Math.max((sound.seek() as number) - 10, 0);
     sound.seek(newTime);
     setCurrentTime(newTime);
   };
 
   const handleProgressBarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const sound = soundRef.current;
+    if (!sound) return;
     const newTime = parseFloat(e.target.value);
     sound.seek(newTime);
     setCurrentTime(newTime);
@@ -109,13 +107,13 @@ const AudioControls: React.FC = () => {
           <button onClick={togglePlayPause} className="button-play-pause">
             <span className="play">
               {isPlaying ? (
-                <svg xmlns="http://www.w3.org/2000/svg" width="9" height="10" viewBox="0 0 9 10" fill="none">
-                  <path d="M8.17725 5.13431L0.751738 9.42143L0.751739 0.847194L8.17725 5.13431Z" fill="#F6F6F6" />
-                </svg>
-              ) : (
                 <svg xmlns="http://www.w3.org/2000/svg" width="7" height="10" viewBox="0 0 7 10" fill="none">
                   <rect x="0.211426" y="0.834656" width="2.01691" height="8.87439" fill="#876950" />
                   <rect x="4.24524" y="0.834656" width="2.01691" height="8.87439" fill="#876950" />
+                </svg>
+              ) : (
+                <svg xmlns="http://www.w3.org/2000/svg" width="9" height="10" viewBox="0 0 9 10" fill="none">
+                  <path d="M8.17725 5.13431L0.751738 9.42143L0.751739 0.847194L8.17725 5.13431Z" fill="#F6F6F6" />
                 </svg>
               )}
             </span>
