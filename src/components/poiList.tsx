@@ -154,14 +154,18 @@ export default function POICardList() {
                   </button>
                   {Array(3)
                     .fill(null)
-                    .map((_, dotIndex) => (
-                      <div
-                        key={dotIndex}
-                        className={`${styles.dot} ${
-                          POI.isComplete ? styles.dotCompleted : styles.dotNotCompleted
-                        } ${index === data.length - 1 ? styles.hiddenDot : ""}`}
-                      ></div>
-                    ))}
+                    .map((_, dotIndex) => {
+                      const isNextCompleted = data[index + 1]?.isComplete ?? false;
+
+                      return (
+                        <div
+                          key={dotIndex}
+                          className={`${styles.dot} ${
+                            isNextCompleted ? styles.dotCompleted : styles.dotNotCompleted
+                          } ${index === data.length - 1 ? styles.hiddenDot : ""}`}
+                        ></div>
+                      );
+                    })}
                 </div>
                 <POICard title={POI.name} duration={POI.duration} imageUrl={POI.image}></POICard>
               </div>
