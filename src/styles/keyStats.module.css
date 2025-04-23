@@ -2,11 +2,12 @@
   display: flex;
   width: 100vw;
 }
+
 .section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   background-color: #eeebe6;
   padding: 1.5rem;
   height: 100%; /* Ensure equal height */
@@ -20,43 +21,46 @@
   margin-top: 25px;
 }
 
-.paText {
-  font-size: 1.25rem;
-  font-weight: 500;
-  text-align: center;
-  color: black;
-  padding-top: 25px;
-}
-
-.sideContainer,
-.centerContainer {
-  flex: 1; /* Ensure equal widths */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.sideContainer,
-.centerContainer {
-  flex: 1; /* Ensure equal widths */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.adText {
-  font-size: 1.25rem;
-  font-weight: 500;
-  text-align: center;
-  color: black;
-  padding-top: 25px;
-}
-
+.paText,
+.adText,
 .tpText {
   font-size: 1.25rem;
   font-weight: 500;
   text-align: center;
+  display: flex;
+  align-items: flex-end;
+  /* justify-content: center; */
   color: black;
+  max-height: 60px;
+  min-height: 50px;
+  /* this makes sure that its centered in the middle of the div i think*/
+
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.vertCenter {
+  position: relative;
+}
+
+.sideContainer,
+.centerContainer {
+  flex: 1; /* Ensure equal widths */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Ensure icons and visual elements align properly */
+.audioButton,
+.progressContainer,
+.audioDuration {
+  margin-bottom: 0.5rem; /* Push down space for text */
+  max-height: 100px;
+  min-height: 92px;
 }
 
 .audioDuration {

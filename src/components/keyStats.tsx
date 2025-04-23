@@ -14,8 +14,9 @@ const PlayAudio: React.FC<PA_Props> = ({ toggleAudioPlayer }) => {
       <Button onClick={toggleAudioPlayer} className={styles.audioButton}>
         <FaPlay className={styles.audioIcon} />
       </Button>
-
-      <span className={styles.paText}>Play Audio</span>
+      <div className={styles.vertCenter}>
+        <span className={styles.paText}>Play Audio</span>
+      </div>
     </div>
   );
 };
@@ -27,7 +28,9 @@ const AudioDuration: React.FC<AD_Props> = ({ duration }) => {
   return (
     <div className={styles.section}>
       <span className={styles.audioDuration}>{duration}</span>
-      <span className={styles.adText}>Audio Duration</span>
+      <div className={styles.vertCenter}>
+        <span className={styles.adText}>Audio Duration</span>
+      </div>
     </div>
   );
 };
@@ -55,7 +58,9 @@ const TourProgress: React.FC<TP_Props> = ({ tour_progress, total_tours }) => {
           {tour_progress}/{total_tours}
         </div>
       </div>
-      <span className={styles.tpText}>Tour Progress</span>
+      <div className={styles.vertCenter}>
+        <span className={styles.tpText}>Tour Progress</span>
+      </div>
     </div>
   );
 };
