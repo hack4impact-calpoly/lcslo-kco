@@ -117,9 +117,21 @@ export default function POICardList() {
                 },
               }}
             >
+              <div className={styles.dotExtraContainer}>
+                {Array(2)
+                  .fill(null)
+                  .map((_, dotIndex) => (
+                    <div
+                      key={dotIndex}
+                      className={`${styles.dotExtra} ${
+                        POI.isComplete ? styles.dotCompleted : styles.dotNotCompleted
+                      } ${index === 0 ? styles.hiddenDot : ""}`}
+                    ></div>
+                  ))}
+              </div>
               <div className={styles.poicard}>
                 <div className={styles.progressBar}>
-                  {Array(4)
+                  {Array(3)
                     .fill(null)
                     .map((_, dotIndex) => (
                       <div
@@ -140,6 +152,20 @@ export default function POICardList() {
                   >
                     {POI.isComplete && <FaCheck color="white" />}
                   </button>
+                  {Array(3)
+                    .fill(null)
+                    .map((_, dotIndex) => {
+                      const isNextCompleted = data[index + 1]?.isComplete ?? false;
+
+                      return (
+                        <div
+                          key={dotIndex}
+                          className={`${styles.dot} ${
+                            isNextCompleted ? styles.dotCompleted : styles.dotNotCompleted
+                          } ${index === data.length - 1 ? styles.hiddenDot : ""}`}
+                        ></div>
+                      );
+                    })}
                 </div>
                 <POICard title={POI.name} duration={POI.duration} imageUrl={POI.image}></POICard>
               </div>
