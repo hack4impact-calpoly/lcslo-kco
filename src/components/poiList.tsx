@@ -6,6 +6,7 @@ import { FaCheck } from "react-icons/fa";
 import { POICard } from "@/components/poiCard";
 import Link from "next/link";
 import React from "react";
+import { BarLoader } from "react-spinners";
 
 interface POI {
   _id: string;
@@ -29,6 +30,7 @@ interface Audio {
 export default function POICardList() {
   const [cardsDone, setCardsDone] = useState(0);
   const [data, setData] = useState<POI[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
@@ -56,6 +58,8 @@ export default function POICardList() {
         setData(mergedData);
       } catch (error) {
         console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
       }
     }
 
@@ -63,6 +67,7 @@ export default function POICardList() {
     const storedData = sessionStorage.getItem("poiData");
     if (storedData) {
       setData(JSON.parse(storedData));
+      setLoading(false);
     } else {
       fetchData();
     }
@@ -84,6 +89,14 @@ export default function POICardList() {
     setCardsDone(updatedData.filter((item) => item.isComplete).length);
   };
 
+  if (loading) {
+    return (
+      <div className={styles.loadingContainer}>
+        <p className={styles.loadingText}>Loading points of interest...</p>
+        <BarLoader className={styles.loader} color="#D29561" width={150} height={6} />
+      </div>
+    );
+  }
   // Defining a custom variant
   return (
     <div className={"flex-auto"}>

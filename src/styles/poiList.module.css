@@ -80,6 +80,25 @@
   margin: 0 1em;
 }
 
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f0ebe7;
+}
+
+.loadingText {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1c1c1c;
+}
+
+.loader {
+  margin-top: 1rem;
+}
+
 .POIchecked {
   background-color: #d29561; /* Set background color for checked state */
   border-color: #d29561; /* Optionally set border color to match */
