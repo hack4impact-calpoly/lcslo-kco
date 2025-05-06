@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import "./SideBar.css";
+import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 
 const SideBar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,6 +31,16 @@ const SideBar: React.FC = () => {
             </li>
             <li>
               <a href="https://lcslo.org/contact-us/">Need Help?</a>
+            </li>
+            <li>
+              <SignedOut>
+                <a>
+                  <SignInButton />
+                </a>
+              </SignedOut>
+              <SignedIn>
+                <UserButton />
+              </SignedIn>
             </li>
           </ul>
         </div>
