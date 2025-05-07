@@ -1,0 +1,17 @@
+.analyticsHeader {
+  background: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.tabItem {
+  transition: all 0.2s ease;
+}
+
+.tabItem:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.activeTab {
+  color: #2563eb;
+  border-bottom: 2px solid #2563eb;
+}
