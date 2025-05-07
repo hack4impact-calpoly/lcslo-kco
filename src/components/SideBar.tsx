@@ -35,7 +35,7 @@ const SideBar: React.FC = () => {
             <li>
               <SignedOut>
                 <a>
-                  <SignInButton redirectUrl="/analytics" />
+                  <SignInButton />
                 </a>
               </SignedOut>
               <SignedIn>
