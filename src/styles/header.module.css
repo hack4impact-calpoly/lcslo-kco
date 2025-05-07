@@ -1,0 +1,32 @@
+.head {
+  background-color: #d29561;
+  display: flex;
+  align-items: center;
+  height: 8vh;
+  position: relative;
+  padding-left: 1rem;
+}
+
+.full_bars {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  position: absolute;
+  left: 1rem;
+}
+
+.bar {
+  width: 30px;
+  height: 3px;
+  background-color: #3b3b3b;
+  border-radius: 3px;
+}
+
+.banner_img {
+  height: 75%;
+  width: auto;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}

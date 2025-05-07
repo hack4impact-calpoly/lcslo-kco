@@ -1,0 +1,167 @@
+.base {
+  flex: auto;
+  background-color: #f7f3ef;
+  padding-top: 20px;
+}
+
+.header {
+  display: flex;
+  height: 97.637px;
+  padding: 19px 46px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  align-self: stretch;
+  background: var(--White, #fff);
+}
+
+.headerTitle {
+  height: 21.88px;
+  align-self: stretch;
+  color: #333;
+  text-align: center;
+  font-family: sans-serif;
+  font-size: 22.145px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.headerSubtitle {
+  height: 21.88px;
+  align-self: stretch;
+  color: #757575;
+  text-align: center;
+  font-family: sans-serif;
+  font-size: 16.105px;
+  font-style: normal;
+  font-weight: 550;
+  line-height: 140%; /* 22.547px */
+}
+
+.poicard {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.checkbox-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: #876950;
+}
+
+.dotCompleted {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: #d29561;
+}
+
+.hiddenDot {
+  opacity: 0;
+}
+
+.progressBar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  align-items: center;
+  /*transform: translateY(-30%); */
+  margin: 0 1em;
+}
+
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f0ebe7;
+}
+
+.loadingText {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1c1c1c;
+}
+
+.loader {
+  margin-top: 1rem;
+}
+
+.POIchecked {
+  background-color: #d29561; /* Set background color for checked state */
+  border-color: #d29561; /* Optionally set border color to match */
+}
+
+.POIdefault {
+  border-color: #876950; /* Set border color for default state */
+  background-color: transparent; /* Ensure background is transparent when not checked */
+}
+
+.topProgress {
+  display: flex;
+  width: 370.07px;
+  padding: 0px 20px;
+  flex-direction: column;
+  gap: 10px;
+  margin-left: auto;
+  padding-bottom: 20px;
+}
+
+.textProgress {
+  width: 300.764px;
+  height: 21.904px;
+  position: absolute;
+  right: -2.764px;
+  color: #333;
+  font-family: sans-serif;
+  font-size: 14.656px;
+  font-style: normal;
+  font-weight: 550;
+  line-height: 110%; /* 16.122px */
+}
+.textInnerProgress {
+  color: #d29561;
+  text-align: center;
+  font-family: sans-serif;
+  font-size: 14.656px;
+  font-style: normal;
+  font-weight: 550;
+  line-height: normal;
+}
+
+.tourProgress {
+  background-color: "#876950";
+}
+
+.dotExtra {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: #876950;
+}
+
+.dotCompleted {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: #d29561;
+}
+
+.dotExtraContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.35em;
+  margin-left: calc(29.5px + 1em);
+}

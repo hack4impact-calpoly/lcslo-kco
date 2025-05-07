@@ -1,100 +1,68 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+
+import React, { useState } from "react";
 import { Howl } from "howler";
 import "./AudioControls.css";
+import "@/components/AudioPlayer";
 
-interface AudioPlayerProps {
-  audioURL: string;
-  name: string;
-}
+const AudioControls: React.FC = () => {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
 
-const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioURL, name }) => {
-  const [isPlaying, setIsPlaying] = useState<boolean>(false);
-  const [progress, setProgress] = useState<number>(0);
-  const [currentTime, setCurrentTime] = useState<number>(0);
-  const [duration, setDuration] = useState<number>(0);
-  const soundRef = useRef<Howl | null>(null);
+  const sound = new Howl({
+    src: ["/path/to/your/audio.mp3"], // Replace with the actual audio file path
+    html5: true,
+    onplay: () => {
+      setDuration(sound.duration());
+      const interval = setInterval(() => {
+        setCurrentTime(sound.seek() as number);
+      }, 1000);
 
-  useEffect(() => {
-    if (audioURL) {
-      if (soundRef.current) {
-        soundRef.current.unload();
-      }
-      soundRef.current = new Howl({
-        src: [audioURL],
-        html5: true,
-        onload: () => {
-          setDuration(soundRef.current?.duration() || 0);
-        },
-        onend: () => {
-          setIsPlaying(false);
-          setProgress(0);
-        },
-      });
-    }
-    return () => {
-      if (soundRef.current) {
-        soundRef.current.unload();
-      }
-    };
-  }, [audioURL]);
+      return () => clearInterval(interval);
+    },
+    onend: () => {
+      setIsPlaying(false);
+    },
+  });
 
   const togglePlayPause = () => {
-    if (soundRef.current) {
-      if (isPlaying) {
-        soundRef.current.pause();
-        setIsPlaying(false);
-      } else {
-        soundRef.current.play();
-        setIsPlaying(true);
-      }
+    if (isPlaying) {
+      sound.pause();
+    } else {
+      sound.play();
     }
+    setIsPlaying(!isPlaying);
   };
 
-  const skipForward = () => {
-    if (soundRef.current) {
-      const newTime = Math.min((soundRef.current.seek() as number) + 5, duration);
-      soundRef.current.seek(newTime);
-      setCurrentTime(newTime);
-    }
+  const handleFastForward = () => {
+    const newTime = Math.min((sound.seek() as number) + 10, duration);
+    sound.seek(newTime);
+    setCurrentTime(newTime);
   };
 
-  const skipBackward = () => {
-    if (soundRef.current) {
-      const newTime = Math.max((soundRef.current.seek() as number) - 5, 0);
-      soundRef.current.seek(newTime);
-      setCurrentTime(newTime);
-    }
+  const handleRewind = () => {
+    const newTime = Math.max((sound.seek() as number) - 10, 0);
+    sound.seek(newTime);
+    setCurrentTime(newTime);
   };
-
-  useEffect(() => {
-    let intervalId: NodeJS.Timeout;
-    if (isPlaying && soundRef.current) {
-      intervalId = setInterval(() => {
-        const currentTime = soundRef.current?.seek() as number;
-        setCurrentTime(currentTime);
-        if (duration > 0) {
-          setProgress((currentTime / duration) * 100);
-        }
-      }, 500);
-    }
-    return () => clearInterval(intervalId);
-  }, [isPlaying, duration]);
 
   const handleProgressBarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newTime = parseFloat(e.target.value);
-    if (soundRef.current) {
-      soundRef.current.seek(newTime);
-      setCurrentTime(newTime);
-      setProgress((newTime / duration) * 100);
-    }
+    sound.seek(newTime);
+    setCurrentTime(newTime);
   };
 
   const formatTime = (time: number) => {
-    const minutes = Math.floor(time / 60);
-    const seconds = Math.floor(time % 60);
-    return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+    const minutes = Math.floor(time / 60)
+      .toString()
+      .padStart(2, "0");
+    const seconds = Math.floor(time % 60)
+      .toString()
+      .padStart(2, "0");
+    return `${minutes}:${seconds}`;
   };
+
   return (
     <div className="audio-controls">
       {/* Progress Bar and Time Display */}
@@ -129,7 +97,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioURL, name }) => {
             />
           </svg>
         </span>
-        <button onClick={skipBackward} className="button-rewind">
+        <button onClick={handleRewind} className="button-rewind">
           <span className="icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="12" height="10" viewBox="0 0 12 10" fill="none">
               <rect width="1.51674" height="9.10043" transform="matrix(-1 0 0 1 2.32031 0.821747)" fill="#D9D9D9" />
@@ -153,7 +121,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioURL, name }) => {
             </span>
           </button>
         </div>
-        <button onClick={skipForward} className="button-fast-forward">
+        <button onClick={handleFastForward} className="button-fast-forward">
           <span className="icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="12" height="10" viewBox="0 0 12 10" fill="none">
               <rect x="10.1531" y="0.821747" width="1.51674" height="9.10043" fill="#D9D9D9" />
@@ -166,4 +134,4 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioURL, name }) => {
   );
 };
 
-export default AudioPlayer;
+export default AudioControls;

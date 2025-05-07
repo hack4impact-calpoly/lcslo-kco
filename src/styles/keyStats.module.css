@@ -1,0 +1,128 @@
+.container {
+  display: flex;
+  width: 100vw;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #eeebe6;
+  padding: 1.5rem;
+  height: 100%; /* Ensure equal height */
+}
+
+.audioIcon {
+  height: 50px; /* Adjusted size */
+  width: 50px;
+  color: #d29561;
+  margin-bottom: 10px; /* Reduce space */
+  margin-top: 25px;
+}
+
+.paText,
+.adText,
+.tpText {
+  font-size: 1.25rem;
+  font-weight: 500;
+  text-align: center;
+  display: flex;
+  align-items: flex-end;
+  /* justify-content: center; */
+  color: black;
+  max-height: 60px;
+  min-height: 50px;
+  /* this makes sure that its centered in the middle of the div i think*/
+
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.vertCenter {
+  position: relative;
+}
+
+.sideContainer,
+.centerContainer {
+  flex: 1; /* Ensure equal widths */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Ensure icons and visual elements align properly */
+.audioButton,
+.progressContainer,
+.audioDuration {
+  margin-bottom: 0.5rem; /* Push down space for text */
+  max-height: 100px;
+  min-height: 92px;
+}
+
+.audioDuration {
+  font-size: 1.875rem;
+  font-weight: bold;
+  color: black;
+  padding-top: 25px;
+}
+
+.progressText {
+  position: absolute;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: black;
+}
+
+.sideContainer {
+  width: 33.33vw;
+  height: 40vw;
+}
+
+.centerContainer {
+  width: 33.33vw;
+  height: 40vw;
+  border-left: 5px solid #e5e5e5; /* Left border */
+  border-right: 5px solid #e5e5e5; /* Right border */
+  border-top: none;
+  border-bottom: none;
+}
+
+.progressContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 6rem;
+  height: 6rem;
+}
+
+.progressText {
+  position: absolute;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: black;
+}
+
+.progressSvg {
+  position: absolute;
+  transform: rotate(90deg);
+}
+
+.progressBgCircle {
+  stroke: #d29561;
+  stroke-width: 10;
+  fill: none;
+}
+
+.progressFillCircle {
+  stroke: #f7cba6;
+  stroke-width: 10;
+  fill: none;
+  stroke-linecap: square;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+}
