@@ -12,6 +12,13 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html suppressHydrationWarning>
+      <head>
+        <script
+          defer
+          src="https://cloud.umami.is/script.js"
+          data-website-id="45b80c2d-d963-4cd8-a4cc-5f51ccaffb95"
+        ></script>
+      </head>
       <body>
         <Provider>{children}</Provider>
       </body>
