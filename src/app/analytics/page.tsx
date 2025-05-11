@@ -6,10 +6,10 @@ import Head from "@/components/headerBar";
 import AnalyticsHeader from "@/components/AnalyticsHeader";
 
 export default async function AnalyticsPage() {
-  const { userId } = await auth();
+  const { userId } = await auth(); // added await
 
   if (!userId) {
-    return RedirectToSignIn({ redirectUrl: "/sign-in" }); // Redirect to default sign-in page
+    return <RedirectToSignIn redirectUrl="/sign-in" />;
   }
 
   return (
