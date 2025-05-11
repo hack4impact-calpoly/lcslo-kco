@@ -23,7 +23,7 @@ const SideBar: React.FC = () => {
           <ul>
             <li>
               <button onClick={() => setIsOpen(false)}>
-                <a href="#">View All Audios</a>
+                <a href="/">View All Audios</a>
               </button>
             </li>
             <li>
