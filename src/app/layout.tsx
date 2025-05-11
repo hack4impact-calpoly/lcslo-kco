@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Provider } from "@/components/ui/provider";
 
+import Script from "next/script";
+
 import "./globals.css";
 
 //! Update metadata to match your project
@@ -12,6 +14,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html suppressHydrationWarning>
+      <head>
+        {/*For Umami Analytics Tracking!*/}
+        <Script defer src="https://cloud.umami.is/script.js" data-website-id="45b80c2d-d963-4cd8-a4cc-5f51ccaffb95" />
+      </head>
       <body>
         <Provider>{children}</Provider>
       </body>
