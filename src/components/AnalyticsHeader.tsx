@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useState } from "react";
 import { FiTrendingUp, FiMap, FiRefreshCw, FiCheck } from "react-icons/fi";
 
@@ -41,6 +42,7 @@ export default function AnalyticsPage() {
   useEffect(() => {
     handleRefresh();
   }, []);
+
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="bg-white px-6 pt-4 pb-2">
