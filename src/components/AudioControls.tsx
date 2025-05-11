@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { Howl } from "howler";
-import "./AudioControls.css";
+import "@/styles/AudioControls.css";
 import "@/components/AudioPlayer";
 
 const AudioControls: React.FC = () => {
