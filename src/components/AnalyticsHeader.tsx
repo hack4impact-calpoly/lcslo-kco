@@ -1,7 +1,4 @@
-// src/app/analytics/page.tsx
-"use client";
-
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FiTrendingUp, FiMap, FiRefreshCw, FiCheck } from "react-icons/fi";
 
 type TabType = "analytics" | "poi";
@@ -16,34 +13,34 @@ type analytic = {
 export default function AnalyticsPage() {
   const [activeTab, setActiveTab] = useState<TabType>("analytics");
   const [lastUpdated, setLastUpdated] = useState<string>("May 1, 2025");
-  const [firstVisit, setfirstVisit] = useState<boolean>(true);
   const [info, setAnalytics] = useState<analytic>();
 
   const handleRefresh = async () => {
-    setLastUpdated(
-      new Date().toLocaleDateString("en-US", {
-        month: "long",
-        day: "numeric",
-        year: "numeric",
-      }),
-    );
+    try {
+      setLastUpdated(
+        new Date().toLocaleDateString("en-US", {
+          month: "long",
+          day: "numeric",
+          year: "numeric",
+        }),
+      );
 
-    const response = await fetch("/api/umami");
-    const data = await response.json();
-    setAnalytics({
-      views: data.pageviews.value,
-      uniqueVisitors: data.visitors.value,
-      visits: data.visits.value,
-      timeSpentSec: data.totaltime.value,
-    });
+      const response = await fetch("/api/umami");
+      const data = await response.json();
+      setAnalytics({
+        views: data.pageviews.value,
+        uniqueVisitors: data.visitors.value,
+        visits: data.visits.value,
+        timeSpentSec: data.totaltime.value,
+      });
+    } catch (err) {
+      console.error("Failed to fetch analytics:", err);
+    }
   };
 
-  //Referesh to get latest info on first visit
-  if (firstVisit) {
+  useEffect(() => {
     handleRefresh();
-    setfirstVisit(false);
-  }
-
+  }, []);
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="bg-white px-6 pt-4 pb-2">
