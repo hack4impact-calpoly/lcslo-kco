@@ -62,7 +62,7 @@ export function ActivityComponent() {
     setDate((prev) => (mode === "Daily" ? addDays(prev, 1) : addWeeks(prev, 1)));
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
     setMode(value);
   };
