@@ -113,7 +113,7 @@ const AudioControls: React.FC<AudioControlsProps> = ({ isPlaying, togglePlayPaus
                 </svg>
               ) : (
                 <svg xmlns="http://www.w3.org/2000/svg" width="9" height="10" viewBox="0 0 9 10" fill="none">
-                  <path d="M8.17725 5.13431L0.751738 9.42143L0.751739 0.847194L8.17725 5.13431Z" fill="#F6F6F6" />
+                  <path d="M8.17725 5.13431L0.751738 9.42143L0.751739 0.847194L8.17725 5.13431Z" fill="#876950" />
                 </svg>
               )}
             </span>

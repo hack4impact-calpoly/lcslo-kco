@@ -109,8 +109,6 @@ const Selected_POI_Page: React.FC<POIProps> = ({
           </p>
         </div>
       </div>
-      {visible && <TranscriptView audioUri={audio_link} imageUrl={mainImage} />}
-      {visible && <AudioPlayer audioURL={audio_link} name="POI Audio" />}
     </div>
   );
 };
