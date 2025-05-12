@@ -1,8 +1,11 @@
 import Link from "next/link";
 import React from "react";
-import { FaPlay, FaPause } from "react-icons/fa";
+import { FaPlay as _FaPlay, FaPause as _FaPause } from "react-icons/fa";
+import type { IconBaseProps } from "react-icons/lib";
 import styles from "@/styles/keyStats.module.css";
 import { Button } from "@chakra-ui/react/button";
+const FaPlay = _FaPlay as React.FC<IconBaseProps>;
+const FaPause = _FaPause as React.FC<IconBaseProps>;
 
 interface PA_Props {
   toggleAudioPlayer: () => void;
@@ -72,7 +75,6 @@ interface KS_Props {
   duration: string;
   tour_progress: number;
   total_tours: number;
-  toggleAudioPlayer: () => void; // New prop
 }
 
 const KeyStats: React.FC<KS_Props> = ({

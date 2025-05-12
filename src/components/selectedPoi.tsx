@@ -93,9 +93,8 @@ const Selected_POI_Page: React.FC<POIProps> = ({
             isPlaying={isPlaying}
             togglePlayPause={togglePlayPause}
             duration={duration}
-            tour_progress={newTourProgress}
+            tour_progress={tour_progress}
             total_tours={total_tours}
-            toggleAudioPlayer={toggleAudioPlayer}
           />
         </div>
         <div className={styles.audioButtonWrapper}>
@@ -110,10 +109,8 @@ const Selected_POI_Page: React.FC<POIProps> = ({
           </p>
         </div>
       </div>
-
-      {isAudioVisible && <TranscriptView audioUri={audio_link} imageUrl={mainImage}></TranscriptView>}
-
-      {isAudioVisible && <AudioPlayer audioURL={audio_link} name="POI Audio" />}
+      {visible && <TranscriptView audioUri={audio_link} imageUrl={mainImage} />}
+      {visible && <AudioPlayer audioURL={audio_link} name="POI Audio" />}
     </div>
   );
 };
