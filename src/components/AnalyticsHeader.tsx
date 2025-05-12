@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { FiTrendingUp, FiMap, FiRefreshCw, FiCheck } from "react-icons/fi";
+import { ActivityComponent } from "./activity";
 
 type TabType = "analytics" | "poi";
 
@@ -44,7 +45,7 @@ export default function AnalyticsPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen" style={{ backgroundColor: "#f0ebe7" }}>
       <div className="bg-white px-6 pt-4 pb-2">
         <h1 className="text-2xl font-bold text-gray-900">LCSLO Admin Dashboard</h1>
 
@@ -98,14 +99,9 @@ export default function AnalyticsPage() {
       </div>
 
       <main className="p-6">
-        <div className="bg-white p-6 rounded-lg shadow" style={{ color: "black" }}>
+        <div style={{ color: "black" }}>
           {activeTab === "analytics" ? (
-            <div>
-              <h2 className="text-lg font-medium">Views (All Pages): {info?.views}</h2>
-              <h2 className="text-lg font-medium">Visits: {info?.visits}</h2>
-              <h2 className="text-lg font-medium">Unique Visitors: {info?.uniqueVisitors}</h2>
-              <h2 className="text-lg font-medium">Net Time Spent: {info?.timeSpentSec}s</h2>
-            </div>
+            <ActivityComponent />
           ) : (
             <h2 className="text-lg font-medium">POI Content Goes Here</h2>
           )}
