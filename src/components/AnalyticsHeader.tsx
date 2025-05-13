@@ -1,24 +1,47 @@
-// src/app/analytics/page.tsx
 "use client";
-
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FiTrendingUp, FiMap, FiRefreshCw, FiCheck } from "react-icons/fi";
 
 type TabType = "analytics" | "poi";
 
+type analytic = {
+  views: number;
+  uniqueVisitors: number;
+  visits: number;
+  timeSpentSec: number;
+};
+
 export default function AnalyticsPage() {
   const [activeTab, setActiveTab] = useState<TabType>("analytics");
   const [lastUpdated, setLastUpdated] = useState<string>("May 1, 2025");
+  const [info, setAnalytics] = useState<analytic>();
 
-  const handleRefresh = () => {
-    setLastUpdated(
-      new Date().toLocaleDateString("en-US", {
-        month: "long",
-        day: "numeric",
-        year: "numeric",
-      }),
-    );
+  const handleRefresh = async () => {
+    try {
+      setLastUpdated(
+        new Date().toLocaleDateString("en-US", {
+          month: "long",
+          day: "numeric",
+          year: "numeric",
+        }),
+      );
+
+      const response = await fetch("/api/umami");
+      const data = await response.json();
+      setAnalytics({
+        views: data.pageviews.value,
+        uniqueVisitors: data.visitors.value,
+        visits: data.visits.value,
+        timeSpentSec: data.totaltime.value,
+      });
+    } catch (err) {
+      console.error("Failed to fetch analytics:", err);
+    }
   };
+
+  useEffect(() => {
+    handleRefresh();
+  }, []);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -75,9 +98,14 @@ export default function AnalyticsPage() {
       </div>
 
       <main className="p-6">
-        <div className="bg-white p-6 rounded-lg shadow">
+        <div className="bg-white p-6 rounded-lg shadow" style={{ color: "black" }}>
           {activeTab === "analytics" ? (
-            <h2 className="text-lg font-medium">Analytics Content Goes Here</h2>
+            <div>
+              <h2 className="text-lg font-medium">Views (All Pages): {info?.views}</h2>
+              <h2 className="text-lg font-medium">Visits: {info?.visits}</h2>
+              <h2 className="text-lg font-medium">Unique Visitors: {info?.uniqueVisitors}</h2>
+              <h2 className="text-lg font-medium">Net Time Spent: {info?.timeSpentSec}s</h2>
+            </div>
           ) : (
             <h2 className="text-lg font-medium">POI Content Goes Here</h2>
           )}
