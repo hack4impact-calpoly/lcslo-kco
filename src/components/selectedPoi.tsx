@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+/* eslint-disable @next/next/no-img-element */
+import React, { useState, useRef, useEffect } from "react";
 import KeyStats from "./keyStats";
+import AudioControls from "./AudioControls";
+import { Howl } from "howler";
 import styles from "@/styles/selectedPoi.module.css";
 import { Button } from "@chakra-ui/react";
 import AudioPlayer from "./AudioPlayer";
@@ -53,21 +56,17 @@ const Selected_POI_Page: React.FC<POIProps> = ({
   id,
 }) => {
   const [isAudioVisible, setIsAudioVisible] = useState(false);
-
   const toggleAudioPlayer = () => {
     setIsAudioVisible((prev) => !prev);
   };
-
   const [newTourProgress, updateTourProgress] = useState(tour_progress);
 
   //When a card is selected, it should be marked as done in sessionStorage
   try {
     //Get locally stored data
     const storedData = sessionStorage.getItem("poiData");
-
     if (storedData) {
       const data: POI[] = JSON.parse(storedData);
-
       //Update tour progression and local data, if required
       const updatedData = data.map((item) => {
         if (item._id === id && !item.isComplete) {
@@ -77,7 +76,6 @@ const Selected_POI_Page: React.FC<POIProps> = ({
           return item;
         }
       });
-
       //Save updated local data
       sessionStorage.setItem("poiData", JSON.stringify(updatedData));
     }
@@ -110,7 +108,6 @@ const Selected_POI_Page: React.FC<POIProps> = ({
       </div>
 
       {isAudioVisible && <TranscriptView audioUri={audio_link} imageUrl={mainImage}></TranscriptView>}
-
       {isAudioVisible && <AudioPlayer audioURL={audio_link} name="POI Audio" />}
     </div>
   );
