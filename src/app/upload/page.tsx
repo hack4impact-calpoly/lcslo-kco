@@ -11,6 +11,13 @@ export default function FileUploadPage() {
   return (
     <>
       <h1>Upload Your File (Image or Audio)</h1>
+      <button
+        onClick={async (event) => {
+          console.log("Button");
+        }}
+      >
+        {"DeepGram"}
+      </button>
 
       <form
         onSubmit={async (event) => {
