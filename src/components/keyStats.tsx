@@ -1,15 +1,15 @@
 import Link from "next/link";
 import React from "react";
-import { FaPlay as _FaPlay, FaPause as _FaPause } from "react-icons/fa";
-import type { IconBaseProps } from "react-icons/lib";
 import styles from "@/styles/keyStats.module.css";
 import { Button } from "@chakra-ui/react/button";
-const FaPlay = _FaPlay as React.FC<IconBaseProps>;
-const FaPause = _FaPause as React.FC<IconBaseProps>;
+import { FaPlay as _FaPlay } from "react-icons/fa";
+import type { IconBaseProps } from "react-icons/lib";
 
 interface PA_Props {
   toggleAudioPlayer: () => void;
 }
+
+const FaPlay = _FaPlay as React.FC<IconBaseProps>;
 
 const PlayAudio: React.FC<PA_Props> = ({ toggleAudioPlayer }) => {
   return (
@@ -70,25 +70,17 @@ const TourProgress: React.FC<TP_Props> = ({ tour_progress, total_tours }) => {
 
 interface KS_Props {
   audio_link: string;
-  isPlaying: boolean;
-  togglePlayPause: () => void;
   duration: string;
   tour_progress: number;
   total_tours: number;
+  toggleAudioPlayer: () => void; // New prop
 }
 
-const KeyStats: React.FC<KS_Props> = ({
-  audio_link,
-  isPlaying,
-  togglePlayPause,
-  duration,
-  tour_progress,
-  total_tours,
-}) => {
+const KeyStats: React.FC<KS_Props> = ({ audio_link, duration, tour_progress, total_tours, toggleAudioPlayer }) => {
   return (
     <div className={styles.container}>
       <div className={styles.sideContainer}>
-        <PlayAudio toggleAudioPlayer={togglePlayPause} />
+        <PlayAudio toggleAudioPlayer={toggleAudioPlayer} />
       </div>
       <div className={styles.centerContainer}>
         <AudioDuration duration={duration} />

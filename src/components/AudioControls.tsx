@@ -105,18 +105,16 @@ const AudioControls: React.FC<AudioControlsProps> = ({ isPlaying, togglePlayPaus
         </button>
         <div className="play-button">
           <button onClick={togglePlayPause} className="button-play-pause">
-            <span className="play">
-              {isPlaying ? (
-                <svg xmlns="http://www.w3.org/2000/svg" width="7" height="10" viewBox="0 0 7 10" fill="none">
-                  <rect x="0.211426" y="0.834656" width="2.01691" height="8.87439" fill="#876950" />
-                  <rect x="4.24524" y="0.834656" width="2.01691" height="8.87439" fill="#876950" />
-                </svg>
-              ) : (
-                <svg xmlns="http://www.w3.org/2000/svg" width="9" height="10" viewBox="0 0 9 10" fill="none">
-                  <path d="M8.17725 5.13431L0.751738 9.42143L0.751739 0.847194L8.17725 5.13431Z" fill="#876950" />
-                </svg>
-              )}
-            </span>
+            {isPlaying ? (
+              <svg xmlns="http://www.w3.org/2000/svg" width="7" height="10" viewBox="0 0 7 10" fill="#876950">
+                <rect x="0.211" y="0.835" width="2.017" height="8.874" fill="#876950" />
+                <rect x="4.245" y="0.835" width="2.017" height="8.874" fill="#876950" />
+              </svg>
+            ) : (
+              <svg xmlns="http://www.w3.org/2000/svg" width="9" height="10" viewBox="0 0 9 10" fill="#876950">
+                <path d="M8.177 5.134L0.752 9.421V0.847L8.177 5.134Z" />
+              </svg>
+            )}
           </button>
         </div>
         <button onClick={handleFastForward} className="button-fast-forward">
