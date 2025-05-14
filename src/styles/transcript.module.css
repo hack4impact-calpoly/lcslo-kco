@@ -1,12 +1,15 @@
 .base {
+  position: fixed;
+  bottom: 120px;
+  height: 20vh;
+  z-index: 999;
   display: flex;
   flex-direction: column;
-  height: 340px; /* Fixed height for proper scrolling */
+  flex-shrink: 0;
+  border-radius: 15.115px 15.115px 0px 0px;
+  overflow: hidden;
   padding: 16px;
-  gap: 10px;
-  border-radius: 15.12px 15.12px 0px 0px;
   background: var(--White, #fff);
-  overflow: hidden; /* Prevents overflow */
 }
 
 .transcriptHeader {
@@ -17,10 +20,10 @@
 }
 
 .transcriptContent {
-  flex: 1; /* Takes up remaining space */
+  flex: 1;
   width: 100%;
-  overflow-y: auto; /* Enables scrolling */
-  padding-right: 8px; /* Prevents text from touching the scrollbar */
+  overflow-y: auto;
+  padding-right: 8px;
 }
 
 .transcriptText {
@@ -35,8 +38,8 @@
 
 .audioControlsWrapper {
   padding-top: 10px;
-  border-top: 1px solid #ddd; /* Optional: Separator */
-  background: white; /* Ensure it doesn't blend with text */
+  border-top: 1px solid #ddd;
+  background: white;
 }
 
 .transcriptHeaderLabel {
@@ -49,15 +52,17 @@
 }
 
 .baseFull {
+  position: fixed;
+  bottom: 120px;
+  height: 80vh;
+  background: var(--Dark-Brown, #37322b);
+  z-index: 999;
   display: flex;
-  height: 735px;
-  padding: 16px;
   flex-direction: column;
-  align-items: flex-start;
   flex-shrink: 0;
   border-radius: 15.115px 15.115px 0px 0px;
-  background: var(--Dark-Brown, #37322b);
-  box-shadow: 0px -4.031px 15.821px 0px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  padding: 16px;
 }
 
 .transcriptHeaderFull {
@@ -76,7 +81,8 @@
 }
 
 .transcriptContentFull {
-  flex: 1; /* Fill remaining vertical space */
+  flex: 1;
+  min-height: 0;
   width: 100%;
   overflow-y: auto;
   padding-right: 8px;
