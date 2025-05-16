@@ -4,6 +4,8 @@ import { FiTrendingUp, FiMap, FiRefreshCw, FiCheck } from "react-icons/fi";
 import AnalyticsPoiList from "@/components/analytics-poi-list";
 import { Button } from "@chakra-ui/react";
 import { FaPlus } from "react-icons/fa";
+import StatsPoiCard from "@/components/stats-poi-card";
+import StatsPoiList from "@/components/stats-poi-list";
 
 type TabType = "analytics" | "poi";
 
@@ -108,6 +110,7 @@ export default function AnalyticsPage() {
               <h2 className="text-lg font-medium">Visits: {info?.visits}</h2>
               <h2 className="text-lg font-medium">Unique Visitors: {info?.uniqueVisitors}</h2>
               <h2 className="text-lg font-medium">Net Time Spent: {info?.timeSpentSec}s</h2>
+              <StatsPoiList />
             </div>
           ) : (
             <div>

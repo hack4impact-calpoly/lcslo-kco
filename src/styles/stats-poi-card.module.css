@@ -1,0 +1,65 @@
+.container {
+  background-color: #f7f3ef;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #e1e1e1;
+}
+
+.name {
+  display: block;
+  font-size: 1.125rem; /* Slightly larger font size */
+  font-weight: 500; /* Medium font weight */
+  color: #2b261f; /* Dark gray text */
+  margin-bottom: 0.75rem;
+  margin-top: 14px;
+}
+
+.card {
+  display: flex;
+  gap: 1rem; /* Space between the stat blocks */
+  background-color: #fff;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  border-radius: 12px;
+  padding-left: 6px;
+  margin-bottom: 8px;
+}
+
+.scans,
+.time {
+  flex: 1; /* Each stat block takes equal width */
+  text-align: left;
+}
+
+.visits {
+  flex: 1; /* Each stat block takes equal width */
+  text-align: left;
+  border-right: 1px solid #efefef;
+}
+
+.subtitle {
+  display: block;
+  font-size: 0.875rem; /* Smaller font size for the subtitle */
+  color: #5a5349;
+  margin-bottom: 0.25rem;
+  font-weight: 600;
+}
+
+.mainStat {
+  display: block;
+  font-size: 1.4rem; /* Large font size for the main statistic */
+  font-weight: 700; /* Bold font weight */
+  color: #577c37;
+  line-height: 1; /* Adjust line height for better vertical spacing */
+  margin-bottom: 0.25rem;
+}
+
+.percent {
+  display: block;
+  font-size: 0.75rem; /* Smaller font size for the percentage */
+  color: #577c37;
+  font-weight: 400;
+}
+
+.percent.negative {
+  color: #ef4444; /* Red color for negative change */
+}
