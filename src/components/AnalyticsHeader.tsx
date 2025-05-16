@@ -1,6 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
 import { FiTrendingUp, FiMap, FiRefreshCw, FiCheck } from "react-icons/fi";
+import AnalyticsPoiList from "@/components/analytics-poi-list";
+import { Button } from "@chakra-ui/react";
+import { FaPlus } from "react-icons/fa";
 
 type TabType = "analytics" | "poi";
 
@@ -97,8 +100,8 @@ export default function AnalyticsPage() {
         </div>
       </div>
 
-      <main className="p-6">
-        <div className="bg-white p-6 rounded-lg shadow" style={{ color: "black" }}>
+      <main>
+        <div className="bg-[#f7f3ef] p-6 rounded-lg shadow" style={{ color: "black" }}>
           {activeTab === "analytics" ? (
             <div>
               <h2 className="text-lg font-medium">Views (All Pages): {info?.views}</h2>
@@ -107,7 +110,16 @@ export default function AnalyticsPage() {
               <h2 className="text-lg font-medium">Net Time Spent: {info?.timeSpentSec}s</h2>
             </div>
           ) : (
-            <h2 className="text-lg font-medium">POI Content Goes Here</h2>
+            <div>
+              <div className="flex flex-row justify-between">
+                <h2 className="text-lg font-medium pl-4">Points of Interest</h2>
+                <button className="bg-[#E6E6E6] w-30 flex flex-row justify-center items-center pl-2 pr-2 rounded-md">
+                  <FaPlus></FaPlus>
+                  <span className="pl-4">Add Point</span>
+                </button>
+              </div>
+              <AnalyticsPoiList></AnalyticsPoiList>
+            </div>
           )}
         </div>
       </main>
