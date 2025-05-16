@@ -5,6 +5,8 @@ import { ActivityComponent } from "./activity";
 import AnalyticsPoiList from "@/components/analytics-poi-list";
 import { Button } from "@chakra-ui/react";
 import { FaPlus } from "react-icons/fa";
+import StatsPoiCard from "@/components/stats-poi-card";
+import StatsPoiList from "@/components/stats-poi-list";
 
 type TabType = "analytics" | "poi";
 
@@ -105,7 +107,10 @@ export default function AnalyticsPage() {
       <main>
         <div className="bg-[#f7f3ef] p-6 rounded-lg shadow" style={{ color: "black" }}>
           {activeTab === "analytics" ? (
-            <ActivityComponent />
+            <div>
+              <ActivityComponent />
+              <StatsPoiList />
+            </div>
           ) : (
             <div>
               <div className="flex flex-row justify-between">
