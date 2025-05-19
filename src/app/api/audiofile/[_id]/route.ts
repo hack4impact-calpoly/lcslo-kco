@@ -4,15 +4,13 @@ import mongoose from "mongoose";
 import connectDB from "@/database/db";
 import Audiofile from "@/database/models/audiofileSchema";
 
-// Ensure database connection before handling requests
 async function ensureDatabaseConnection() {
   await connectDB();
 }
 
-// Get specific audiofile by ID
-export async function GET(request: NextRequest, context: any) {
-  // now no more "implicit any" on `context`
-  const { _id } = context.params as { _id: string };
+// GET handler
+export async function GET(request: NextRequest, { params }: { params: { _id: string } }) {
+  const { _id } = params;
 
   try {
     await ensureDatabaseConnection();
@@ -30,9 +28,9 @@ export async function GET(request: NextRequest, context: any) {
   }
 }
 
-// Update specific audiofile by ID
-export async function PUT(request: NextRequest, context: any) {
-  const { _id } = context.params as { _id: string };
+// PUT handler
+export async function PUT(request: NextRequest, { params }: { params: { _id: string } }) {
+  const { _id } = params;
 
   try {
     await ensureDatabaseConnection();
