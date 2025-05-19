@@ -8,8 +8,13 @@ async function ensureDatabaseConnection() {
   await connectDB();
 }
 
-// GET handler
-export async function GET(request: NextRequest, { params }: { params: { _id: string } }) {
+type Params = {
+  params: {
+    _id: string;
+  };
+};
+
+export async function GET(request: NextRequest, { params }: Params) {
   const { _id } = params;
 
   try {
@@ -28,8 +33,7 @@ export async function GET(request: NextRequest, { params }: { params: { _id: str
   }
 }
 
-// PUT handler
-export async function PUT(request: NextRequest, { params }: { params: { _id: string } }) {
+export async function PUT(request: NextRequest, { params }: Params) {
   const { _id } = params;
 
   try {
