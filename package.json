@@ -23,8 +23,9 @@
     "date-fns": "^4.1.0",
     "dotenv": "^16.4.7",
     "howler": "^2.2.4",
-    "mongoose": "^8.9.5",
-    "next": "^15.3.1",
+    "mongo": "^0.1.0",
+    "mongoose": "^8.10.0",
+    "next": "^14",
     "next-themes": "^0.4.4",
     "react": "^18",
     "react-dom": "^18",
@@ -33,7 +34,6 @@
     "supertest": "^7.0.0"
   },
   "devDependencies": {
-    "@babel/plugin-syntax-import-attributes": "^7.27.1",
     "@babel/preset-env": "^7.26.9",
     "@babel/preset-react": "^7.26.3",
     "@babel/preset-typescript": "^7.26.0",
@@ -42,8 +42,8 @@
     "@testing-library/react": "^16.2.0",
     "@types/howler": "^2.2.12",
     "@types/jest": "^29.5.14",
-    "@types/node": "20.17.47",
-    "@types/react": "18.3.21",
+    "@types/node": "^20",
+    "@types/react": "^18",
     "@types/react-dom": "^18",
     "@types/supertest": "^6.0.2",
     "autoprefixer": "^10.4.20",
@@ -64,6 +64,6 @@
     "prettier": "^3",
     "tailwindcss": "^3.4.17",
     "ts-jest": "^29.2.5",
-    "typescript": "5.8.3"
+    "typescript": "^5.7.3"
   }
 }
