@@ -21,13 +21,13 @@ export default function AnalyticsPoiCard({ title, imageUrl, scans, duration }: A
           <span className={styles.statsText}>{duration} min</span>
         </div>
         <div className={styles.actions}>
-          <button className={styles.iconButton}>
+          {/* <button className={styles.iconButton}>
             <FaPencilRuler color="#000000" />
             <span className={styles.buttonText}>Edit</span>
-          </button>
-          <button className={styles.iconButton}>
+          </button> */}
+          {/* <button className={styles.iconButton}>
             <FaTrash color="#000000" />
-          </button>
+          </button> */}
         </div>
       </div>
     </div>
