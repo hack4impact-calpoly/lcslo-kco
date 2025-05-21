@@ -100,7 +100,6 @@ export default function AnalyticsPage() {
         </div>
       </div>
 
-
       <main>
         <div className="bg-[#f7f3ef] p-6 rounded-lg shadow" style={{ color: "black" }}>
           {activeTab === "analytics" ? (
