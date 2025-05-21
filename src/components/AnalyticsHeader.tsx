@@ -3,9 +3,6 @@ import { useEffect, useState } from "react";
 import { FiTrendingUp, FiMap, FiRefreshCw, FiCheck } from "react-icons/fi";
 import { ActivityComponent } from "./activity";
 import AnalyticsPoiList from "@/components/analytics-poi-list";
-import { Button } from "@chakra-ui/react";
-import { FaPlus } from "react-icons/fa";
-import StatsPoiCard from "@/components/stats-poi-card";
 import StatsPoiList from "@/components/stats-poi-list";
 
 type TabType = "analytics" | "poi";
