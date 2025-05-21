@@ -116,10 +116,6 @@ export default function AnalyticsPage() {
             <div>
               <div className="flex flex-row justify-between">
                 <h2 className="text-lg font-medium pl-4">Points of Interest</h2>
-                <button className="bg-[#E6E6E6] w-30 flex flex-row justify-center items-center pl-2 pr-2 rounded-md">
-                  <FaPlus></FaPlus>
-                  <span className="pl-4">Add Point</span>
-                </button>
               </div>
               <AnalyticsPoiList></AnalyticsPoiList>
             </div>
