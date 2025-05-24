@@ -2,6 +2,8 @@
 import { useEffect, useState } from "react";
 import { FiTrendingUp, FiMap, FiRefreshCw, FiCheck } from "react-icons/fi";
 import { ActivityComponent } from "./activity";
+import AnalyticsPoiList from "@/components/analytics-poi-list";
+import StatsPoiList from "@/components/stats-poi-list";
 
 type TabType = "analytics" | "poi";
 
@@ -98,12 +100,20 @@ export default function AnalyticsPage() {
         </div>
       </div>
 
-      <main className="p-6">
-        <div style={{ color: "black" }}>
+      <main>
+        <div className="bg-[#f7f3ef] p-6 rounded-lg shadow" style={{ color: "black" }}>
           {activeTab === "analytics" ? (
-            <ActivityComponent />
+            <div>
+              <ActivityComponent />
+              <StatsPoiList />
+            </div>
           ) : (
-            <h2 className="text-lg font-medium">POI Content Goes Here</h2>
+            <div>
+              <div className="flex flex-row justify-between">
+                <h2 className="text-lg font-medium pl-4">Points of Interest</h2>
+              </div>
+              <AnalyticsPoiList></AnalyticsPoiList>
+            </div>
           )}
         </div>
       </main>
