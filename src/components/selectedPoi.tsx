@@ -8,6 +8,15 @@ import { Button } from "@chakra-ui/react";
 import AudioPlayer from "./AudioPlayer";
 import { TranscriptView } from "./transcript";
 
+// IMPORTANT: Declare the global 'umami' object for TypeScript
+declare global {
+  interface Window {
+    umami: {
+      track: (eventName: string, eventData?: Record<string, any>) => void;
+    };
+  }
+}
+
 //Subcomponent to display image (unblurred) and header of the POI name
 interface OverlayImageProps {
   src: string;
@@ -82,6 +91,26 @@ const Selected_POI_Page: React.FC<POIProps> = ({
   } catch (error) {
     console.log("Error Updating Progress:", error);
   }
+
+  useEffect(() => {
+    // Only track if window and umami are confirmed to exist
+    if (typeof window !== "undefined" && window.umami) {
+      try {
+        // Dynamically create the event name using the POI's name
+        const eventName = `${name}-POI-Visited`;
+        window.umami.track(eventName, {
+          // You can also send additional data
+          visiterProgress: tour_progress,
+        });
+        console.log(`Umami event tracked: ${eventName}`);
+      } catch (error) {
+        // More specific error logging
+        console.error("Umami tracking event failed", error);
+      }
+    } else {
+      console.warn("Umami is not loaded.");
+    }
+  }, []);
 
   return (
     <div className={styles.pageContainer}>
