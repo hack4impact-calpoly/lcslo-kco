@@ -1,4 +1,6 @@
 import styles from "@/styles/analytics-poi-card.module.css";
+import { log } from "console";
+import { useEffect, useState } from "react";
 import { FaPencilRuler, FaTrash } from "react-icons/fa";
 
 interface AnaylticsPoiCardProps {
@@ -9,6 +11,24 @@ interface AnaylticsPoiCardProps {
 }
 
 export default function AnalyticsPoiCard({ title, imageUrl, scans, duration }: AnaylticsPoiCardProps) {
+  const [views, setViews] = useState("Loading views...");
+
+  useEffect(() => {
+    const fetchViews = async () => {
+      try {
+        const response = await fetch(`/api/umami/`);
+        const data = await response.json();
+        console.log(data);
+        setViews(data[0].total);
+      } catch (error) {
+        console.error("Failed to fetch transcript:", error);
+        setViews("Error fetching transcript.");
+      }
+    };
+
+    fetchViews();
+  }, []);
+
   return (
     <div className={styles.cardContainer}>
       <div className={styles.imageWrapper}>
@@ -17,7 +37,7 @@ export default function AnalyticsPoiCard({ title, imageUrl, scans, duration }: A
       <div className={styles.content}>
         <h1 className={styles.title}>{title}</h1>
         <div className={styles.stats}>
-          <span className={styles.statsText}>{scans} scans this month</span>
+          <span className={styles.statsText}>{views} scans this month</span>
           <span className={styles.statsText}>{duration} min</span>
         </div>
         <div className={styles.actions}>
