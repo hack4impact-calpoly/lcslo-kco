@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import { Howl } from "howler";
-import "./AudioControls.css";
+import "@/styles/AudioControls.css";
 
 interface AudioPlayerProps {
   audioURL: string;
