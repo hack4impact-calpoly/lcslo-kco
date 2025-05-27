@@ -29,8 +29,12 @@ export default function AnalyticsPoiCard({ title, imageUrl, scans, duration }: A
         if (!Array.isArray(data) || !data[0]?.total) {
           throw new Error("Unexpected data format");
         }
-
-        setViews(data[0].total);
+        let count = 0;
+        for (let i = 0; i < data.length; i++) {
+          count = count + data[i].total
+          
+}
+      setViews(count.toString())
       } catch (error) {
         console.error("Failed to fetch data:", error);
         setViews("0");

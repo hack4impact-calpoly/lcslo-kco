@@ -14,7 +14,11 @@ export default function StatsPoiList() {
     isComplete: boolean;
   }
 
+
+  
   const [data, setData] = useState<POI[]>([]);
+
+
 
   useEffect(() => {
     async function fetchData() {
@@ -38,7 +42,7 @@ export default function StatsPoiList() {
           title={poi.name || "Unnamed POI"}
           scans={245}
           visits={15}
-          time="2:23 min"
+          time={poi.duration || "0:00"}
           percentScans={5}
           percentVisits={2}
           percentTime={1}
