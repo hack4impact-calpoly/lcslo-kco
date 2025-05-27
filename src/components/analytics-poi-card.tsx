@@ -3,31 +3,42 @@ import { log } from "console";
 import { useEffect, useState } from "react";
 import { FaPencilRuler, FaTrash } from "react-icons/fa";
 
-interface AnaylticsPoiCardProps {
+interface AnalyticsPoiCardProps {
   title: string;
   imageUrl: string;
   scans: number;
   duration: string;
 }
 
-export default function AnalyticsPoiCard({ title, imageUrl, scans, duration }: AnaylticsPoiCardProps) {
+export default function AnalyticsPoiCard({ title, imageUrl, scans, duration }: AnalyticsPoiCardProps) {
   const [views, setViews] = useState("Loading views...");
+  const [poiName, setPoiName] = useState(title);
 
   useEffect(() => {
-    const fetchViews = async () => {
+    const fetchViews = async (name: string) => {
       try {
-        const response = await fetch(`/api/umami/`);
+        const response = await fetch(`/api/umami?event=${encodeURIComponent(name + "-POI-Visited")}`);
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          throw new Error(`Server error: ${errorText}`);
+        }
+
         const data = await response.json();
-        console.log(data);
+
+        if (!Array.isArray(data) || !data[0]?.total) {
+          throw new Error("Unexpected data format");
+        }
+
         setViews(data[0].total);
       } catch (error) {
-        console.error("Failed to fetch transcript:", error);
-        setViews("Error fetching transcript.");
+        console.error("Failed to fetch data:", error);
+        setViews("0");
       }
     };
 
-    fetchViews();
-  }, []);
+    fetchViews(poiName);
+  }, [poiName]);
 
   return (
     <div className={styles.cardContainer}>
