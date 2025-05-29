@@ -17,67 +17,66 @@ export function ActivityComponent({
   setMode,
 }: {
   date: Date;
-  setDate: (d: Date) => void;
+  setDate: React.Dispatch<React.SetStateAction<Date>>;
   mode: "Daily" | "Weekly";
-  setMode: (m: "Daily" | "Weekly") => void;
+  setMode: React.Dispatch<React.SetStateAction<"Daily" | "Weekly">>;
 }) {
   const [maxViews, setMaxViews] = useState("Loading views...");
   const [poiName, setPoiName] = useState("Loading title...");
 
   useEffect(() => {
-  const fetchViews = async (date: Date, mode: string) => {
-    try {
-      let startDate = mode === "Daily"
-        ? new Date(date.getTime() - 24 * 60 * 60 * 1000)
-        : new Date(date.getTime() - 7 * 24 * 60 * 60 * 1000);
+    const fetchViews = async (date: Date, mode: string) => {
+      try {
+        let startDate =
+          mode === "Daily"
+            ? new Date(date.getTime() - 24 * 60 * 60 * 1000)
+            : new Date(date.getTime() - 7 * 24 * 60 * 60 * 1000);
 
-      const poiResponse = await fetch("/api/poi");
-      const poiData = await poiResponse.json();
+        const poiResponse = await fetch("/api/poi");
+        const poiData = await poiResponse.json();
 
-      // Run fetches in parallel
-      const fetchPromises = poiData.POIs.map(async (poi: any) => {
-        const title = poi.name;
-        try {
-          const response = await fetch(
-            `/api/umami-stats?event=${encodeURIComponent(title + "-POI-Visited")}&startDate=${encodeURIComponent(startDate.toISOString())}&endDate=${encodeURIComponent(date.toISOString())}`
-          );
+        // Run fetches in parallel
+        const fetchPromises = poiData.POIs.map(async (poi: any) => {
+          const title = poi.name;
+          try {
+            const response = await fetch(
+              `/api/umami-stats?event=${encodeURIComponent(title + "-POI-Visited")}&startDate=${encodeURIComponent(startDate.toISOString())}&endDate=${encodeURIComponent(date.toISOString())}`,
+            );
 
-          if (!response.ok) {
-            throw new Error(`Failed for ${title}`);
+            if (!response.ok) {
+              throw new Error(`Failed for ${title}`);
+            }
+
+            const data = await response.json();
+            const count = Array.isArray(data) ? data.reduce((sum, d) => sum + (d.total || 0), 0) : 0;
+
+            return { title, count };
+          } catch (e) {
+            console.error("Fetch error for POI:", title, e);
+            return { title, count: 0 };
           }
+        });
 
-          const data = await response.json();
-          const count = Array.isArray(data)
-            ? data.reduce((sum, d) => sum + (d.total || 0), 0)
-            : 0;
+        const counts = await Promise.all(fetchPromises);
+        const maxEntry = counts.reduce((max, curr) => (curr.count > max.count ? curr : max), {
+          title: "",
+          count: 0,
+        });
 
-          return { title, count };
-        } catch (e) {
-          console.error("Fetch error for POI:", title, e);
-          return { title, count: 0 };
-        }
-      });
+        setMaxViews(maxEntry.count.toString());
+        setPoiName(maxEntry.title);
+      } catch (error) {
+        console.error("Failed to fetch POI stats:", error);
+        setMaxViews("0");
+        setPoiName("Unavailable");
+      }
+    };
 
-      const counts = await Promise.all(fetchPromises);
-      const maxEntry = counts.reduce((max, curr) => (curr.count > max.count ? curr : max), {
-        title: "",
-        count: 0,
-      });
-
-      setMaxViews(maxEntry.count.toString());
-      setPoiName(maxEntry.title);
-    } catch (error) {
-      console.error("Failed to fetch POI stats:", error);
-      setMaxViews("0");
-      setPoiName("Unavailable");
-    }
-  };
-
-  fetchViews(date, mode);
+    fetchViews(date, mode);
   }, [date, mode]);
 
   const goPrev = () => {
-    setDate((prev) => (mode === "Daily" ? subDays(prev, 1) : subWeeks(prev, 1)));
+    setDate((prev: Date) => (mode === "Daily" ? subDays(prev, 1) : subWeeks(prev, 1)));
   };
 
   const goNext = () => {
@@ -86,7 +85,7 @@ export function ActivityComponent({
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
-    setMode(value);
+    setMode(value as "Daily" | "Weekly");
   };
 
   const getTimeframeText = () => {

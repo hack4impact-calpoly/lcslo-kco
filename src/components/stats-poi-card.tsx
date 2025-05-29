@@ -37,8 +37,8 @@ export default function StatsPoiCard({
 
         const response = await fetch(
           `/api/umami-stats?event=${encodeURIComponent(title + "-POI-Visited")}&startDate=${encodeURIComponent(
-            startDate.toISOString()
-          )}&endDate=${encodeURIComponent(date.toISOString())}`
+            startDate.toISOString(),
+          )}&endDate=${encodeURIComponent(date.toISOString())}`,
         );
 
         if (!response.ok) {
@@ -50,7 +50,7 @@ export default function StatsPoiCard({
         const count = Array.isArray(data) ? data.reduce((sum, d) => sum + (d.total || 0), 0) : 0;
 
         setViews(count.toString());
-        setUniqueVisits((data.length).toString()); // Still a bit unclear why +1
+        setUniqueVisits(data.length.toString()); // Still a bit unclear why +1
       } catch (error) {
         console.error("Failed to fetch data:", error);
         setViews("0");

@@ -10,7 +10,7 @@
   overflow: hidden;
   padding: 16px;
   background: var(--White, #fff);
-  width: 100%
+  width: 100%;
 }
 
 .transcriptHeader {
@@ -26,7 +26,6 @@
   overflow-y: auto;
   padding-right: 8px;
   display: flex;
-
 }
 
 .transcriptText {
@@ -37,8 +36,6 @@
   font-weight: 600;
   line-height: 180%;
   width: 100%;
-
-  
 }
 
 .audioControlsWrapper {
@@ -91,8 +88,7 @@
   width: 100%;
   overflow-y: auto;
   padding-right: 8px;
-    display: flex;
-
+  display: flex;
 }
 
 .transcriptTextFull {
