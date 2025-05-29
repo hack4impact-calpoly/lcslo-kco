@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import styles from "@/styles/activityComponent.module.css";
 import { IconButton, Select } from "@chakra-ui/react";
@@ -13,6 +13,67 @@ import { addDays, subDays, addWeeks, subWeeks, startOfWeek, endOfWeek, format } 
 export function ActivityComponent() {
   const [mode, setMode] = useState("Daily");
   const [date, setDate] = useState(new Date());
+  const [maxViews, setMaxViews] = useState("Loading views...");
+  const [poiName, setPoiName] = useState("Loading title...");
+
+  useEffect(() => {
+    const fetchViews = async (date: Date, mode: string) => {
+      try {
+        let startDate = date;
+        if (mode === "Daily") {
+          startDate = new Date(date.getTime() - 24 * 60 * 60 * 1000);
+        }
+        if (mode === "Weekly") {
+          startDate = new Date(date.getTime() - 7 * 24 * 60 * 60 * 1000);
+        }
+
+        const poiResponse = await fetch("/api/poi");
+        const poiData = await poiResponse.json();
+        let arr = [];
+        let max = 0;
+        let maxTitle = "";
+        for (let i = 0; i < poiData.POIs.length; i++) {
+          const title = poiData.POIs[i].name;
+          console.log(title);
+          try {
+            const response = await fetch(
+              `/api/umami-stats?event=${encodeURIComponent(title + "-POI-Visited")}&startDate=${encodeURIComponent(startDate.toISOString())}&endDate=${encodeURIComponent(date.toISOString())}`,
+            );
+
+            if (!response.ok) {
+              const errorText = await response.text();
+              throw new Error(`Server error: ${errorText}`);
+            }
+
+            const data = await response.json();
+
+            if (!Array.isArray(data) || !data[0]?.total) {
+              throw new Error("Unexpected data format");
+            }
+            let count = 0;
+            for (let i = 0; i < data.length; i++) {
+              count = count + data[i].total;
+            }
+            if (max < count) {
+              max = count;
+              maxTitle = title;
+            }
+          } catch (error) {
+            console.error("Failed to fetch data:", error);
+            arr[i] = 0;
+          }
+        }
+        setMaxViews(max.toString());
+        setPoiName(maxTitle);
+
+      } catch (error) {
+        console.error("Failed to fetch data:", error);
+        setMaxViews("0");
+      }
+    };
+
+    fetchViews(date, mode);
+  }, [date, mode]);
 
   const goPrev = () => {
     setDate((prev) => (mode === "Daily" ? subDays(prev, 1) : subWeeks(prev, 1)));
@@ -63,15 +124,14 @@ export function ActivityComponent() {
           <h3 className="text-sm font-medium">Total Unique Visitors</h3>
           <div className={styles.activityUniqueInfo}>
             <FaChartLine size={30} color="#44566D" />
-            <h1 className="text-4xl font-medium p-2 text-[#44566D]">112</h1>
+            <h1 className="text-4xl font-medium p-2 text-[#44566D]">{maxViews}</h1>
           </div>
-          <h2 className="text-xs text-[#577c37] font-medium ml-11">↑12% WoW</h2>
         </div>
         <div className={`bg-white p-4 rounded-lg ${styles.activityMostVisited}`}>
           <h3 className="text-sm font-medium">Most Visited POI</h3>
           <div className={styles.activityMostVisitedInfo}>
             <FaHeart size={30} color="#44566D" />
-            <h1 className="text-sm font-medium p-2 text-[#44566D]">Kaila Welcome</h1>
+            <h1 className="text-sm font-medium p-2 text-[#44566D]">{poiName}</h1>
           </div>
         </div>
       </div>

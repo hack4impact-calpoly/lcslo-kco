@@ -14,11 +14,7 @@ export default function StatsPoiList() {
     isComplete: boolean;
   }
 
-
-  
   const [data, setData] = useState<POI[]>([]);
-
-
 
   useEffect(() => {
     async function fetchData() {

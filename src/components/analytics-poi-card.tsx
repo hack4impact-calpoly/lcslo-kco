@@ -31,10 +31,9 @@ export default function AnalyticsPoiCard({ title, imageUrl, scans, duration }: A
         }
         let count = 0;
         for (let i = 0; i < data.length; i++) {
-          count = count + data[i].total
-          
-}
-      setViews(count.toString())
+          count = count + data[i].total;
+        }
+        setViews(count.toString());
       } catch (error) {
         console.error("Failed to fetch data:", error);
         setViews("0");

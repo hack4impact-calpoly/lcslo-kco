@@ -20,10 +20,9 @@ export default function StatsPoiCard({
   percentVisits,
   percentTime,
 }: StatsPoiCardProps) {
-
-const [views, setViews] = useState("Loading views...");
-const [uniqueVisits, setUniqueVisits] = useState("0");
-const [poiName, setPoiName] = useState(title);
+  const [views, setViews] = useState("Loading views...");
+  const [uniqueVisits, setUniqueVisits] = useState("0");
+  const [poiName, setPoiName] = useState(title);
 
   useEffect(() => {
     const fetchViews = async (name: string) => {
@@ -42,10 +41,10 @@ const [poiName, setPoiName] = useState(title);
         }
         let count = 0;
         for (let i = 0; i < data.length; i++) {
-          count = count + data[i].total
-          }
-          setUniqueVisits((data.length+1).toString())
-      setViews(count.toString())
+          count = count + data[i].total;
+        }
+        setUniqueVisits((data.length + 1).toString());
+        setViews(count.toString());
       } catch (error) {
         console.error("Failed to fetch data:", error);
         setViews("0");
@@ -69,8 +68,6 @@ const [poiName, setPoiName] = useState(title);
           <span className={styles.mainStat}>{uniqueVisits}</span>
           <span className={styles.percent}>+{percentVisits}% WoW</span>
         </div>
-
-        
       </div>
     </div>
   );
