@@ -10,9 +10,17 @@ import { MdOutlineDateRange } from "react-icons/md";
 
 import { addDays, subDays, addWeeks, subWeeks, startOfWeek, endOfWeek, format } from "date-fns";
 
-export function ActivityComponent() {
-  const [mode, setMode] = useState("Daily");
-  const [date, setDate] = useState(new Date());
+export function ActivityComponent({
+  date,
+  setDate,
+  mode,
+  setMode,
+}: {
+  date: Date;
+  setDate: (d: Date) => void;
+  mode: "Daily" | "Weekly";
+  setMode: (m: "Daily" | "Weekly") => void;
+}) {
   const [maxViews, setMaxViews] = useState("Loading views...");
   const [poiName, setPoiName] = useState("Loading title...");
 
@@ -34,7 +42,6 @@ export function ActivityComponent() {
         let maxTitle = "";
         for (let i = 0; i < poiData.POIs.length; i++) {
           const title = poiData.POIs[i].name;
-          console.log(title);
           try {
             const response = await fetch(
               `/api/umami-stats?event=${encodeURIComponent(title + "-POI-Visited")}&startDate=${encodeURIComponent(startDate.toISOString())}&endDate=${encodeURIComponent(date.toISOString())}`,
@@ -65,7 +72,6 @@ export function ActivityComponent() {
         }
         setMaxViews(max.toString());
         setPoiName(maxTitle);
-
       } catch (error) {
         console.error("Failed to fetch data:", error);
         setMaxViews("0");

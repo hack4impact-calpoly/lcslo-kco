@@ -18,6 +18,8 @@ export default function AnalyticsPage() {
   const [activeTab, setActiveTab] = useState<TabType>("analytics");
   const [lastUpdated, setLastUpdated] = useState<string>("May 1, 2025");
   const [info, setAnalytics] = useState<analytic>();
+  const [date, setDate] = useState(new Date());
+  const [mode, setMode] = useState<"Daily" | "Weekly">("Daily");
 
   const handleRefresh = async () => {
     try {
@@ -104,15 +106,13 @@ export default function AnalyticsPage() {
         <div className="bg-[#f7f3ef] p-6 rounded-lg shadow" style={{ color: "black" }}>
           {activeTab === "analytics" ? (
             <div>
-              <ActivityComponent />
-              <StatsPoiList />
+              <ActivityComponent date={date} setDate={setDate} mode={mode} setMode={setMode} />
+              <StatsPoiList date={date} mode={mode} />
             </div>
           ) : (
             <div>
-              <div className="flex flex-row justify-between">
-                <h2 className="text-lg font-medium pl-4">Points of Interest</h2>
-              </div>
-              <AnalyticsPoiList></AnalyticsPoiList>
+              <h2 className="text-lg font-medium pl-4">Points of Interest</h2>
+              <AnalyticsPoiList />
             </div>
           )}
         </div>

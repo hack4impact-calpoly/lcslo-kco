@@ -9,6 +9,8 @@ interface StatsPoiCardProps {
   percentScans: number;
   percentVisits: number;
   percentTime: number;
+  date: Date;
+  mode: "Daily" | "Weekly";
 }
 
 export default function StatsPoiCard({
@@ -19,6 +21,8 @@ export default function StatsPoiCard({
   percentScans,
   percentVisits,
   percentTime,
+  date,
+  mode,
 }: StatsPoiCardProps) {
   const [views, setViews] = useState("Loading views...");
   const [uniqueVisits, setUniqueVisits] = useState("0");
@@ -27,8 +31,17 @@ export default function StatsPoiCard({
   useEffect(() => {
     const fetchViews = async (name: string) => {
       try {
-        const response = await fetch(`/api/umami?event=${encodeURIComponent(name + "-POI-Visited")}`);
+        let startDate = date;
+        if (mode === "Daily") {
+          startDate = new Date(date.getTime() - 24 * 60 * 60 * 1000);
+        }
+        if (mode === "Weekly") {
+          startDate = new Date(date.getTime() - 7 * 24 * 60 * 60 * 1000);
+        }
 
+        const response = await fetch(
+          `/api/umami-stats?event=${encodeURIComponent(title + "-POI-Visited")}&startDate=${encodeURIComponent(startDate.toISOString())}&endDate=${encodeURIComponent(date.toISOString())}`,
+        );
         if (!response.ok) {
           const errorText = await response.text();
           throw new Error(`Server error: ${errorText}`);
@@ -48,11 +61,12 @@ export default function StatsPoiCard({
       } catch (error) {
         console.error("Failed to fetch data:", error);
         setViews("0");
+        setUniqueVisits("0");
       }
     };
 
     fetchViews(poiName);
-  }, [poiName]);
+  }, [poiName, date, mode, title]);
 
   return (
     <div className={styles.container}>
@@ -61,12 +75,10 @@ export default function StatsPoiCard({
         <div className={styles.scans}>
           <span className={styles.subtitle}>Total Scans</span>
           <span className={styles.mainStat}>{views}</span>
-          <span className={styles.percent}>+{percentScans}% WoW</span>
         </div>
         <div className={styles.visits}>
           <span className={styles.subtitle}>Unique Visits</span>
           <span className={styles.mainStat}>{uniqueVisits}</span>
-          <span className={styles.percent}>+{percentVisits}% WoW</span>
         </div>
       </div>
     </div>
