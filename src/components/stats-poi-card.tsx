@@ -26,38 +26,31 @@ export default function StatsPoiCard({
 }: StatsPoiCardProps) {
   const [views, setViews] = useState("Loading views...");
   const [uniqueVisits, setUniqueVisits] = useState("0");
-  const [poiName, setPoiName] = useState(title);
 
   useEffect(() => {
-    const fetchViews = async (name: string) => {
+    const fetchViews = async () => {
       try {
-        let startDate = date;
-        if (mode === "Daily") {
-          startDate = new Date(date.getTime() - 24 * 60 * 60 * 1000);
-        }
-        if (mode === "Weekly") {
-          startDate = new Date(date.getTime() - 7 * 24 * 60 * 60 * 1000);
-        }
+        const startDate =
+          mode === "Daily"
+            ? new Date(date.getTime() - 24 * 60 * 60 * 1000)
+            : new Date(date.getTime() - 7 * 24 * 60 * 60 * 1000);
 
         const response = await fetch(
-          `/api/umami-stats?event=${encodeURIComponent(title + "-POI-Visited")}&startDate=${encodeURIComponent(startDate.toISOString())}&endDate=${encodeURIComponent(date.toISOString())}`,
+          `/api/umami-stats?event=${encodeURIComponent(title + "-POI-Visited")}&startDate=${encodeURIComponent(
+            startDate.toISOString()
+          )}&endDate=${encodeURIComponent(date.toISOString())}`
         );
+
         if (!response.ok) {
           const errorText = await response.text();
           throw new Error(`Server error: ${errorText}`);
         }
 
         const data = await response.json();
+        const count = Array.isArray(data) ? data.reduce((sum, d) => sum + (d.total || 0), 0) : 0;
 
-        if (!Array.isArray(data) || !data[0]?.total) {
-          throw new Error("Unexpected data format");
-        }
-        let count = 0;
-        for (let i = 0; i < data.length; i++) {
-          count = count + data[i].total;
-        }
-        setUniqueVisits((data.length + 1).toString());
         setViews(count.toString());
+        setUniqueVisits((data.length).toString()); // Still a bit unclear why +1
       } catch (error) {
         console.error("Failed to fetch data:", error);
         setViews("0");
@@ -65,8 +58,8 @@ export default function StatsPoiCard({
       }
     };
 
-    fetchViews(poiName);
-  }, [poiName, date, mode, title]);
+    fetchViews();
+  }, [date, mode, title]); // No need for poiName
 
   return (
     <div className={styles.container}>

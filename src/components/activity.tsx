@@ -25,60 +25,55 @@ export function ActivityComponent({
   const [poiName, setPoiName] = useState("Loading title...");
 
   useEffect(() => {
-    const fetchViews = async (date: Date, mode: string) => {
-      try {
-        let startDate = date;
-        if (mode === "Daily") {
-          startDate = new Date(date.getTime() - 24 * 60 * 60 * 1000);
-        }
-        if (mode === "Weekly") {
-          startDate = new Date(date.getTime() - 7 * 24 * 60 * 60 * 1000);
-        }
+  const fetchViews = async (date: Date, mode: string) => {
+    try {
+      let startDate = mode === "Daily"
+        ? new Date(date.getTime() - 24 * 60 * 60 * 1000)
+        : new Date(date.getTime() - 7 * 24 * 60 * 60 * 1000);
 
-        const poiResponse = await fetch("/api/poi");
-        const poiData = await poiResponse.json();
-        let arr = [];
-        let max = 0;
-        let maxTitle = "";
-        for (let i = 0; i < poiData.POIs.length; i++) {
-          const title = poiData.POIs[i].name;
-          try {
-            const response = await fetch(
-              `/api/umami-stats?event=${encodeURIComponent(title + "-POI-Visited")}&startDate=${encodeURIComponent(startDate.toISOString())}&endDate=${encodeURIComponent(date.toISOString())}`,
-            );
+      const poiResponse = await fetch("/api/poi");
+      const poiData = await poiResponse.json();
 
-            if (!response.ok) {
-              const errorText = await response.text();
-              throw new Error(`Server error: ${errorText}`);
-            }
+      // Run fetches in parallel
+      const fetchPromises = poiData.POIs.map(async (poi: any) => {
+        const title = poi.name;
+        try {
+          const response = await fetch(
+            `/api/umami-stats?event=${encodeURIComponent(title + "-POI-Visited")}&startDate=${encodeURIComponent(startDate.toISOString())}&endDate=${encodeURIComponent(date.toISOString())}`
+          );
 
-            const data = await response.json();
-
-            if (!Array.isArray(data) || !data[0]?.total) {
-              throw new Error("Unexpected data format");
-            }
-            let count = 0;
-            for (let i = 0; i < data.length; i++) {
-              count = count + data[i].total;
-            }
-            if (max < count) {
-              max = count;
-              maxTitle = title;
-            }
-          } catch (error) {
-            console.error("Failed to fetch data:", error);
-            arr[i] = 0;
+          if (!response.ok) {
+            throw new Error(`Failed for ${title}`);
           }
-        }
-        setMaxViews(max.toString());
-        setPoiName(maxTitle);
-      } catch (error) {
-        console.error("Failed to fetch data:", error);
-        setMaxViews("0");
-      }
-    };
 
-    fetchViews(date, mode);
+          const data = await response.json();
+          const count = Array.isArray(data)
+            ? data.reduce((sum, d) => sum + (d.total || 0), 0)
+            : 0;
+
+          return { title, count };
+        } catch (e) {
+          console.error("Fetch error for POI:", title, e);
+          return { title, count: 0 };
+        }
+      });
+
+      const counts = await Promise.all(fetchPromises);
+      const maxEntry = counts.reduce((max, curr) => (curr.count > max.count ? curr : max), {
+        title: "",
+        count: 0,
+      });
+
+      setMaxViews(maxEntry.count.toString());
+      setPoiName(maxEntry.title);
+    } catch (error) {
+      console.error("Failed to fetch POI stats:", error);
+      setMaxViews("0");
+      setPoiName("Unavailable");
+    }
+  };
+
+  fetchViews(date, mode);
   }, [date, mode]);
 
   const goPrev = () => {
