@@ -3,7 +3,7 @@ import StatsPoiCard from "@/components/stats-poi-card";
 import { useState, useEffect } from "react";
 import styles from "@/styles/analytics-poi-list.module.css";
 
-export default function StatsPoiList() {
+export default function StatsPoiList({ date, mode }: { date: Date; mode: "Daily" | "Weekly" }) {
   interface POI {
     _id: string;
     name: string;
@@ -38,10 +38,12 @@ export default function StatsPoiList() {
           title={poi.name || "Unnamed POI"}
           scans={245}
           visits={15}
-          time="2:23 min"
+          time={poi.duration || "0:00"}
           percentScans={5}
           percentVisits={2}
           percentTime={1}
+          date={date}
+          mode={mode}
         />
       ))}
     </div>
