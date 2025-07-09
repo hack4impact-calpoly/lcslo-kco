@@ -1,0 +1,39 @@
+.activityTop {
+  display: flex;
+  flex-direction: row;
+}
+
+.activityTimeframe {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.timeframeButtons {
+  display: flex;
+  gap: 0.5em;
+}
+
+.activityComponent {
+  font-size: 13px;
+}
+
+.activityInfo {
+  display: flex;
+  margin: 1em 0;
+}
+
+.activityUnique {
+  flex-basis: 55%;
+  margin-right: 0.5em;
+}
+.activityMostVisited {
+  flex-basis: 45%;
+}
+
+.activityUniqueInfo,
+.activityMostVisitedInfo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

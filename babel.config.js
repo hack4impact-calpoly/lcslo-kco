@@ -27,5 +27,6 @@ module.exports = {
         },
       },
     ],
+    "@babel/plugin-syntax-import-attributes",
   ],
 };

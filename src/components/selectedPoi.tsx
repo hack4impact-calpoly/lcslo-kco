@@ -1,9 +1,21 @@
-import React, { useState } from "react";
+/* eslint-disable @next/next/no-img-element */
+import React, { useState, useRef, useEffect } from "react";
 import KeyStats from "./keyStats";
+import AudioControls from "./AudioControls";
+import { Howl } from "howler";
 import styles from "@/styles/selectedPoi.module.css";
 import { Button } from "@chakra-ui/react";
 import AudioPlayer from "./AudioPlayer";
 import { TranscriptView } from "./transcript";
+
+// IMPORTANT: Declare the global 'umami' object for TypeScript
+declare global {
+  interface Window {
+    umami: {
+      track: (eventName: string, eventData?: Record<string, any>) => void;
+    };
+  }
+}
 
 //Subcomponent to display image (unblurred) and header of the POI name
 interface OverlayImageProps {
@@ -53,21 +65,17 @@ const Selected_POI_Page: React.FC<POIProps> = ({
   id,
 }) => {
   const [isAudioVisible, setIsAudioVisible] = useState(false);
-
   const toggleAudioPlayer = () => {
     setIsAudioVisible((prev) => !prev);
   };
-
   const [newTourProgress, updateTourProgress] = useState(tour_progress);
 
   //When a card is selected, it should be marked as done in sessionStorage
   try {
     //Get locally stored data
     const storedData = sessionStorage.getItem("poiData");
-
     if (storedData) {
       const data: POI[] = JSON.parse(storedData);
-
       //Update tour progression and local data, if required
       const updatedData = data.map((item) => {
         if (item._id === id && !item.isComplete) {
@@ -77,13 +85,32 @@ const Selected_POI_Page: React.FC<POIProps> = ({
           return item;
         }
       });
-
       //Save updated local data
       sessionStorage.setItem("poiData", JSON.stringify(updatedData));
     }
   } catch (error) {
     console.log("Error Updating Progress:", error);
   }
+
+  useEffect(() => {
+    // Only track if window and umami are confirmed to exist
+    if (typeof window !== "undefined" && window.umami) {
+      try {
+        // Dynamically create the event name using the POI's name
+        const eventName = `${name}-POI-Visited`;
+        window.umami.track(eventName, {
+          // You can also send additional data
+          visiterProgress: tour_progress,
+        });
+        console.log(`Umami event tracked: ${eventName}`);
+      } catch (error) {
+        // More specific error logging
+        console.error("Umami tracking event failed", error);
+      }
+    } else {
+      console.warn("Umami is not loaded.");
+    }
+  }, []);
 
   return (
     <div className={styles.pageContainer}>
@@ -110,7 +137,6 @@ const Selected_POI_Page: React.FC<POIProps> = ({
       </div>
 
       {isAudioVisible && <TranscriptView audioUri={audio_link} imageUrl={mainImage}></TranscriptView>}
-
       {isAudioVisible && <AudioPlayer audioURL={audio_link} name="POI Audio" />}
     </div>
   );

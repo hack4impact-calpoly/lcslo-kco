@@ -10,6 +10,8 @@
   overflow: hidden;
   padding: 16px;
   background: var(--White, #fff);
+
+  width: 100%;
 }
 
 .transcriptHeader {
@@ -24,6 +26,8 @@
   width: 100%;
   overflow-y: auto;
   padding-right: 8px;
+
+  display: flex;
 }
 
 .transcriptText {
@@ -86,6 +90,7 @@
   width: 100%;
   overflow-y: auto;
   padding-right: 8px;
+  display: flex;
 }
 
 .transcriptTextFull {

@@ -52,7 +52,9 @@ export function TranscriptView({ audioUri, imageUrl }: TranscriptProps) {
       </div>
 
       <div className={isExpanded ? styles.transcriptContentFull : styles.transcriptContent}>
-        <div className={isExpanded ? styles.transcriptTextFull : styles.transcriptText}>{transcript}</div>
+        <div className={isExpanded ? styles.transcriptTextFull : styles.transcriptText}>
+          <div style={{ width: "100%" }}>{transcript}</div>
+        </div>
       </div>
     </div>
   );

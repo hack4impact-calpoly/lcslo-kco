@@ -1,6 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
 import { FiTrendingUp, FiMap, FiRefreshCw, FiCheck } from "react-icons/fi";
+import { ActivityComponent } from "./activity";
+import AnalyticsPoiList from "@/components/analytics-poi-list";
+import StatsPoiList from "@/components/stats-poi-list";
 
 type TabType = "analytics" | "poi";
 
@@ -15,6 +18,8 @@ export default function AnalyticsPage() {
   const [activeTab, setActiveTab] = useState<TabType>("analytics");
   const [lastUpdated, setLastUpdated] = useState<string>("May 1, 2025");
   const [info, setAnalytics] = useState<analytic>();
+  const [date, setDate] = useState(new Date());
+  const [mode, setMode] = useState<"Daily" | "Weekly">("Daily");
 
   const handleRefresh = async () => {
     try {
@@ -44,7 +49,7 @@ export default function AnalyticsPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen" style={{ backgroundColor: "#f0ebe7" }}>
       <div className="bg-white px-6 pt-4 pb-2">
         <h1 className="text-2xl font-bold text-gray-900">LCSLO Admin Dashboard</h1>
 
@@ -97,17 +102,18 @@ export default function AnalyticsPage() {
         </div>
       </div>
 
-      <main className="p-6">
-        <div className="bg-white p-6 rounded-lg shadow" style={{ color: "black" }}>
+      <main>
+        <div className="bg-[#f7f3ef] p-6 rounded-lg shadow" style={{ color: "black" }}>
           {activeTab === "analytics" ? (
             <div>
-              <h2 className="text-lg font-medium">Views (All Pages): {info?.views}</h2>
-              <h2 className="text-lg font-medium">Visits: {info?.visits}</h2>
-              <h2 className="text-lg font-medium">Unique Visitors: {info?.uniqueVisitors}</h2>
-              <h2 className="text-lg font-medium">Net Time Spent: {info?.timeSpentSec}s</h2>
+              <ActivityComponent date={date} setDate={setDate} mode={mode} setMode={setMode} />
+              <StatsPoiList date={date} mode={mode} />
             </div>
           ) : (
-            <h2 className="text-lg font-medium">POI Content Goes Here</h2>
+            <div>
+              <h2 className="text-lg font-medium pl-4">Points of Interest</h2>
+              <AnalyticsPoiList />
+            </div>
           )}
         </div>
       </main>

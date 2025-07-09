@@ -1,12 +1,15 @@
 import Link from "next/link";
 import React from "react";
-import { FaPlay } from "react-icons/fa";
 import styles from "@/styles/keyStats.module.css";
 import { Button } from "@chakra-ui/react/button";
+import { FaPlay as _FaPlay } from "react-icons/fa";
+import type { IconBaseProps } from "react-icons/lib";
 
 interface PA_Props {
   toggleAudioPlayer: () => void;
 }
+
+const FaPlay = _FaPlay as React.FC<IconBaseProps>;
 
 const PlayAudio: React.FC<PA_Props> = ({ toggleAudioPlayer }) => {
   return (
