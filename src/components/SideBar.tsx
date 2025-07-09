@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import "./SideBar.css";
 import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import Link from "next/link";
 
 const SideBar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,6 +33,12 @@ const SideBar: React.FC = () => {
             <li>
               <a href="https://lcslo.org/contact-us/">Need Help?</a>
             </li>
+            <li>
+              <button onClick={() => setIsOpen(false)}>
+                <a href="/analytics">Analytics</a>
+              </button>
+            </li>
+
             <li>
               <SignedOut>
                 <a>
