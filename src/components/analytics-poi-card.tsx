@@ -7,10 +7,9 @@ interface AnalyticsPoiCardProps {
   title: string;
   imageUrl: string;
   scans: number;
-  duration: string;
 }
 
-export default function AnalyticsPoiCard({ title, imageUrl, scans, duration }: AnalyticsPoiCardProps) {
+export default function AnalyticsPoiCard({ title, imageUrl, scans }: AnalyticsPoiCardProps) {
   const [views, setViews] = useState("Loading views...");
   const [poiName, setPoiName] = useState(title);
 
@@ -52,7 +51,6 @@ export default function AnalyticsPoiCard({ title, imageUrl, scans, duration }: A
         <h1 className={styles.title}>{title}</h1>
         <div className={styles.stats}>
           <span className={styles.statsText}>{views} scans this month</span>
-          <span className={styles.statsText}>{duration} min</span>
         </div>
         <div className={styles.actions}>
           {/* <button className={styles.iconButton}>

@@ -37,7 +37,6 @@ export default function AnalyticsPoiList() {
           key={poi._id}
           imageUrl={poi.image || "/placeholder.jpg"}
           title={poi.name || "Unnamed POI"}
-          duration="0:58"
           scans={245}
         />
       ))}
